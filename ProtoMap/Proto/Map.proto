@@ -3,4 +3,19 @@ syntax = "proto3";
 package Map;
 option go_package="ProtoMap/Proto";
 
-service MapService{}
+message Greeting{
+    string fist_name = 1;
+    string last_name = 2;
+}
+
+message MapRequest {
+    Greeting greeting = 1;
+}
+
+message MapResponse {
+    string result = 1;
+}
+
+service MapService{
+    rpc Map(MapRequest) returns (MapResponse) {};
+}
