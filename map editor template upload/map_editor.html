@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang=th>
+  <head>
+    <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventMe</title>
+  </head>
+  <body>
+    <p>Please upload your map template</p>
+    <form method="post" enctype="multipart/form-data" action="http://localhost:8080/upload">
+      <input type="file" name="upload">
+      <input type="hidden" name="token" value="{{.}}"/>
+      <input type="submit" value="Upload your map template" name="upload">
+    </form>
+    <script src="map_editor.js"></script>
+  </body>
+</html>
