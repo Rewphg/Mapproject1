@@ -8,15 +8,14 @@ package Proto
 
 import (
 	context "context"
-	reflect "reflect"
-	sync "sync"
-
 	proto "github.com/golang/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -85,6 +84,108 @@ func (x *Greeting) GetLastName() string {
 	return ""
 }
 
+type SumRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Num1 int32 `protobuf:"varint,1,opt,name=Num1,proto3" json:"Num1,omitempty"`
+	Num2 int32 `protobuf:"varint,2,opt,name=Num2,proto3" json:"Num2,omitempty"`
+}
+
+func (x *SumRequest) Reset() {
+	*x = SumRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ProtoMap_Proto_Map_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SumRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SumRequest) ProtoMessage() {}
+
+func (x *SumRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_ProtoMap_Proto_Map_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SumRequest.ProtoReflect.Descriptor instead.
+func (*SumRequest) Descriptor() ([]byte, []int) {
+	return file_ProtoMap_Proto_Map_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *SumRequest) GetNum1() int32 {
+	if x != nil {
+		return x.Num1
+	}
+	return 0
+}
+
+func (x *SumRequest) GetNum2() int32 {
+	if x != nil {
+		return x.Num2
+	}
+	return 0
+}
+
+type SumResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Sum_Result int32 `protobuf:"varint,1,opt,name=Sum_Result,json=SumResult,proto3" json:"Sum_Result,omitempty"`
+}
+
+func (x *SumResponse) Reset() {
+	*x = SumResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ProtoMap_Proto_Map_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SumResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SumResponse) ProtoMessage() {}
+
+func (x *SumResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_ProtoMap_Proto_Map_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SumResponse.ProtoReflect.Descriptor instead.
+func (*SumResponse) Descriptor() ([]byte, []int) {
+	return file_ProtoMap_Proto_Map_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SumResponse) GetSum_Result() int32 {
+	if x != nil {
+		return x.Sum_Result
+	}
+	return 0
+}
+
 type MapRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -96,7 +197,7 @@ type MapRequest struct {
 func (x *MapRequest) Reset() {
 	*x = MapRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ProtoMap_Proto_Map_proto_msgTypes[1]
+		mi := &file_ProtoMap_Proto_Map_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -109,7 +210,7 @@ func (x *MapRequest) String() string {
 func (*MapRequest) ProtoMessage() {}
 
 func (x *MapRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_ProtoMap_Proto_Map_proto_msgTypes[1]
+	mi := &file_ProtoMap_Proto_Map_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -122,7 +223,7 @@ func (x *MapRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MapRequest.ProtoReflect.Descriptor instead.
 func (*MapRequest) Descriptor() ([]byte, []int) {
-	return file_ProtoMap_Proto_Map_proto_rawDescGZIP(), []int{1}
+	return file_ProtoMap_Proto_Map_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *MapRequest) GetGreeting() *Greeting {
@@ -143,7 +244,7 @@ type MapResponse struct {
 func (x *MapResponse) Reset() {
 	*x = MapResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ProtoMap_Proto_Map_proto_msgTypes[2]
+		mi := &file_ProtoMap_Proto_Map_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -156,7 +257,7 @@ func (x *MapResponse) String() string {
 func (*MapResponse) ProtoMessage() {}
 
 func (x *MapResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_ProtoMap_Proto_Map_proto_msgTypes[2]
+	mi := &file_ProtoMap_Proto_Map_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -169,12 +270,106 @@ func (x *MapResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MapResponse.ProtoReflect.Descriptor instead.
 func (*MapResponse) Descriptor() ([]byte, []int) {
-	return file_ProtoMap_Proto_Map_proto_rawDescGZIP(), []int{2}
+	return file_ProtoMap_Proto_Map_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *MapResponse) GetResult() string {
 	if x != nil {
 		return x.Result
+	}
+	return ""
+}
+
+type MapManytimesRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Greetmanytime *Greeting `protobuf:"bytes,1,opt,name=greetmanytime,proto3" json:"greetmanytime,omitempty"`
+}
+
+func (x *MapManytimesRequest) Reset() {
+	*x = MapManytimesRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ProtoMap_Proto_Map_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MapManytimesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MapManytimesRequest) ProtoMessage() {}
+
+func (x *MapManytimesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_ProtoMap_Proto_Map_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MapManytimesRequest.ProtoReflect.Descriptor instead.
+func (*MapManytimesRequest) Descriptor() ([]byte, []int) {
+	return file_ProtoMap_Proto_Map_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *MapManytimesRequest) GetGreetmanytime() *Greeting {
+	if x != nil {
+		return x.Greetmanytime
+	}
+	return nil
+}
+
+type MapManyTimesResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Manyresult string `protobuf:"bytes,1,opt,name=Manyresult,proto3" json:"Manyresult,omitempty"`
+}
+
+func (x *MapManyTimesResponse) Reset() {
+	*x = MapManyTimesResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ProtoMap_Proto_Map_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MapManyTimesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MapManyTimesResponse) ProtoMessage() {}
+
+func (x *MapManyTimesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_ProtoMap_Proto_Map_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MapManyTimesResponse.ProtoReflect.Descriptor instead.
+func (*MapManyTimesResponse) Descriptor() ([]byte, []int) {
+	return file_ProtoMap_Proto_Map_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *MapManyTimesResponse) GetManyresult() string {
+	if x != nil {
+		return x.Manyresult
 	}
 	return ""
 }
@@ -188,18 +383,41 @@ var file_ProtoMap_Proto_Map_proto_rawDesc = []byte{
 	0x69, 0x73, 0x74, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
 	0x66, 0x69, 0x73, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x73, 0x74,
 	0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6c, 0x61, 0x73,
-	0x74, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x37, 0x0a, 0x0a, 0x4d, 0x61, 0x70, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x12, 0x29, 0x0a, 0x08, 0x67, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x4d, 0x61, 0x70, 0x2e, 0x47, 0x72, 0x65, 0x65,
-	0x74, 0x69, 0x6e, 0x67, 0x52, 0x08, 0x67, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x22, 0x25,
-	0x0a, 0x0b, 0x4d, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a,
-	0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72,
-	0x65, 0x73, 0x75, 0x6c, 0x74, 0x32, 0x38, 0x0a, 0x0a, 0x4d, 0x61, 0x70, 0x53, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x12, 0x2a, 0x0a, 0x03, 0x4d, 0x61, 0x70, 0x12, 0x0f, 0x2e, 0x4d, 0x61, 0x70,
-	0x2e, 0x4d, 0x61, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x4d, 0x61,
-	0x70, 0x2e, 0x4d, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42,
-	0x10, 0x5a, 0x0e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x4d, 0x61, 0x70, 0x2f, 0x50, 0x72, 0x6f, 0x74,
-	0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x34, 0x0a, 0x0a, 0x53, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x4e, 0x75, 0x6d, 0x31, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x05, 0x52, 0x04, 0x4e, 0x75, 0x6d, 0x31, 0x12, 0x12, 0x0a, 0x04, 0x4e, 0x75, 0x6d, 0x32, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x4e, 0x75, 0x6d, 0x32, 0x22, 0x2c, 0x0a, 0x0b, 0x53,
+	0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x53, 0x75,
+	0x6d, 0x5f, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09,
+	0x53, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x37, 0x0a, 0x0a, 0x4d, 0x61, 0x70,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x29, 0x0a, 0x08, 0x67, 0x72, 0x65, 0x65, 0x74,
+	0x69, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x4d, 0x61, 0x70, 0x2e,
+	0x47, 0x72, 0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x08, 0x67, 0x72, 0x65, 0x65, 0x74, 0x69,
+	0x6e, 0x67, 0x22, 0x25, 0x0a, 0x0b, 0x4d, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x4a, 0x0a, 0x13, 0x4d, 0x61, 0x70,
+	0x4d, 0x61, 0x6e, 0x79, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x33, 0x0a, 0x0d, 0x67, 0x72, 0x65, 0x65, 0x74, 0x6d, 0x61, 0x6e, 0x79, 0x74, 0x69, 0x6d,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x4d, 0x61, 0x70, 0x2e, 0x47, 0x72,
+	0x65, 0x65, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x0d, 0x67, 0x72, 0x65, 0x65, 0x74, 0x6d, 0x61, 0x6e,
+	0x79, 0x74, 0x69, 0x6d, 0x65, 0x22, 0x36, 0x0a, 0x14, 0x4d, 0x61, 0x70, 0x4d, 0x61, 0x6e, 0x79,
+	0x54, 0x69, 0x6d, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1e, 0x0a,
+	0x0a, 0x4d, 0x61, 0x6e, 0x79, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0a, 0x4d, 0x61, 0x6e, 0x79, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x32, 0x81, 0x01,
+	0x0a, 0x0a, 0x4d, 0x61, 0x70, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x2a, 0x0a, 0x03,
+	0x4d, 0x61, 0x70, 0x12, 0x0f, 0x2e, 0x4d, 0x61, 0x70, 0x2e, 0x4d, 0x61, 0x70, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x4d, 0x61, 0x70, 0x2e, 0x4d, 0x61, 0x70, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x47, 0x0a, 0x0c, 0x4d, 0x61, 0x70, 0x4d,
+	0x61, 0x6e, 0x79, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x12, 0x18, 0x2e, 0x4d, 0x61, 0x70, 0x2e, 0x4d,
+	0x61, 0x70, 0x4d, 0x61, 0x6e, 0x79, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x19, 0x2e, 0x4d, 0x61, 0x70, 0x2e, 0x4d, 0x61, 0x70, 0x4d, 0x61, 0x6e, 0x79,
+	0x54, 0x69, 0x6d, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30,
+	0x01, 0x32, 0x38, 0x0a, 0x0a, 0x53, 0x75, 0x6d, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
+	0x2a, 0x0a, 0x03, 0x53, 0x75, 0x6d, 0x12, 0x0f, 0x2e, 0x4d, 0x61, 0x70, 0x2e, 0x53, 0x75, 0x6d,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x4d, 0x61, 0x70, 0x2e, 0x53, 0x75,
+	0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x10, 0x5a, 0x0e, 0x50,
+	0x72, 0x6f, 0x74, 0x6f, 0x4d, 0x61, 0x70, 0x2f, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -214,21 +432,30 @@ func file_ProtoMap_Proto_Map_proto_rawDescGZIP() []byte {
 	return file_ProtoMap_Proto_Map_proto_rawDescData
 }
 
-var file_ProtoMap_Proto_Map_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_ProtoMap_Proto_Map_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_ProtoMap_Proto_Map_proto_goTypes = []interface{}{
-	(*Greeting)(nil),    // 0: Map.Greeting
-	(*MapRequest)(nil),  // 1: Map.MapRequest
-	(*MapResponse)(nil), // 2: Map.MapResponse
+	(*Greeting)(nil),             // 0: Map.Greeting
+	(*SumRequest)(nil),           // 1: Map.SumRequest
+	(*SumResponse)(nil),          // 2: Map.SumResponse
+	(*MapRequest)(nil),           // 3: Map.MapRequest
+	(*MapResponse)(nil),          // 4: Map.MapResponse
+	(*MapManytimesRequest)(nil),  // 5: Map.MapManytimesRequest
+	(*MapManyTimesResponse)(nil), // 6: Map.MapManyTimesResponse
 }
 var file_ProtoMap_Proto_Map_proto_depIdxs = []int32{
 	0, // 0: Map.MapRequest.greeting:type_name -> Map.Greeting
-	1, // 1: Map.MapService.Map:input_type -> Map.MapRequest
-	2, // 2: Map.MapService.Map:output_type -> Map.MapResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0, // 1: Map.MapManytimesRequest.greetmanytime:type_name -> Map.Greeting
+	3, // 2: Map.MapService.Map:input_type -> Map.MapRequest
+	5, // 3: Map.MapService.MapManytimes:input_type -> Map.MapManytimesRequest
+	1, // 4: Map.SumService.Sum:input_type -> Map.SumRequest
+	4, // 5: Map.MapService.Map:output_type -> Map.MapResponse
+	6, // 6: Map.MapService.MapManytimes:output_type -> Map.MapManyTimesResponse
+	2, // 7: Map.SumService.Sum:output_type -> Map.SumResponse
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_ProtoMap_Proto_Map_proto_init() }
@@ -250,7 +477,7 @@ func file_ProtoMap_Proto_Map_proto_init() {
 			}
 		}
 		file_ProtoMap_Proto_Map_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MapRequest); i {
+			switch v := v.(*SumRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -262,7 +489,55 @@ func file_ProtoMap_Proto_Map_proto_init() {
 			}
 		}
 		file_ProtoMap_Proto_Map_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SumResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ProtoMap_Proto_Map_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MapRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ProtoMap_Proto_Map_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MapResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ProtoMap_Proto_Map_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MapManytimesRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ProtoMap_Proto_Map_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MapManyTimesResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -280,9 +555,9 @@ func file_ProtoMap_Proto_Map_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_ProtoMap_Proto_Map_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   7,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_ProtoMap_Proto_Map_proto_goTypes,
 		DependencyIndexes: file_ProtoMap_Proto_Map_proto_depIdxs,
@@ -307,6 +582,7 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MapServiceClient interface {
 	Map(ctx context.Context, in *MapRequest, opts ...grpc.CallOption) (*MapResponse, error)
+	MapManytimes(ctx context.Context, in *MapManytimesRequest, opts ...grpc.CallOption) (MapService_MapManytimesClient, error)
 }
 
 type mapServiceClient struct {
@@ -326,9 +602,42 @@ func (c *mapServiceClient) Map(ctx context.Context, in *MapRequest, opts ...grpc
 	return out, nil
 }
 
+func (c *mapServiceClient) MapManytimes(ctx context.Context, in *MapManytimesRequest, opts ...grpc.CallOption) (MapService_MapManytimesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_MapService_serviceDesc.Streams[0], "/Map.MapService/MapManytimes", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &mapServiceMapManytimesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type MapService_MapManytimesClient interface {
+	Recv() (*MapManyTimesResponse, error)
+	grpc.ClientStream
+}
+
+type mapServiceMapManytimesClient struct {
+	grpc.ClientStream
+}
+
+func (x *mapServiceMapManytimesClient) Recv() (*MapManyTimesResponse, error) {
+	m := new(MapManyTimesResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // MapServiceServer is the server API for MapService service.
 type MapServiceServer interface {
 	Map(context.Context, *MapRequest) (*MapResponse, error)
+	MapManytimes(*MapManytimesRequest, MapService_MapManytimesServer) error
 }
 
 // UnimplementedMapServiceServer can be embedded to have forward compatible implementations.
@@ -337,6 +646,9 @@ type UnimplementedMapServiceServer struct {
 
 func (*UnimplementedMapServiceServer) Map(context.Context, *MapRequest) (*MapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Map not implemented")
+}
+func (*UnimplementedMapServiceServer) MapManytimes(*MapManytimesRequest, MapService_MapManytimesServer) error {
+	return status.Errorf(codes.Unimplemented, "method MapManytimes not implemented")
 }
 
 func RegisterMapServiceServer(s *grpc.Server, srv MapServiceServer) {
@@ -361,6 +673,27 @@ func _MapService_Map_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MapService_MapManytimes_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(MapManytimesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MapServiceServer).MapManytimes(m, &mapServiceMapManytimesServer{stream})
+}
+
+type MapService_MapManytimesServer interface {
+	Send(*MapManyTimesResponse) error
+	grpc.ServerStream
+}
+
+type mapServiceMapManytimesServer struct {
+	grpc.ServerStream
+}
+
+func (x *mapServiceMapManytimesServer) Send(m *MapManyTimesResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 var _MapService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "Map.MapService",
 	HandlerType: (*MapServiceServer)(nil),
@@ -368,6 +701,84 @@ var _MapService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Map",
 			Handler:    _MapService_Map_Handler,
+		},
+	},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "MapManytimes",
+			Handler:       _MapService_MapManytimes_Handler,
+			ServerStreams: true,
+		},
+	},
+	Metadata: "ProtoMap/Proto/Map.proto",
+}
+
+// SumServiceClient is the client API for SumService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type SumServiceClient interface {
+	Sum(ctx context.Context, in *SumRequest, opts ...grpc.CallOption) (*SumResponse, error)
+}
+
+type sumServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewSumServiceClient(cc grpc.ClientConnInterface) SumServiceClient {
+	return &sumServiceClient{cc}
+}
+
+func (c *sumServiceClient) Sum(ctx context.Context, in *SumRequest, opts ...grpc.CallOption) (*SumResponse, error) {
+	out := new(SumResponse)
+	err := c.cc.Invoke(ctx, "/Map.SumService/Sum", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SumServiceServer is the server API for SumService service.
+type SumServiceServer interface {
+	Sum(context.Context, *SumRequest) (*SumResponse, error)
+}
+
+// UnimplementedSumServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedSumServiceServer struct {
+}
+
+func (*UnimplementedSumServiceServer) Sum(context.Context, *SumRequest) (*SumResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Sum not implemented")
+}
+
+func RegisterSumServiceServer(s *grpc.Server, srv SumServiceServer) {
+	s.RegisterService(&_SumService_serviceDesc, srv)
+}
+
+func _SumService_Sum_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SumRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SumServiceServer).Sum(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Map.SumService/Sum",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SumServiceServer).Sum(ctx, req.(*SumRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _SumService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "Map.SumService",
+	HandlerType: (*SumServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Sum",
+			Handler:    _SumService_Sum_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
