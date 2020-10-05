@@ -1,7 +1,0 @@
-//Declare a variable to store clientFile id in order to use it in our function.
-let upload = document.getElementById("clientFile");
-
-//Create our function to do HTML Events
-function uploadingTemplate() {
-  
-}
