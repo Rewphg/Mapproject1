@@ -22,16 +22,16 @@ func (*server) Map(ctx context.Context, req *Proto.MapRequest) (*Proto.MapRespon
 	return res, nil
 }
 
-func (*server) Sum(ctx context.Context, req *Proto.SumRequest) (*Proto.SumResponse, error) {
-	fmt.Printf("Sum Function is created with %v", req)
-	Num1 := req.GetNum1()
-	Num2 := req.GetNum2()
-	Result := Num1 + Num2
-	res := &Proto.SumResponse{
-		Sum_Result: Result,
-	}
-	return res, nil
-}
+// func (*server) Sum(ctx context.Context, req *Proto.SumRequest) (*Proto.SumResponse, error) {
+// 	fmt.Printf("Sum Function is created with %v", req)
+// 	Num1 := req.GetNum1()
+// 	Num2 := req.GetNum2()
+// 	Result := Num1 + Num2
+// 	res := &Proto.SumResponse{
+// 		Sum_Result: Result,
+// 	}
+// 	return res, nil
+// }
 
 func main() {
 	fmt.Println("Run")
@@ -48,8 +48,8 @@ func main() {
 		log.Fatal("failed to serve: %v", err)
 	}
 
-	Proto.RegisterSumServiceServer(s, &server{})
-	if err := s.Serve(lis); err != nil {
-		log.Fatal("failed to serve: %v", err)
-	}
+	// Proto.RegisterSumServiceServer(s, &server{})
+	// if err := s.Serve(lis); err != nil {
+	// 	log.Fatal("failed to serve: %v", err)
+	// }
 }
