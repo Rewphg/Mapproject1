@@ -1,5 +1,6 @@
 .vertical-menu {
     width: 100px;
+    position: relative;
   }
   
   .vertical-menu a {
