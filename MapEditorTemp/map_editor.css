@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.content {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    display: inline;
+}
+.content .btn {
+    height: 50px;
+    width: 170px;
+}
+.content .btn button{
+    height: 50%;
+    width: 50;
+    outline: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.content .file-name {
+    user-select: none;
+    display: none;
+}
+.content .file-name:before {
+    position: absolute;
+}

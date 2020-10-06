@@ -8,6 +8,15 @@ message Greeting{
     string last_name = 2;
 }
 
+message SumRequest{
+    int32 Num1 = 1;
+    int32 Num2 = 2;
+}
+
+message SumResponse{
+    int32 Sum_Result = 1;
+}
+
 message MapRequest {
     Greeting greeting = 1;
 }
@@ -16,6 +25,19 @@ message MapResponse {
     string result = 1;
 }
 
+message MapManytimesRequest{
+    Greeting greetmanytime = 1;
+}
+
+message MapManyTimesResponse{
+    string Manyresult = 1;
+}
+
 service MapService{
     rpc Map(MapRequest) returns (MapResponse) {};
+    rpc MapManytimes(MapManytimesRequest) returns (stream MapManyTimesResponse) {};
+}
+
+service SumService{
+    rpc Sum(SumRequest) returns (SumResponse) {};
 }

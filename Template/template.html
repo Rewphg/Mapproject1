@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 
 <html>
+   <meta name="viewport" content="width=device-width">
    <head>
          <meta charset="UTF-8">
          <link rel="stylesheet" href="/static/stylesheets/welcome-Templatee.css">
+         <link rel="Javascript" href="/static/Javascript/main.js">
          <title>Welcome {{.Name}}</title>
    </head>
+   <script type="text/javascript" src="/static/Javascript/main.js"></script>
    <body>
+     
       <div class="welcome center">Welcome {{.Name}}, it is {{.Time}}</div>
+      <canvas id="canvas"></canvas>
+      <div id="ClearBut">
+         <input type="button" id="Clear">Clear</input>
+      </div>
+      <a href="custom.html">
+         <button>Custom</button>
+      </a>
    </body>
 </html>
