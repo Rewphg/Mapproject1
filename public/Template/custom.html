@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang = "en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -89,6 +90,129 @@
                       }
             </script>
         </body>
+=======
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="\static\stylesheets\format.css">
+  <link rel="stylesheet" href="\static\stylesheets\form.css">
+  <link rel="stylesheet" href="\static\stylesheets\welcome-Templatee.css">
+  <link rel="Javascript" href="/static/Javascript/main.js">
+
+  <title>Create your Template</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/Javascript/main.js"></script>
+<body>
+  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="/__/firebase/7.22.1/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="/__/firebase/7.22.1/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="/__/firebase/7.22.1/firebase-auth.js"></script>
+  <script src="/__/firebase/7.22.1/firebase-firestore.js"></script>
+
+  <div id="Canvas-Container">
+    <img src='mara.png' alt="" id="BackgoundImg">
+    <canvas id="canvas"></canvas>
+    <div id="MarkerConainer">
+      <div></div>
+    </div>
+  </div>
+    <a href="select.html">
+      <button>Back</button>
+    </a>
+    <div class="vertical-menu">
+      <a href="#" class="active">Menu</a>
+      <div>
+        <button class="open-button" onclick="openForm()">Booth<img src="\static\Icons\fair-stand.png" width="50"
+            length="50"></button>
+        <div class="form-popup" id="myForm">
+          <form action="/action_page.php" class="form-container">
+            <h1>Booth</h1>
+            <label for="text"><b>Description</b></label>
+            <input type="text" placeholder="Enter your booth description here">
+            <button type="submit" class="btn">Confirm</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
+      </div>
+  
+      <div>
+        <button class="open-button" onclick="openForm()">First-Aid<img src="\static\Icons\first-aid-kit.png" width="50"
+            length="50"></button>
+        <div class="form-popup" id="myForm">
+          <form action="/action_page.php" class="form-container">
+            <h1>Login</h1>
+            <label for="text"><b>First-Aid</b></label>
+            <input type="text" placeholder="">
+            <button type="submit" class="btn">Confirm</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
+      </div>
+  
+      <div>
+        <button class="open-button" onclick="openForm()">Toilet<img src="\static\Icons\toilet.png" width="50"
+            length="50"></button>
+        <div class="form-popup" id="myForm">
+          <form action="/action_page.php" class="form-container">
+            <h1>Login</h1>
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="">
+            <button type="submit" class="btn">Confirm</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
+      </div>
+  
+      <div>
+        <button class="open-button" onclick="openForm()">Text Box<img src="\static\Icons\text.png" width="50"
+            length="50"></button>
+        <div class="form-popup" id="myForm">
+          <form action="/action_page.php" class="form-container">
+            <h1>Login</h1>
+            <label for="text"><b>Text Box</b></label>
+            <input type="text" placeholder="">
+            <button type="submit" class="btn">Confirm</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
+      </div>
+  
+      <div>
+        <button class="open-button" onclick="openForm()">Information<img src="\static\Icons\info.png" width="50"
+            length="50"></button>
+        <div class="form-popup" id="myForm">
+          <form action="/action_page.php" class="form-container">
+            <h1>Login</h1>
+            <label for="text"><b>Information</b></label>
+            <input type="text" placeholder="">
+            <button type="submit" class="btn">Confirm</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
+      </div>
+      <div id="SButton">
+        <button id="SaveBut"onclick="SaveData()">SaveData</button>
+        <script>
+        </script>
+      </div>
+    <script>
+      function openForm() {
+        document.getElementById("myForm").style.display = "block";
+      }
+      function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+      }
+    </script>
+</body>
+>>>>>>> f3ef399a0f6e74e2056395f5c1c461751060a939
 <!--<script>
        if (typeof FunctionName == 'function') { 
         FunctionName(); 
@@ -97,5 +221,10 @@
 }
 </script>
 -->
+<<<<<<< HEAD
     </body>
+=======
+</body>
+
+>>>>>>> f3ef399a0f6e74e2056395f5c1c461751060a939
 </html>
