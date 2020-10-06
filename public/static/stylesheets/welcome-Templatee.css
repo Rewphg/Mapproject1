@@ -19,9 +19,59 @@ body  {
      align-items: center;
  }
 
- #canvas {
+ #canvas { 
    background-color: aliceblue;
    background-size: cover;
    background-blend-mode: normal;
    border: 10px solid rgb(0, 0, 0);
  }
+
+ #image-wrapper {
+   width: 400px;
+   height: 400px;
+   position: relative;
+   margin: 2em auto;
+   background: #f6f6f6;
+   border: 2px solid #ddd;
+}
+
+#image-wrapper img {
+   display: block;
+   margin: 25px auto;
+}
+
+span.marker {
+   width: 20px;
+   height: 20px;
+   background: #f66;
+   color: #fff;
+   text-align: center;
+   position: absolute;
+   line-height: 20px;
+   cursor: pointer;
+}
+span.marker:before {
+   content: '+';
+}
+
+.interactive-image {
+   max-width: 300;
+   max-height: 300;
+}
+
+#Map-Image {
+   width: 100%;
+   position: relative;
+}
+
+span.caption {
+   width: 180px;
+   background: #f66;
+   color: #fff;
+   padding: 4px;
+   position: absolute;
+   top: 20px;
+   left: 0;
+   display: none;
+}
+
