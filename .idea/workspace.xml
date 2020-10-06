@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7bbd8b48-56c7-4f9c-a793-c871de2902e1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/MapEditorTemp/map_editor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MapEditorTemp/map_editor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MapEditorTemp/map_editor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/Icons/Icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/Javascript/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProtoMap/MapServer/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/ProtoMap/MapServer/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProtoMap/Proto/Map.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/ProtoMap/Proto/Map.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProtoMap/Proto/Map.proto" beforeDir="false" afterPath="$PROJECT_DIR$/ProtoMap/Proto/Map.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Template/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/Template/template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map editor template upload/map_editor.css" beforeDir="false" afterPath="$PROJECT_DIR$/MapEditorTemp/map_editor.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map editor template upload/map_editor.go" beforeDir="false" afterPath="$PROJECT_DIR$/MapEditorTemp/map_editor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map editor template upload/map_editor.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/map editor template upload/map_editor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/stylesheets/welcome-Templatee.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/stylesheets/welcome-Templatee.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1iVBcym6i7Igihlmjg7ZBewjOVI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7bbd8b48-56c7-4f9c-a793-c871de2902e1" name="Default Changelist" comment="" />
+      <created>1601982963074</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601982963074</updated>
+      <workItem from="1601982967122" duration="1355000" />
+      <workItem from="1601994402204" duration="711000" />
+      <workItem from="1601995419841" duration="292000" />
+      <workItem from="1601995861194" duration="847000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601996697273">
+      <screen x="0" y="23" width="1440" height="798" />
+    </state>
+    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.798@0.23.1440.798" timestamp="1601996697273" />
+  </component>
+</project>
