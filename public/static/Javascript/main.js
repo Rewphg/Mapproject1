@@ -5,6 +5,15 @@ window.addEventListener("load", () => {
     const canvas = document.querySelector("#canvas");
     const ctx = canvas.getContext("2d");
 
+<<<<<<< HEAD
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    canvas.addEventListener("click", GenCan);
+    function GenCan(e){
+        console.log("Create", e.clientX,e.clientY);
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(CreateImg("/static/Icons/Icon.png", 100, 100, "ssss"), e.clientX,e.clientY, 50,50)
+=======
     canvas.height = 480;
     canvas.width = 720;
     canvas.addEventListener("click", GenCan);
@@ -26,6 +35,7 @@ window.addEventListener("load", () => {
        Marker.push(MarkerInfo)
        console.log(Marker.length)
        Index++
+>>>>>>> f3ef399a0f6e74e2056395f5c1c461751060a939
     }
 })
 
@@ -42,6 +52,9 @@ function CreateImg(src, width, height, alt) {
 var Number = 0
 window.addEventListener("click", function(e) {
     console.log('X:', e.x, 'Y:', e.y)
+<<<<<<< HEAD
+    // GenPhoto("Icons/Icon.png", 1024/4, 1024/4, "ssss",3000,2000)
+=======
     // var rect = document.getElementById("Map-Image").getBoundingClientRect()
     //console.log("s",rect.top, rect.right, rect.bottom, rect.left)
     var Marker = [
@@ -55,6 +68,7 @@ window.addEventListener("click", function(e) {
 
     //createItem(Marker)
     
+>>>>>>> f3ef399a0f6e74e2056395f5c1c461751060a939
 })
 
 var createItem = function(Marker){
@@ -91,6 +105,22 @@ function GenPhoto(src, width, height, alt,x, y) {
     document.body.appendChild(img);
 }
 
+<<<<<<< HEAD
+document.getElementById("Clear").addEventListener('click', function() {
+    var MyCan = document.getElementById("canvas");
+    var ctx = MyCan.getContext('2d');
+    ctx.clearRect(0,0, canvas.width, canvas.height);
+})
+
+function CreateImg(src, width, height, alt) {
+    var ImageObj = new Image();
+    ImageObj.src = src;
+    ImageObj.width = width;
+    ImageObj.height = height;
+    ImageObj.alt = alt;
+    return ImageObj;
+}
+=======
 //  s sdocument.getElementById("Clear").addEventListener('click', function() {
 //     var MyCan = document.getElementById("canvas");
 //     var ctx = MyCan.getContext('2d');
@@ -106,3 +136,35 @@ window.addEventListener("resize" , function(){
     canvas.fillStyle = '#00FFF'
     canvas.fillRect(0,0)
 }, false)
+<<<<<<< HEAD
+=======
+
+var config = {
+    apiKey: "AIzaSyB-OBk-Q2Ik7jqRp9XlTCLIL8FPbUhozUA",
+    authDomain: "mapproject1-76680.firebaseio.com",
+    databaseURL: "https://mapproject1-76680.firebaseio.com/",
+    storageBucket: "mapproject1-76680.appspot.com"
+  };
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+function writeFirebaseData(Data, Index) {
+    firebase.database().ref('Marker/' + Index).set({
+        type: Data.type,
+        x: Data.x,
+        y: Data.y,
+    });
+    console.log("writeData")
+}
+
+function SaveData() {
+    for (i = 0; i< Marker.length; i++){
+        var D = Marker[i]
+        Mname = "Marker" + D.Number
+        writeFirebaseData(D, Mname)
+    }
+  }
+document.getElementById("SaveBut").addEventListener('click', SaveData(Marker))
+>>>>>>> f3ef399a0f6e74e2056395f5c1c461751060a939
+>>>>>>> refs/remotes/origin/master
