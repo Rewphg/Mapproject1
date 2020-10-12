@@ -22,8 +22,9 @@ body  {
  #canvas { 
    background-color: aliceblue;
    background-size: cover;
-   position: absolute;
-   justify-content: center;
+   position: relative;
+   align-items: center;
+   align-self: center;
    background-blend-mode: normal;
    border: 5px solid rgb(0, 0, 0);
    z-index: +3;

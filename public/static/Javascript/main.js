@@ -5,15 +5,6 @@ window.addEventListener("load", () => {
     const canvas = document.querySelector("#canvas");
     const ctx = canvas.getContext("2d");
 
-<<<<<<< HEAD
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-    canvas.addEventListener("click", GenCan);
-    function GenCan(e){
-        console.log("Create", e.clientX,e.clientY);
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(CreateImg("/static/Icons/Icon.png", 100, 100, "ssss"), e.clientX,e.clientY, 50,50)
-=======
     canvas.height = 480;
     canvas.width = 720;
     canvas.addEventListener("click", GenCan);
@@ -35,7 +26,6 @@ window.addEventListener("load", () => {
        Marker.push(MarkerInfo)
        console.log(Marker.length)
        Index++
->>>>>>> f3ef399a0f6e74e2056395f5c1c461751060a939
     }
 })
 
@@ -52,23 +42,7 @@ function CreateImg(src, width, height, alt) {
 var Number = 0
 window.addEventListener("click", function(e) {
     console.log('X:', e.x, 'Y:', e.y)
-<<<<<<< HEAD
     // GenPhoto("Icons/Icon.png", 1024/4, 1024/4, "ssss",3000,2000)
-=======
-    // var rect = document.getElementById("Map-Image").getBoundingClientRect()
-    //console.log("s",rect.top, rect.right, rect.bottom, rect.left)
-    var Marker = [
-        {
-            top: 300,
-            left: 300,
-            title: "marker1"
-        }
-    ]
-    Number ++
-
-    //createItem(Marker)
-    
->>>>>>> f3ef399a0f6e74e2056395f5c1c461751060a939
 })
 
 var createItem = function(Marker){
@@ -105,7 +79,7 @@ function GenPhoto(src, width, height, alt,x, y) {
     document.body.appendChild(img);
 }
 
-<<<<<<< HEAD
+
 document.getElementById("Clear").addEventListener('click', function() {
     var MyCan = document.getElementById("canvas");
     var ctx = MyCan.getContext('2d');
@@ -120,7 +94,7 @@ function CreateImg(src, width, height, alt) {
     ImageObj.alt = alt;
     return ImageObj;
 }
-=======
+
 //  s sdocument.getElementById("Clear").addEventListener('click', function() {
 //     var MyCan = document.getElementById("canvas");
 //     var ctx = MyCan.getContext('2d');
@@ -136,8 +110,6 @@ window.addEventListener("resize" , function(){
     canvas.fillStyle = '#00FFF'
     canvas.fillRect(0,0)
 }, false)
-<<<<<<< HEAD
-=======
 
 var config = {
     apiKey: "AIzaSyB-OBk-Q2Ik7jqRp9XlTCLIL8FPbUhozUA",
@@ -166,5 +138,4 @@ function SaveData() {
     }
   }
 document.getElementById("SaveBut").addEventListener('click', SaveData(Marker))
->>>>>>> f3ef399a0f6e74e2056395f5c1c461751060a939
->>>>>>> refs/remotes/origin/master
+
