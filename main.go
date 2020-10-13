@@ -15,7 +15,8 @@ type Page struct {
 func main() {
 	welcome := Page{"Annonymus", time.Now().Format(time.Stamp)}
 
-	templates := template.Must(template.ParseFiles("Template/template.html"))
+	Homepage := template.Must(template.ParseFiles("Template/template.html"))
+	
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
