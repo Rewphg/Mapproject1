@@ -5,8 +5,8 @@ window.addEventListener("load", () => {
     const canvas = document.querySelector("#canvas");
     const ctx = canvas.getContext("2d");
 
-    canvas.height = 480;
-    canvas.width = 720;
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
     canvas.addEventListener("click", GenCan);
     function GenCan(e){
        var Border = document.getElementById("canvas").getBoundingClientRect();
