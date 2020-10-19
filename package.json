@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Rewphg/Mapproject1/issues"
   },
-  "homepage": "https://github.com/Rewphg/Mapproject1#readme"
+  "homepage": "https://github.com/Rewphg/Mapproject1#readme",
+  "dependencies": {
+    "firebase-admin": "^9.2.0"
+  }
 }

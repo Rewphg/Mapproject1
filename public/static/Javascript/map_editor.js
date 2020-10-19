@@ -13,7 +13,7 @@ let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_]+$/;
 
 //In JS, to make a web functional we need to create an HTML events to make it more
 //functional.
-file.addEventListener("change", function() {
+file.addEventListener("change", function () {
     test(this);
 });
 
@@ -22,7 +22,7 @@ function displayTemplate() {
     window.alert("Please upload your map template.")
     defaultBtn.click();
 }
-defaultBtn.addEventListener("change", function() {
+defaultBtn.addEventListener("change", function () {
     if (this.value) {
         let nameValue = this.value.match(regExp);
         fileName.style.display = "block";
@@ -39,25 +39,25 @@ function uploadResponse() {
 
     formData.append("template", template);
 
-    xhr.onreadystatechange = state => {console.log(xhr.status);}
+    xhr.onreadystatechange = state => { console.log(xhr.status); }
     xhr.open("POST", '/upload/template');
     xhr.send(formData);
-    
-    document.template.imagetag.src=document.template.filetag.value;
+
+    document.template.imagetag.src = document.template.filetag.value;
 }
 
 function test(input) {
     var reader;
 
-  if (input.files && input.files[0]) {
-    reader = new FileReader();
+    if (input.files && input.files[0]) {
+        reader = new FileReader();
 
-    reader.onload = function(e) {
-      preview.setAttribute('src', e.target.result);
+        reader.onload = function (e) {
+            preview.setAttribute('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
     }
-
-    reader.readAsDataURL(input.files[0]);
-  }
 }
 
 function displayAnother() {
@@ -72,17 +72,17 @@ function toDatabase() {
     const file = document.querySelector("preview").files[0]
     const name = new Data() + '-' + file.name
     const metadata = {
-        contentType:file.type
+        contentType: file.type
     }
 
-    const task = ref.child(name).put(file,metadata)
+    const task = ref.child(name).put(file, metadata)
 
     task
-    .then(snapshot => snapshot.ref.getDownloadURL())
-    .then(url => {
-        console.log(url)
-        alert("Image upload successful")
-        const preview = document.querySelector("#preview")
-        preview.src = url
-    })
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+            console.log(url)
+            alert("Image upload successful")
+            const preview = document.querySelector("#preview")
+            preview.src = url
+        })
 }
