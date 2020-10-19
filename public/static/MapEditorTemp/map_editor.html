@@ -4,45 +4,43 @@
     <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>EventMe</title>
-    <link rel="stylesheet" href="map_editor.css">
+    <title>EventMe - Upload</title>
   </head>
   <body>
-    <div class="content">
-      <input id="default-btn" type="file" hidden>
-      <div class="btn">
-        <form name="templateUpload">Please upload your map template.</form>
-        <img src="" id="preview">
-        <button onclick="displayTemplate(), toDatabase()" id="custom-btn">Select File</button>
-      </div>
-      <div class="file-name">No file selected</div>
-    </div>
+    <style> img {
+      height: 450px;
+      width: 750px;
+      border: 2px solid black;
+    }</style>
+    <h3> Please enter your template name following this order: PROJECT_ORGANIZERID_FILENAME </h3>
+    Size: Height = 450px and Width = 750px. <input type="text" id="namebox"> <br> <br>
+    <img id="image"/> <label id="progress"> </label> <br> <br>
+    <button id="select">SELECT</button>
+    <button id="upload">UPLOAD</button>
+
   </body>
   <script src="map_editor.js"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-database.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-analytics.js"></script>
     <script>
       // Your web app's Firebase configuration
       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
       var firebaseConfig = {
-        apiKey: "AIzaSyB-OBk-Q2Ik7jqRp9XlTCLIL8FPbUhozUA",
+        apiKey: "AAAAxMF20pw:APA91bEWbYQVtAqN8p6m4e8C6GPd83PV4aYVs-ZNYB6M5tNXtbLn-ophH52psvEwZhm44yDmXxaxuq1uwS1CZ9BQoiG1WfgX4Z8uj_1q2yxFyc1MLdyRD1fwhoO6r-1La3ACMZzO9JQO",
         authDomain: "mapproject1-76680.firebaseapp.com",
         databaseURL: "https://mapproject1-76680.firebaseio.com",
         projectId: "mapproject1-76680",
-        storageBucket: "mapproject1-76680.appspot.com",
+        storageBucket: "gs://mapproject1-76680.appspot.com",
         messagingSenderId: "845059379868",
         appId: "1:845059379868:web:b027db02ef397c849f5359",
-        measurementId: "G-WB26Y8VMXC"
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-      firebase.analytics();
       console.log(firebase);
     </script>
 </html>
