@@ -1,5 +1,3 @@
-
-
 const MPos = [{
     x: 0,
     y: 0,
@@ -36,8 +34,6 @@ function animate(){
     console.log(BoothIcons.length)
 }
 
-
-const Eraser = new eraser(0,30, 50,50,"./static/Icons/Eraser.png" )
 
 
 addEventListener("click", (event) => {
