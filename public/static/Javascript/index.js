@@ -42,6 +42,11 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     var border = document.getElementById("canvas").getBoundingClientRect();
     MPos.x = event.clientX - border.left - 25
     MPos.y = event.clientY - border.top - 25
+    BoothIcons.forEach((A, index) => {
+        if (CheckCollition(MPos.x,MPos.y, A) == true) {
+            BoothIcons.splice(index, 1)
+        }
+    });
 
     if (MPos.y < canvas.height && MPos.x < canvas.width) {
         On = 1
