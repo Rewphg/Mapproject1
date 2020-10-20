@@ -1,28 +1,23 @@
-<link rel="stylesheet" href=".\static\stylesheets\format.css">
-<link rel="stylesheet" href=".\static\stylesheets\form.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
-  body {
-    margin: 0;
-  }
-
-  .npm canvas {
-    background-color: black;
-  }
-  canvas {
-    border: 2px solid black;
-  }
-  .testing {
-    width: 750px;
-    height: 450px;
-  }
-</style>
-
 <body>
+  <link rel="stylesheet" href=".\static\stylesheets\format.css">
+  <link rel="stylesheet" href=".\static\stylesheets\form.css">
+  <style>
+    body {
+        margin: 0;
+    }
+    .npm canvas{
+        background-color: black;
+    }
+    canvas {
+      border: solid 2px;
+      border-color: black;
+    }
+  </style>
   <input type="file" id="namebox1" onchange="preview(this)"> <br> <br>
   <button id="clickbutton" onclick="toCanvas()">Display</button>
-  
   <canvas id="canvas"></canvas>
+  <script src="./static/Javascript/CreateObj.js"></script>
+  <script  src="./static/Javascript/index.js"></script>
   <img id="display" hidden>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-app.js"></script>
@@ -49,11 +44,14 @@
       firebase.initializeApp(firebaseConfig);
     </script>
   <div>
+<div>
+    <button class="open-button" onclick="openForm()">Text Box<img src=".\static\Icons\text.png" width="50"
+        length="50"></button>
     <div class="form-popup" id="myForm">
       <form action="/action_page.php" class="form-container">
-        <h1>BoothInfo</h1>
+        <h1>Login</h1>
         <label for="text"><b>Text Box</b></label>
-        <input type="text" placeholder="Discription">
+        <input type="text" placeholder="">
         <button type="submit" class="btn">Confirm</button>
         <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
       </form>
@@ -67,21 +65,25 @@
           length="50"></button>
     </div>
 
-    <div>
-      <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/text.png" width="50"
-          length="50"></button>
-      <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
-          <h1>Login</h1>
-          <label for="text"><b>Information</b></label>
-          <input type="text" placeholder="">
-          <button type="submit" class="btn">Confirm</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-      </div>
+  <div>
+    <button class="open-button" onclick="openForm()">Information<img src=".\static\Icons\info.png" width="50"
+        length="50"></button>
+    <div class="form-popup" id="myForm">
+      <form action="/action_page.php" class="form-container">
+        <h1>Login</h1>
+        <label for="text"><b>Information</b></label>
+        <input type="text" placeholder="">
+        <button type="submit" class="btn">Confirm</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+      <script src="./static/Javascript/displayimage.js"></script>
+      <script>
+        function openForm() {
+          document.getElementById("myForm").style.display = "block";
+        }
+        function closeForm() {
+          document.getElementById("myForm").style.display = "none";
+        }
+      </script>
     </div>
   </div>
-  <script src="./static/Javascript/CreateObj.js"></script>
-  <script src="./static/Javascript/index.js"></script>
-  <script src="./static/Javascript/displayimage.js"></script>
-</body>
