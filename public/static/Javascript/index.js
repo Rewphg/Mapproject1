@@ -6,10 +6,10 @@ const MPos = [{
 const canvas = document.querySelector("canvas")
 const ctx = canvas.getContext('2d')
 
-const mode = 0
+var mode = 0
 
 canvas.width = window.innerWidth;
-canvas.height = window.innerWidth;
+canvas.height = window.innerHeight;
 
 const BoothIcons = [] 
 
@@ -19,19 +19,12 @@ function animate(){
     requestAnimationFrame(animate)
     BoothIcons.forEach((BoothIcon, index) => {
         BoothIcon.Update()
-        if (mode == 1) {
-            if (CheckCollition(MPos, BoothIcon) == true){
-                BoothIcons.splice(index,1)
-                mode = 0
-            }
-        }
         if (CheckCollitionImg(BoothIcon, Eraser) == true){
-            BoothIcons.splice(index,1)
-            mode = 1
+            BoothIcons.splice(BoothIcon,1)
         }
 
         BoothIcons.forEach((B2, I) => {
-            
+
         })
     });
 }
@@ -39,19 +32,14 @@ function animate(){
 const Eraser = new eraser(0,30, 50,50,"./static/Icons/Eraser.png" )
 
 addEventListener("click", (event) => {
-    if (mode == 0) {
-        BoothIcons.push(new BoothIcon(event.clientX, event.clientY,50,50,"./static/Icons/Icon.png"))
-    }
+    MPos.x = event.clientX - border.left
+    MPos.y = event.clientY - border.top
+    
+    BoothIcons.push(new BoothIcon(MPos.x, MPos.y,50,50,"./static/Icons/Icon.png"))
+
     if (CheckCollition(event.clientX, event.clientY, eraser) == true){
-        mode = 1
         console.log("Eraser")
     }
-    MPos.x = event.clientX
-    MPos.y = event.clientY
-})
-
-addEventListener('mouseover', (event) => {
-    
 })
 
 animate()
