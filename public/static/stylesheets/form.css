@@ -16,9 +16,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 /* The popup form - hidden by default */
 .form-popup {
-  padding-left: 10px;
   display: none;
-  position: fixed;
+  position: relative;
   bottom: 0;
   right: 15px;
   border: 3px solid #f1f1f1;
@@ -69,9 +68,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
   opacity: 1;
 }
 
-.MenuContainere * {
-  position: fixed;
+#MenuContainere * {
+  position: relative;
   width: 95px;
   background-color: bisque;
-  z-index: 9;
 }

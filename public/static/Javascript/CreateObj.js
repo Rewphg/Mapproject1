@@ -1,13 +1,20 @@
 
 class BoothIcon {
+<<<<<<< HEAD
     constructor(x, y, width, height, src, title, dis) {
+=======
+    constructor(x, y, width, height, src) {
+>>>>>>> a5778a5e76e4d36ad283713cfa5c0448aed74296
         this.x = x
         this.y = y
         this.src = src
         this.width = width
         this.height = height
+<<<<<<< HEAD
         this.title = title
         this.dis = dis
+=======
+>>>>>>> a5778a5e76e4d36ad283713cfa5c0448aed74296
     }
 
     Draw() {
@@ -16,9 +23,6 @@ class BoothIcon {
         B.height = this.height
         B.src = this.src
         ctx.drawImage(B, this.x, this.y, this.width, this.height)
-        ctx.font = "15px Arial"
-        ctx.textAlign = "center"
-        ctx.fillText(this.title, this.x + 24,this.y - 10)
     }
 
     Update() {
@@ -53,10 +57,8 @@ class eraser {
 }
 
 function CheckCollition(X, Y, rect2) {
-    if (X < rect2.x + rect2.width/2 &&
-        X > rect2.x - rect2.width/2 &&
-        Y < rect2.y + rect2.height/2 &&
-        Y > rect2.y - rect2.height/2) {
+    if (X < rect2.x + rect2.width &&
+        Y < rect2.y + rect2.height) {
         return true
     }
 }
@@ -70,8 +72,13 @@ function CheckCollitionImg(rect1, rect2) {
     }
 }
 
+<<<<<<< HEAD
 function ShowMyForm(x, y, I) {
     var Form = document.getElementById("CreateForm");
+=======
+function ShowMyForm() {
+    var Form = document.getElementById("myForm");
+>>>>>>> a5778a5e76e4d36ad283713cfa5c0448aed74296
     Form.style.display = "block"
 }
 
