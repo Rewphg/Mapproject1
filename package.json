@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Rewphg/Mapproject1#readme",
   "dependencies": {
-    "firebase-admin": "^9.2.0"
+    "firebase-admin": "^9.2.0",
+    "node": "^14.14.0"
   }
 }

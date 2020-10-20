@@ -1,41 +1,47 @@
-<link rel="stylesheet" href="\static\stylesheets\format.css">
-<link rel="stylesheet" href="\static\stylesheets\form.css">
-
-<canvas id="canvas"></canvas>
-<script src="./static/Javascript/CreateObj.js"></script>
-<script  src="./static/Javascript/index.js"></script>
+<link rel="stylesheet" href=".\static\stylesheets\format.css">
+<link rel="stylesheet" href=".\static\stylesheets\form.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
-    body {
-        margin: 0;
-    }
-    .npm canvas{
-        background-color: black;
-    }
-</style>
-<div>
-    <button class="open-button" onclick="openForm()">Text Box<img src="\static\Icons\text.png" width="50"
-        length="50"></button>
-    <div class="form-popup" id="myForm">
-      <form action="/action_page.php" class="form-container">
-        <h1>Login</h1>
-        <label for="text"><b>Text Box</b></label>
-        <input type="text" placeholder="">
-        <button type="submit" class="btn">Confirm</button>
-        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-      </form>
-    </div>
-  </div>
+  body {
+    margin: 0;
+  }
 
-  <div>
-    <button class="open-button" onclick="openForm()">Information<img src="\static\Icons\info.png" width="50"
-        length="50"></button>
-    <div class="form-popup" id="myForm">
-      <form action="/action_page.php" class="form-container">
-        <h1>Login</h1>
-        <label for="text"><b>Information</b></label>
-        <input type="text" placeholder="">
-        <button type="submit" class="btn">Confirm</button>
-        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-      </form>
+  .npm canvas {
+    background-color: black;
+  }
+</style>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script src="./static/Javascript/CreateObj.js"></script>
+  <script src="./static/Javascript/index.js"></script>
+  <div id="MenuContainer" >
+    <div>
+      <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\text.png" width="50"
+          length="50"></button>
+      <div class="form-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+          <h1>Login</h1>
+          <label for="text"><b>Text Box</b></label>
+          <input type="text" placeholder="">
+          <button type="submit" class="btn">Confirm</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
+    </div>
+
+    <div>
+      <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/text.png" width="50"
+          length="50"></button>
+      <div class="form-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+          <h1>Login</h1>
+          <label for="text"><b>Information</b></label>
+          <input type="text" placeholder="">
+          <button type="submit" class="btn">Confirm</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
     </div>
   </div>
+</body>
