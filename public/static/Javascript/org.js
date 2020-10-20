@@ -1,4 +1,0 @@
-function getInfo() {
-    var username
-
-}
