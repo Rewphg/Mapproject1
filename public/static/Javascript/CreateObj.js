@@ -72,3 +72,16 @@ function ShowMyForm(x, y, I) {
     var Form = document.getElementById("myForm");
     Form.style.display = "block"
 }
+
+function DisplayInfo() {
+    var title = document.getElementById("DisName").value
+    BoothIcons.push(new BoothIcon(ConX, ConY, 50, 50, "./static/Icons/pin.png", title))
+    console.log(BoothIcons[BoothIcons.length - 1].title, MPos.x)
+    document.getElementById("myForm").style.display = "none"
+    On = 0
+}
+
+function Change(M) {
+    mode = M
+    console.log(M)
+}

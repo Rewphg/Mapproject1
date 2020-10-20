@@ -1,3 +1,5 @@
+
+
 const MPos = [{
     x: 0,
     y: 0,
@@ -37,16 +39,25 @@ var ConX = 0
 var ConY = 0
 var On = 0
 
+//mode 0 = none ,mode 1 = Booth ,mode 2 = Toilet ,mode 3 = info, mode 4 = eraser
+
 document.getElementById("canvas").addEventListener("click", (event) => {
     event.preventDefault()
     var border = document.getElementById("canvas").getBoundingClientRect();
     MPos.x = event.clientX - border.left - 25
     MPos.y = event.clientY - border.top - 25
-    BoothIcons.forEach((A, index) => {
-        if (CheckCollition(MPos.x,MPos.y, A) == true) {
-            BoothIcons.splice(index, 1)
-        }
-    });
+    if (mode == 4) {
+        BoothIcons.forEach((A, index) => {
+            if (CheckCollition(MPos.x,MPos.y, A) == true) {
+                BoothIcons.splice(index, 1)
+            }
+        });
+        ToiletIcons.forEach((B, index) => {
+            if (CheckCollition(MPos.x,MPos.y, B) == true) {
+                ToiletIcons.splice(index, 1)
+            }
+        });
+    }
 
     if (MPos.y < canvas.height && MPos.x < canvas.width) {
         On = 1
@@ -59,7 +70,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         }
 
         if (mode == 2) {
-            ToiletIcons.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/toilet.png"))
+            ToiletIcons.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/toilet.png", "Toilet"))
         }
 
         if (CheckCollition(event.clientX, event.clientY, eraser) == true) {
@@ -68,16 +79,4 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     }
 })
 
-function DisplayInfo() {
-    var title = document.getElementById("DisName").value
-    BoothIcons.push(new BoothIcon(ConX, ConY, 50, 50, "./static/Icons/Icon.png", title))
-    console.log(BoothIcons[BoothIcons.length - 1].title, MPos.x)
-    document.getElementById("myForm").style.display = "none"
-    On = 0
-}
-
-function Change(M) {
-    mode = M
-    console.log(M)
-}
 animate()

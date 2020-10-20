@@ -41,7 +41,7 @@
       firebase.initializeApp(firebaseConfig);
     </script>
   <div>
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" width="1000" height="1000"></canvas>
     <div class="form-popup" id="myForm">
       <form class="form-container">
         <h1>BoothInfo</h1>
@@ -63,11 +63,15 @@
     </div>
 
     <div>
-      <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/text.png" width="50"
+      <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/pin.png" width="50"
           length="50"></button>
     </div>
     <div>
-      <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/text.png" width="50"
+      <button class="open-button" onclick="Change(3)">Info<img src="./static/Icons/info.png" width="50"
+          length="50"></button>
+    </div>
+    <div>
+      <button class="open-button" onclick="Change(4)">Info<img src="./static/Icons/Eraser.png" width="50"
           length="50"></button>
     </div>
   </div>
