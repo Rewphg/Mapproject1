@@ -51,3 +51,5 @@ var reader = new FileReader();
         }
         );
     }
+
+    document.getElementById("next").onclick

@@ -26,7 +26,7 @@ function check() {
     
     if(regname.value == storedname && regpw.value == storedpw) {
         alert('successful')
-        window.location.replace("TestMap.html")
+        window.location.href="MapEditorTemp/map_editor.html"
     }else{
         alert("Error")
     }
