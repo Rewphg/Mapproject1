@@ -15,12 +15,14 @@
   <div>
     <canvas id="canvas"></canvas>
     <div class="form-popup" id="myForm">
-      <form action="/action_page.php" class="form-container">
+      <form class="form-container">
         <h1>BoothInfo</h1>
-        <label for="text"><b>Text Box</b></label>
-        <input type="text" placeholder="Discription">
-        <button type="submit" class="btn">Confirm</button>
-        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        <label for="text"><b>Booth Name</b></label>
+        <input id="DisName" type="text" placeholder="Name">
+        <label for="text"><b>Overview</b></label>
+        <input id="DisName" type="text" placeholder="This booth is....">
+        <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title"></input>
+        <button type="button" class="btn cancel" onclick="">Close</button>
       </form>
     </div>
   </div>
@@ -35,15 +37,10 @@
     <div>
       <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/text.png" width="50"
           length="50"></button>
-      <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
-          <h1>Login</h1>
-          <label for="text"><b>Information</b></label>
-          <input type="text" placeholder="">
-          <button type="submit" class="btn">Confirm</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-      </div>
+    </div>
+    <div>
+      <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/text.png" width="50"
+          length="50"></button>
     </div>
   </div>
 </body>

@@ -1,10 +1,11 @@
 class BoothIcon {
-    constructor(x, y, width, height, src) {
+    constructor(x, y, width, height, src, title) {
         this.x = x
         this.y = y
         this.src = src
         this.width = width
         this.height = height
+        this.title = title
     }
 
     Draw() {
@@ -13,6 +14,9 @@ class BoothIcon {
         B.height = this.height
         B.src = this.src
         ctx.drawImage(B, this.x, this.y, this.width, this.height)
+        ctx.font = "15px Arial"
+        ctx.textAlign = "center"
+        ctx.fillText(this.title, this.x + 24,this.y - 10)
     }
 
     Update() {
@@ -47,8 +51,10 @@ class eraser {
 }
 
 function CheckCollition(X, Y, rect2) {
-    if (X < rect2.x + rect2.width &&
-        Y < rect2.y + rect2.height) {
+    if (X < rect2.x + rect2.width/2 &&
+        X > rect2.x - rect2.width/2 &&
+        Y < rect2.y + rect2.height/2 &&
+        Y > rect2.y - rect2.height/2) {
         return true
     }
 }
@@ -62,7 +68,7 @@ function CheckCollitionImg(rect1, rect2) {
     }
 }
 
-function ShowMyForm() {
+function ShowMyForm(x, y, I) {
     var Form = document.getElementById("myForm");
     Form.style.display = "block"
 }
