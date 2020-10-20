@@ -1,4 +1,4 @@
-const border = document.getElementById("canvas").getBoundingClientRect()
+const border = canvas.getBoundingClientRect()
 
 class BoothIcon {
     constructor(x,y,width,height, src) {
