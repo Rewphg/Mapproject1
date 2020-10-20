@@ -33,6 +33,7 @@ function animate(){
     ToiletIcons.forEach((TI, index) => {
         TI.Update()
     })
+    console.log(BoothIcons.length)
 }
 
 
@@ -43,16 +44,19 @@ addEventListener("click", (event) => {
     var border = document.getElementById("canvas").getBoundingClientRect();
     MPos.x = event.clientX - border.left -25
     MPos.y = event.clientY - border.top -25
-    if (mode == 1) {
-        BoothIcons.push(new BoothIcon(MPos.x, MPos.y,50,50,"./static/Icons/Icon.png"))
-    }
+    if (MPos.y < canvas.height && MPos.x < canvas.width) {
+        if (mode == 1) {
+            BoothIcons.push(new BoothIcon(MPos.x, MPos.y,50,50,"./static/Icons/Icon.png"))
+            ShowMyForm()
+        }
 
-    if (mode == 2) {
-        BoothIcons.push(new BoothIcon(MPos.x, MPos.y,50,50,"./static/Icons/toilet.png"))
-    }
+        if (mode == 2) {
+            ToiletIcons.push(new BoothIcon(MPos.x, MPos.y,50,50,"./static/Icons/toilet.png"))
+        }
 
-    if (CheckCollition(event.clientX, event.clientY, eraser) == true){
-        console.log("Eraser")
+        if (CheckCollition(event.clientX, event.clientY, eraser) == true){
+            console.log("Eraser")
+        }
     }
 })
 

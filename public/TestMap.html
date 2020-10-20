@@ -19,6 +19,7 @@
 </style>
 
 <body>
+<<<<<<< HEAD
   <input type="text" id="namebox1"> <br> <br>
   <button id="append" onclick="toShowup()">Load</button>
   <img id="display" hidden>
@@ -49,19 +50,26 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
     </script>
+=======
+  <div>
+    <canvas id="canvas"></canvas>
+    <div class="form-popup" id="myForm">
+      <form action="/action_page.php" class="form-container">
+        <h1>BoothInfo</h1>
+        <label for="text"><b>Text Box</b></label>
+        <input type="text" placeholder="Discription">
+        <button type="submit" class="btn">Confirm</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+    </div>
+  </div>
+  <script src="./static/Javascript/CreateObj.js"></script>
+  <script src="./static/Javascript/index.js"></script>
+>>>>>>> c9783ca35ebca020e4025af5465a8b0e8f31345f
   <div id="MenuContainer" >
     <div>
       <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\text.png" width="50"
           length="50"></button>
-      <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
-          <h1>Login</h1>
-          <label for="text"><b>Text Box</b></label>
-          <input type="text" placeholder="">
-          <button type="submit" class="btn">Confirm</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-      </div>
     </div>
 
     <div>
