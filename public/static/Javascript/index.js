@@ -15,6 +15,7 @@ canvas.height = window.innerHeight;
 
 const BoothIcons = []
 const ToiletIcons = []
+const Infos = []
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -29,6 +30,9 @@ function animate() {
     ToiletIcons.forEach((TI, index) => {
         TI.Update()
     })
+    Infos.forEach((TI, index) => {
+        TI.Update()
+    })
     console.log(BoothIcons.length)
 }
 
@@ -38,6 +42,7 @@ const Eraser = new eraser(0, 30, 50, 50, "./static/Icons/Eraser.png")
 var ConX = 0
 var ConY = 0
 var On = 0
+var EditIndex = 0
 
 //mode 0 = none ,mode 1 = Booth ,mode 2 = Toilet ,mode 3 = info, mode 4 = eraser
 
@@ -49,7 +54,8 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     if (mode == 4) {
         BoothIcons.forEach((A, index) => {
             if (CheckCollition(MPos.x,MPos.y, A) == true) {
-                BoothIcons.splice(index, 1)
+                OpenEdit(BoothIcons[index])
+                EditIndex = index
             }
         });
         ToiletIcons.forEach((B, index) => {
@@ -71,6 +77,10 @@ document.getElementById("canvas").addEventListener("click", (event) => {
 
         if (mode == 2) {
             ToiletIcons.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/toilet.png", "Toilet"))
+        }
+
+        if (mode == 3) {
+            Infos.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/info.png", "Info"))
         }
 
         if (CheckCollition(event.clientX, event.clientY, eraser) == true) {

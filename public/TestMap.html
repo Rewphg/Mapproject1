@@ -42,23 +42,35 @@
     </script>
   <div>
     <canvas id="canvas" width="1000" height="1000"></canvas>
-    <div class="form-popup" id="myForm">
+    <div class="form-popup" id="CreateForm">
       <form class="form-container">
         <h1>BoothInfo</h1>
         <label for="text"><b>Booth Name</b></label>
         <input id="DisName" type="text" placeholder="Name">
         <label for="text"><b>Overview</b></label>
-        <input id="DisName" type="text" placeholder="This booth is....">
+        <input id="Discription" type="text" placeholder="This booth is....">
         <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title"></input>
-        <button type="button" class="btn cancel" onclick="">Close</button>
+        <button type="button" class="btn cancel" onclick="Close('CreateForm')">Close</button>
       </form>
     </div>
   </div>
+  <div class="form-popup" id="EditForm">
+    <form class="form-container">
+      <h1>Edit Booth Information</h1>
+      <label for="text"><b>Booth Name</b></label>
+      <input id="EditName" type="text" placeholder="Name">
+      <label for="text"><b>Overview</b></label>
+      <input id="EditDis" type="text" placeholder="This booth is....">
+      <input type="button" class="btn" onclick="ApplyEditBoothInfo()" placeholder="Title"></input>
+      <button type="button" class="btn cancel" onclick="Close('EditForm')">Close</button>
+    </form>
+  </div>
+</div>
   <script src="./static/Javascript/CreateObj.js"></script>
   <script src="./static/Javascript/index.js"></script>
   <div id="MenuContainer" >
     <div>
-      <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\text.png" width="50"
+      <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\toilet.png" width="50"
           length="50"></button>
     </div>
 
@@ -71,7 +83,7 @@
           length="50"></button>
     </div>
     <div>
-      <button class="open-button" onclick="Change(4)">Info<img src="./static/Icons/Eraser.png" width="50"
+      <button class="open-button" onclick="Change(4)">Edit/Delete<img src="./static/Icons/Eraser.png" width="50"
           length="50"></button>
     </div>
   </div>

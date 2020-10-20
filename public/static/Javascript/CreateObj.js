@@ -1,11 +1,13 @@
+
 class BoothIcon {
-    constructor(x, y, width, height, src, title) {
+    constructor(x, y, width, height, src, title, dis) {
         this.x = x
         this.y = y
         this.src = src
         this.width = width
         this.height = height
         this.title = title
+        this.dis = dis
     }
 
     Draw() {
@@ -69,19 +71,41 @@ function CheckCollitionImg(rect1, rect2) {
 }
 
 function ShowMyForm(x, y, I) {
-    var Form = document.getElementById("myForm");
+    var Form = document.getElementById("CreateForm");
     Form.style.display = "block"
 }
 
 function DisplayInfo() {
     var title = document.getElementById("DisName").value
-    BoothIcons.push(new BoothIcon(ConX, ConY, 50, 50, "./static/Icons/pin.png", title))
+    var discript = document.getElementById("Discription").value
+    BoothIcons.push(new BoothIcon(ConX, ConY, 50, 50, "./static/Icons/pin.png", title, discript))
     console.log(BoothIcons[BoothIcons.length - 1].title, MPos.x)
-    document.getElementById("myForm").style.display = "none"
+    document.getElementById("CreateForm").style.display = "none"
     On = 0
+    document.getElementById("DisName").value = ""
+    document.getElementById("Discription").value = ""
 }
 
 function Change(M) {
     mode = M
     console.log(M)
+}
+
+function OpenEdit(B) {
+    document.getElementById("EditName").value = B.title
+    document.getElementById("EditDis").value = B.dis
+    document.getElementById("EditForm").style.display = "block"
+}
+
+function ApplyEditBoothInfo() {
+    var B = BoothIcons[EditIndex]
+    B.title = document.getElementById("EditName").value
+    B.dis = document.getElementById("EditDis").value
+    document.getElementById("EditForm").style.display = "none"
+    document.getElementById("EditName").value = ""
+    document.getElementById("EditDis").value = ""
+}
+
+function Close(e) {
+    document.getElementById(e).style.display = "none"
 }
