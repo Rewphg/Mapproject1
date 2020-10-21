@@ -29,7 +29,6 @@ const Infos = []
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    Eraser.Draw()
     if (Background.length > 0) {
         Background[Background.length-1].Draw()
     }

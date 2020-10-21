@@ -13,5 +13,5 @@ function preview(input) {
 
 function toCanvas() {
     var image = document.getElementById("display").getAttribute("src");
-    Background.push(new eraser(10, 10, canvas.Width,canvas.Height, image))
+    showcanvas.style.backgroundImage = "url(" + image + ")"
 }
