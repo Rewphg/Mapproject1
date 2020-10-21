@@ -10,7 +10,8 @@ function preview(input) {
     reader.readAsDataURL(input.files[0]);
 }
 
+
 function toCanvas() {
-    var image = document.getElementById("display");
-    context.drawImage(image, 10, 10);
+    var image = document.getElementById("display").getAttribute("src");
+    Background.push(new eraser(10, 10, canvas.Width,canvas.Height, image))
 }

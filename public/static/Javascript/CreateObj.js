@@ -109,3 +109,16 @@ function ApplyEditBoothInfo() {
 function Close(e) {
     document.getElementById(e).style.display = "none"
 }
+
+function preview(input) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById("display").setAttribute("src", e.target.result);
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+
+function toCanvas() {
+    var image = document.getElementById("display");
+    Background.push(new eraser(10, 10, canvas.Width,canvas.Height, image))
+}

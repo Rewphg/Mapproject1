@@ -19,9 +19,10 @@ const ctx = canvas.getContext('2d')
 
 var mode = 0
 
-canvas.width = canvas.clientWidth;
-canvas.height = canvas.clientHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
+const Background = []
 const BoothIcons = []
 const ToiletIcons = []
 const Infos = []
@@ -29,6 +30,9 @@ const Infos = []
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     Eraser.Draw()
+    if (Background.length > 0) {
+        Background[Background.length-1].Draw()
+    }
     requestAnimationFrame(animate)
     BoothIcons.forEach((BoothIcon, index) => {
         BoothIcon.Update()
@@ -70,6 +74,11 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         ToiletIcons.forEach((B, index) => {
             if (CheckCollition(MPos.x,MPos.y, B) == true) {
                 ToiletIcons.splice(index, 1)
+            }
+        });
+        Infos.forEach((B, index) => {
+            if (CheckCollition(MPos.x,MPos.y, B) == true) {
+                Infos.splice(index, 1)
             }
         });
     }
