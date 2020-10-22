@@ -1,4 +1,3 @@
-
 const signupName =document.getElementById('signup-name');
 const pw = document.getElementById('pw');
 const email = document.getElementById('email');
@@ -26,7 +25,7 @@ function check() {
     
     if(regname.value == storedname && regpw.value == storedpw) {
         alert('successful')
-        window.location.href="/Users/rewphg/go/src/github.com/Rewphg/Mapproject1/public/TestMap.html"
+        window.location.href="/public/templates/TestMap.html"
     }else{
         alert("Error")
     }
