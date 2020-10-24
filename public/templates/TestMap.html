@@ -92,8 +92,23 @@
         <label for="text"><b>Booth Name</b></label>
         <input id="DisName" name="DisName" type="text" placeholder="Name">
         <label for="text"><b>Overview</b></label>
-        <input id="Description" name="Description" type="text" placeholder="This booth is....">
+        <input id="Discription" name="Discription" type="text" placeholder="This booth is....">
         <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title"></input>
+        <button type="button" class="btn cancel" onclick="HideDisplayInfo()">Close</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="form-popup" id="EditForm">
+    <canvas id="qr-code"></canvas>
+
+      <form class="form-container" >
+        <h1>BoothInfo</h1>
+        <label for="text"><b>Booth Name</b></label>
+        <input id="EditName" name="EditName" type="text" placeholder="Name">
+        <label for="text"><b>Overview</b></label>
+        <input id="EditDis" name="EditDis" type="text" placeholder="This booth is....">
+        <input type="button" class="btn" onclick="ApplyEditBoothInfo()" placeholder="Title"></input>
         <button type="button" class="btn cancel" onclick="">Close</button>
       </form>
     </div>
@@ -152,6 +167,8 @@ class BoothIcon {
         B.height = this.height
         B.src = this.src
         ctx.drawImage(B, this.x, this.y, this.width, this.height)
+        ctx.strokeRect( this.x, this.y, this.width, this.height) // debug to set border to image
+        
         ctx.font = "15px Arial"
         ctx.textAlign = "center"
         ctx.fillText(this.title, this.x + 24, this.y - 10)
@@ -179,6 +196,8 @@ class eraser {
         B.height = this.height
         B.src = this.src
         ctx.drawImage(B, this.x, this.y, this.width, this.height)
+        
+        
     }
 
     Update() {
@@ -212,12 +231,25 @@ function ShowMyForm(x, y, I) {
     
 }
 
+
+
 function DisplayInfo() {
     var title = document.getElementById("DisName").value
-    var discript = document.getElementById("Description").value
+    var discript = document.getElementById("Discription").value
     BoothIcons.push(new BoothIcon(ConX, ConY, 50, 50, "./static/Icons/pin.png", title, discript))
     console.log(BoothIcons[BoothIcons.length - 1].title, MPos.x)
     document.getElementById("CreateForm").style.display = "block"
+    On = 0
+    document.getElementById("DisName").value = ""
+    document.getElementById("Discription").value = ""
+}
+
+function HideDisplayInfo() {
+    var title = document.getElementById("DisName").value
+    var discript = document.getElementById("Discription").value
+    BoothIcons.push(new BoothIcon(ConX, ConY, 50, 50, "./static/Icons/pin.png", title, discript))
+    console.log(BoothIcons[BoothIcons.length - 1].title, MPos.x)
+    document.getElementById("CreateForm").style.display = "none"
     On = 0
     document.getElementById("DisName").value = ""
     document.getElementById("Discription").value = ""
@@ -291,12 +323,22 @@ const BoothIcons = []
 const ToiletIcons = []
 const Infos = []
 
+
+
+var bg = new Image(canvas.width, canvas.height);
+bg.src="./static/Icons/dealers_room.jpg";
+console.log(bg)
+
+//ctx.drawImage(B, this.x, this.y, this.width, this.height)
+
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     if (Background.length > 0) {
         Background[Background.length-1].Draw()
     }
     requestAnimationFrame(animate)
+    
+    ctx.drawImage(bg, 0,0,canvas.width, canvas.height);
 
     BoothIcons.forEach((booth, index) => {
         booth.Update()
@@ -313,7 +355,7 @@ function animate() {
         TI.Update()
     })
 
-    console.log(BoothIcons.length)
+    //console.log(BoothIcons.length)
 }
 
 
@@ -337,9 +379,11 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     var border = document.getElementById("canvas").getBoundingClientRect();
     MPos.x = event.clientX - border.left - 25
     MPos.y = event.clientY - border.top - 25
-    if (mode == 4) {
+    if (mode == 1) {
+      
         BoothIcons.forEach((A, index) => {
             if (CheckCollition(MPos.x,MPos.y, A) == true) {
+              console.log("Edit old")
                 OpenEdit(BoothIcons[index])
                 EditIndex = index
             }
@@ -356,7 +400,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         });
     }
 
-    console.log(MPos.y, canvas.height, MPos.x ,canvas.width)
+    //console.log(MPos.y, canvas.height, MPos.x ,canvas.width)
 
     if (MPos.y < canvas.height && MPos.x < canvas.width) {
         On = 1
