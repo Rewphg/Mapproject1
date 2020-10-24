@@ -1,7 +1,19 @@
 # public/server.py
 from flask import Flask, render_template, request, url_for, redirect
+from flaskext.mysql import MySQL
 
 app = Flask(__name__)
+
+mysql = MySQL() 
+
+# MySQL configurations
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = '12345678'
+app.config['MYSQL_DATABASE_DB'] = 'eventme_db'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+mysql.init_app(app)
+
+
 
 @app.after_request
 def add_header(r):
@@ -42,7 +54,15 @@ def signuppage():
 
 @app.route("/TestMap.html")
 def realeditor():
-    return render_template("TestMap.html")
+    global mysql
+    #db = mysql.connect("localhost","myusername","mypassword","mydbname" )
+    db = mysql.connect()
+    cursor = db.cursor()
+    query_string = "select * from maps;"
+    cursor.execute(query_string)
+    data = cursor.fetchall()
+    db.close()
+    return render_template("TestMap.html",data=data)
 
 if __name__ == "__main__":
     app.run(debug=True)
