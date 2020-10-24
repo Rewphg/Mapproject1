@@ -1,0 +1,72 @@
+<link rel="stylesheet" href=".\static\stylesheets\format.css">
+<link rel="stylesheet" href=".\static\stylesheets\form.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+  body {
+    margin: 0;
+  }
+
+  .npm canvas {
+    background-color: black;
+  }
+  canvas {
+    border: 2px solid;
+    border-color: black;
+  }
+</style>
+
+<body>
+  <input type="file" id="namebox1" onchange="preview(this)"> <br> <br>
+  <button id="clickbutton" onclick="toCanvas()">Display</button>
+  <img id="display" hidden>
+  <div>
+    <canvas id="canvas" width="1000" height="1000" class="canvasbody"></canvas>
+    <div class="form-popup" id="CreateForm">
+      <form class="form-container">
+        <h1>BoothInfo</h1>
+        <label for="text"><b>Booth Name</b></label>
+        <input id="DisName" type="text" placeholder="Name">
+        <label for="text"><b>Overview</b></label>
+        <input id="Discription" type="text" placeholder="This booth is....">
+        <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title"></input>
+        <button type="button" class="btn cancel" onclick="Close('CreateForm')">Close</button>
+      </form>
+    </div>
+  </div>
+  <div class="form-popup" id="EditForm">
+    <form class="form-container">
+      <h1>Edit Booth Information</h1>
+      <label for="text"><b>Booth Name</b></label>
+      <input id="EditName" type="text" placeholder="New Name">
+      <label for="text"><b>Overview</b></label>
+      <input id="EditDis" type="text" placeholder="New Discription">
+      <input type="button" class="btn" onclick="ApplyEditBoothInfo()" placeholder="Title"></input>
+      <button type="button" class="btn cancel" onclick="Close('EditForm')">Close</button>
+    </form>
+  </div>
+</div>
+  <script src="./static/Javascript/CreateObj.js"></script>
+  <script src="./static/Javascript/index.js"></script>
+  <div id="MenuContainer" >
+    <div>
+      <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\toilet.png" width="50"
+          length="50"></button>
+    </div>
+
+    <div>
+      <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/pin.png" width="50"
+          length="50"></button>
+    </div>
+    <div>
+      <button class="open-button" onclick="Change(3)">Info<img src="./static/Icons/info.png" width="50"
+          length="50"></button>
+    </div>
+    <div>
+      <button class="open-button" onclick="Change(4)">Edit/Delete<img src="./static/Icons/Eraser.png" width="50"
+          length="50"></button>
+    </div>
+  </div>
+  <script src="./static/Javascript/CreateObj.js"></script>
+  <script src="./static/Javascript/index.js"></script>
+  <script src="./static/Javascript/displayimage.js"></script>
+</body>
