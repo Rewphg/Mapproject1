@@ -52,7 +52,7 @@
     </script>
   <div style="float:left;">
 
-  <h3>QR Code Generator</h3>
+  <h3>xxxxxxxx</h3>
   
     <div>
         <input id="qr-text" type="text" placeholder="Type message QR Code..."/></div> 
@@ -62,37 +62,44 @@
     </div>
     <br/>
   
-    <canvas id="canvas" ></canvas>
+    <div>
 
-    <div class="form-popup" id="myForm">
+      <canvas id="canvas" style="width:800px; height:600px; border:1px solid gray;"></canvas>
+
+      <div id="MenuContainer" style="float:left;width:110px;"> <!-- div menu panel-->
+        
+        <div>
+          <button  style="width:98px;" class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/icon.png" width="50" length="50"></button>
+        </div>
+    
+        <div>
+          <button style="width:98px;" class="open-button" onclick="Change(2)">Toilet<img src="./static/Icons/toilet.png" width="50" length="50"></button>
+        </div>
+
+        <div>
+          <button style="width:98px;" class="open-button" onclick="Change(3)">Info<img src="./static/Icons/info.png" width="50" length="50"></button>
+        </div>
+      </div> <!-- end idv menu panel -->
+
+    </div> 
+    
+
+    <div class="form-popup" id="CreateForm">
     <canvas id="qr-code"></canvas>
 
-      <form class="form-container">
+      <form class="form-container" >
         <h1>BoothInfo</h1>
         <label for="text"><b>Booth Name</b></label>
-        <input id="DisName" type="text" placeholder="Name">
+        <input id="DisName" name="DisName" type="text" placeholder="Name">
         <label for="text"><b>Overview</b></label>
-        <input id="DisName" type="text" placeholder="This booth is....">
+        <input id="Description" name="Description" type="text" placeholder="This booth is....">
         <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title"></input>
         <button type="button" class="btn cancel" onclick="">Close</button>
       </form>
     </div>
   </div>
   
-  <div id="MenuContainer" style="width:110px;">
-    <div>
-      <button style="width:98px;" id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\text.png" width="50" length="50"></button>
-    </div>
-    
-    <div>
-      <button  style="width:98px;" class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/text.png" width="50" length="50"></button>
-    </div>
-
-    <div>
-      <button style="width:98px;" class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/text.png" width="50" length="50"></button>
-    </div>
-
-  </div>
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 		<script>
 			/*
@@ -121,7 +128,261 @@
       }
 	</script>
 
-  <script src="./static/Javascript/CreateObj.js"></script>
-  <script src="./static/Javascript/index.js"></script>
+  <script src="./static/Javascript/CreateObj.j s"></script>
+  <script src="./static/Javascript/index.j s"></script>
   <script src="./static/Javascript/displayimage.js"></script>
+
+  <script>
+
+
+class BoothIcon {
+    constructor(x, y, width, height, src, title, dis) {
+        this.x = x
+        this.y = y
+        this.src = src
+        this.width = width
+        this.height = height
+        this.title = title
+        this.dis = dis
+    }
+
+    Draw() {
+        var B = new Image()
+        B.width = this.width
+        B.height = this.height
+        B.src = this.src
+        ctx.drawImage(B, this.x, this.y, this.width, this.height)
+        ctx.font = "15px Arial"
+        ctx.textAlign = "center"
+        ctx.fillText(this.title, this.x + 24, this.y - 10)
+    }
+
+    Update() {
+        this.Draw()
+        this.x = this.x
+        this.y = this.y
+    }
+} // .End BoothIcon
+
+class eraser {
+    constructor(x, y, width, height, src) {
+        this.x = x
+        this.y = y
+        this.src = src
+        this.width = width
+        this.height = height
+    }
+
+    Draw() {
+        var B = new Image()
+        B.width = this.width
+        B.height = this.height
+        B.src = this.src
+        ctx.drawImage(B, this.x, this.y, this.width, this.height)
+    }
+
+    Update() {
+        this.Draw()
+        this.x = this.x
+        this.y = this.y
+    }
+} // .End eraser
+
+function CheckCollition(X, Y, rect2) {
+    if (X < rect2.x + rect2.width / 2 &&
+        X > rect2.x - rect2.width / 2 &&
+        Y < rect2.y + rect2.height / 2 &&
+        Y > rect2.y - rect2.height / 2) {
+        return true
+    }
+}
+
+function CheckCollitionImg(rect1, rect2) {
+    if (rect1.x < rect2.x + rect2.width &&
+        rect1.x + rect1.width > rect2.x &&
+        rect1.y < rect2.y + rect2.height &&
+        rect1.y + rect1.height > rect2.y) {
+        return true
+    }
+}
+
+function ShowMyForm(x, y, I) {
+    var Form = document.getElementById("CreateForm");
+    Form.style.display = "block"
+    
+}
+
+function DisplayInfo() {
+    var title = document.getElementById("DisName").value
+    var discript = document.getElementById("Description").value
+    BoothIcons.push(new BoothIcon(ConX, ConY, 50, 50, "./static/Icons/pin.png", title, discript))
+    console.log(BoothIcons[BoothIcons.length - 1].title, MPos.x)
+    document.getElementById("CreateForm").style.display = "block"
+    On = 0
+    document.getElementById("DisName").value = ""
+    document.getElementById("Discription").value = ""
+}
+
+function Change(M) {
+    mode = M
+    console.log(M)
+} // .End Change
+
+function OpenEdit(B) {
+    document.getElementById("EditName").value = B.title
+    document.getElementById("EditDis").value = B.dis
+    document.getElementById("EditForm").style.display = "block"
+}
+
+function ApplyEditBoothInfo() {
+    var B = BoothIcons[EditIndex]
+    B.title = document.getElementById("EditName").value
+    B.dis = document.getElementById("EditDis").value
+    document.getElementById("EditForm").style.display = "none"
+    document.getElementById("EditName").value = ""
+    document.getElementById("EditDis").value = ""
+}
+
+function Close(e) {
+    document.getElementById(e).style.display = "none"
+}
+
+function preview(input) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById("display").setAttribute("src", e.target.result);
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+
+function toCanvas() {
+    var image = document.getElementById("display");
+    Background.push(new eraser(10, 10, canvas.Width,canvas.Height, image))
+}
+
+// ----------------------------------------
+
+const MPos = [{
+    x: 0,
+    y: 0,
+}]
+
+// function setupCanvas(canvas) {
+//     var dpr = window.devicePixelRatio || 1;
+//     var rect = canvas.getBoundingClientRect();
+//     canvas.width = rect.width * dpr;
+//     canvas.height = rect.height * dpr;
+//     var ctx = canvas.getContext('2d');
+//     ctx.scale(dpr, dpr);
+//     return ctx;
+//   }
+// var ctx = setupCanvas(document.querySelector('.my-canvas'));
+
+const canvas = document.querySelector("canvas")
+const ctx = canvas.getContext('2d')
+
+var mode = 0
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const Background = []
+const BoothIcons = []
+const ToiletIcons = []
+const Infos = []
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    if (Background.length > 0) {
+        Background[Background.length-1].Draw()
+    }
+    requestAnimationFrame(animate)
+
+    BoothIcons.forEach((booth, index) => {
+        booth.Update()
+        if (CheckCollitionImg(BoothIcon, Eraser) == true) {
+            BoothIcons.splice(BoothIcon, 1)
+        }
+    });
+
+    ToiletIcons.forEach((TI, index) => {
+        TI.Update()
+    })
+
+    Infos.forEach((TI, index) => {
+        TI.Update()
+    })
+
+    console.log(BoothIcons.length)
+}
+
+
+const Eraser = new eraser(0, 30, 50, 50, "./static/Icons/Eraser.png")
+
+var ConX = 0
+var ConY = 0
+var On = 0
+var EditIndex = 0
+
+/*
+* mode 0 = none 
+  mode 1 = Booth 
+  mode 2 = Toilet 
+  mode 3 = info
+  mode 4 = eraser
+*/
+
+document.getElementById("canvas").addEventListener("click", (event) => {
+    event.preventDefault()
+    var border = document.getElementById("canvas").getBoundingClientRect();
+    MPos.x = event.clientX - border.left - 25
+    MPos.y = event.clientY - border.top - 25
+    if (mode == 4) {
+        BoothIcons.forEach((A, index) => {
+            if (CheckCollition(MPos.x,MPos.y, A) == true) {
+                OpenEdit(BoothIcons[index])
+                EditIndex = index
+            }
+        });
+        ToiletIcons.forEach((B, index) => {
+            if (CheckCollition(MPos.x,MPos.y, B) == true) {
+                ToiletIcons.splice(index, 1)
+            }
+        });
+        Infos.forEach((B, index) => {
+            if (CheckCollition(MPos.x,MPos.y, B) == true) {
+                Infos.splice(index, 1)
+            }
+        });
+    }
+
+    console.log(MPos.y, canvas.height, MPos.x ,canvas.width)
+
+    if (MPos.y < canvas.height && MPos.x < canvas.width) {
+        On = 1
+        if (mode == 1) {
+            ConX = event.clientX - border.left - 25
+            ConY = event.clientY - border.top - 25
+            //BoothIcons.push(new BoothIcon(MPos.x, MPos.y,50,50,"./static/Icons/Icon.png"))
+            var index = 1
+
+             ShowMyForm(MPos.x, MPos.y, index)
+        }
+
+        if (mode == 2) {
+            ToiletIcons.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/toilet.png", "Toilet"))
+        }
+
+        if (mode == 3) {
+            Infos.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/info.png", "Info"))
+        }
+
+        if (CheckCollition(event.clientX, event.clientY, eraser) == true) {
+            console.log("Eraser")
+        }
+    }
+})
+
+animate()
+  </script>
 </body>
