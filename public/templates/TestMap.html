@@ -43,7 +43,8 @@
 
     <canvas id="canvas" width="1000" height="1000"></canvas>
     <div class="form-popup" id="CreateForm">
-        <canvas id="canvas"></canvas>
+        <canvas id="qr-code"></canvas>
+
         <form class="form-container">
             <h1>BoothInfo</h1>
             <label for="text"><b>Booth Name</b></label>
@@ -55,6 +56,7 @@
         </form>
     </div>
     <div class="form-popup" id="EditForm">
+        <canvas id="qr-code2"></canvas>
         <form class="form-container">
             <h1>Edit Booth Information</h1>
             <label for="text"><b>Booth Name</b></label>
@@ -66,8 +68,7 @@
         </form>
     </div>
     </div>
-    <script src="./static/Javascript/CreateObj.js"></script>
-    <script src="./static/Javascript/index.js"></script>
+    
     <div id="MenuContainer">
         <div>
             <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\toilet.png" width="50"
@@ -90,10 +91,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script>
         var qr;
+        var qr2;
 
         (function() {
             qr = new QRious({
                 element: document.getElementById('qr-code'), // canvas object
+                size: 100, // size image qr code
+                value: 'Event Me!!!' // value default text
+            });
+
+            qr2 = new QRious({
+                element: document.getElementById('qr-code2'), // canvas object
                 size: 100, // size image qr code
                 value: 'Event Me!!!' // value default text
             });
@@ -108,9 +116,16 @@
                 size: 100, // size image qr code
                 value: qrtext // set text for qr
             });
+
+            qr2.set({
+                foreground: 'black', //  setup background color of qr code.
+                size: 100, // size image qr code
+                value: qrtext // set text for qr
+            });
         }
     </script>
     <script src="./static/Javascript/CreateObj.js"></script>
     <script src="./static/Javascript/index.js"></script>
     <script src="./static/Javascript/displayimage.js"></script>
+
 </body>
