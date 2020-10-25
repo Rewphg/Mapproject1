@@ -30,7 +30,7 @@ const Infos = []
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     if (Background.length > 0) {
-        Background[Background.length-1].Draw()
+        Background[Background.length - 1].Draw()
     }
     requestAnimationFrame(animate)
     BoothIcons.forEach((BoothIcon, index) => {
@@ -48,9 +48,6 @@ function animate() {
     console.log(BoothIcons.length)
 }
 
-
-const Eraser = new eraser(0, 30, 50, 50, "./static/Icons/Eraser.png")
-
 var ConX = 0
 var ConY = 0
 var On = 0
@@ -65,18 +62,18 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     MPos.y = event.clientY - border.top - 25
     if (mode == 4) {
         BoothIcons.forEach((A, index) => {
-            if (CheckCollition(MPos.x,MPos.y, A) == true) {
+            if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 OpenEdit(BoothIcons[index])
                 EditIndex = index
             }
         });
         ToiletIcons.forEach((B, index) => {
-            if (CheckCollition(MPos.x,MPos.y, B) == true) {
+            if (CheckCollition(MPos.x, MPos.y, B) == true) {
                 ToiletIcons.splice(index, 1)
             }
         });
         Infos.forEach((B, index) => {
-            if (CheckCollition(MPos.x,MPos.y, B) == true) {
+            if (CheckCollition(MPos.x, MPos.y, B) == true) {
                 Infos.splice(index, 1)
             }
         });
@@ -87,7 +84,6 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         if (mode == 1) {
             ConX = event.clientX - border.left - 25
             ConY = event.clientY - border.top - 25
-            // BoothIcons.push(new BoothIcon(MPos.x, MPos.y,50,50,"./static/Icons/Icon.png"))
             var index = 1
             ShowMyForm(MPos.x, MPos.y, index)
         }

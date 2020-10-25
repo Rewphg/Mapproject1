@@ -13,8 +13,6 @@ app.config['MYSQL_DATABASE_DB'] = 'eventme_db'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
-
-
 @app.after_request
 def add_header(r):
     """
@@ -53,16 +51,20 @@ def signuppage():
     return render_template("signup.html")
 
 @app.route("/TestMap.html")
-def realeditor():
-    global mysql
-    #db = mysql.connect("localhost","myusername","mypassword","mydbname" )
-    db = mysql.connect()
-    cursor = db.cursor()
-    query_string = "select * from maps;"
-    cursor.execute(query_string)
-    data = cursor.fetchall()
-    db.close()
-    return render_template("TestMap.html",data=data)
+def  MapEditerPage(): 
+    return render_template("TestMap.html")
+
+# @app.route("/TestMap.html")
+# def realeditor():
+#     global mysql
+#     #db = mysql.connect("localhost","myusername","mypassword","mydbname" )
+#     db = mysql.connect()
+#     cursor = db.cursor()
+#     query_string = "select * from maps;"
+#     cursor.execute(query_string)
+#     data = cursor.fetchall()
+#     db.close()
+#     return render_template("TestMap.html",data=data)
 
 if __name__ == "__main__":
     app.run(debug=True)

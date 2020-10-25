@@ -1,4 +1,3 @@
-
 class BoothIcon {
     constructor(x, y, width, height, src, title, dis) {
         this.x = x
@@ -120,5 +119,5 @@ function preview(input) {
 
 function toCanvas() {
     var image = document.getElementById("display");
-    Background.push(new eraser(10, 10, canvas.Width,canvas.Height, image))
+    Background.push(new eraser(10, 10, canvas.Width, canvas.Height, image))
 }
