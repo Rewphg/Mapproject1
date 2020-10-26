@@ -1,17 +1,20 @@
 # public/server.py
 from flask import Flask, render_template, request, url_for, redirect
-from flaskext.mysql import MySQL
+from werkzeug.datastructures import native_itermethods
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Username.db'
+db = SQLAlchemy(app)
 
-mysql = MySQL() 
-
-# MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '12345678'
-app.config['MYSQL_DATABASE_DB'] = 'eventme_db'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-mysql.init_app(app)
+class Username(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)
+    Password = db.Column(db.String(200), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    def __repr__(self):
+        return '<Name %r>' % self.id
 
 @app.after_request
 def add_header(r):
@@ -34,19 +37,31 @@ def userpage():
     if request.method == "POST":
         username = request.form['username']
         password = request.form['pass']
-        print(username, password)
-        return redirect(url_for("TestMap.html",))
-    return render_template("user.html")
+        print(username,password)
+        return render_template("/user.html")
 
-@app.route("/org.html")
+@app.route("/org.html", methods=["GET","POST"])
 def loginpage():
-    return render_template("org.html")
+    if request.method == "POST":
+        username = request.form['username']
+        password = request.form['pass']
+        new_username = Username(name = username, Password = password)
+        try:
+            db.session.add(new_username)
+            db.session.commit()
+            print(new_username.name)
+            return redirect('/org.html')
+        except:
+            return "there is not filled"
+    else:
+        User = Username.query.order_by(Username.date_created)
+        return render_template("/org.html", User=User)
 
 @app.route("/custom.html")
 def editorpage():
     return render_template("custom.html")
 
-@app.route("/signup.html")
+@app.route("/signup.html", method=["GET", "POST"])
 def signuppage():
     return render_template("signup.html")
 

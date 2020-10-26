@@ -35,9 +35,6 @@ function animate() {
     requestAnimationFrame(animate)
     BoothIcons.forEach((BoothIcon, index) => {
         BoothIcon.Update()
-        if (CheckCollitionImg(BoothIcon, Eraser) == true) {
-            BoothIcons.splice(BoothIcon, 1)
-        }
     });
     ToiletIcons.forEach((TI, index) => {
         TI.Update()
@@ -94,10 +91,6 @@ document.getElementById("canvas").addEventListener("click", (event) => {
 
         if (mode == 3) {
             Infos.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/info.png", "Info"))
-        }
-
-        if (CheckCollition(event.clientX, event.clientY, eraser) == true) {
-            console.log("Eraser")
         }
     }
 })
