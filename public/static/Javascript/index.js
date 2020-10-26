@@ -35,14 +35,17 @@ function animate() {
     requestAnimationFrame(animate)
     BoothIcons.forEach((BoothIcon, index) => {
         BoothIcon.Update()
+            /*if (CheckCollitionImg(BoothIcon, Eraser) == true) {
+                BoothIcons.splice(BoothIcon, 1)
+            }*/
     });
     ToiletIcons.forEach((TI, index) => {
         TI.Update()
     })
     Infos.forEach((TI, index) => {
-        TI.Update()
-    })
-    console.log(BoothIcons.length)
+            TI.Update()
+        })
+        //console.log(BoothIcons.length)
 }
 
 var ConX = 0
@@ -62,6 +65,14 @@ document.getElementById("canvas").addEventListener("click", (event) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 OpenEdit(BoothIcons[index])
                 EditIndex = index
+
+
+
+                qr2.set({
+                    foreground: 'black', //  setup background color of qr code.
+                    size: 100, // size image qr code
+                    value: BoothIcons[index].title // set text for qr
+                });
             }
         });
         ToiletIcons.forEach((B, index) => {
@@ -92,6 +103,10 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         if (mode == 3) {
             Infos.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/info.png", "Info"))
         }
+
+        /*if (CheckCollition(event.clientX, event.clientY, eraser) == true) {
+            console.log("Eraser")
+        }*/
     }
 })
 
