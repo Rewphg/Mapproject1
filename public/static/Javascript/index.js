@@ -28,6 +28,7 @@ const Background = []
 const BoothIcons = []
 const ToiletIcons = []
 const Infos = []
+const lines = []
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -43,12 +44,29 @@ function animate() {
     });
     ToiletIcons.forEach((TI, index) => {
         TI.Update()
-    })
+    });
+
     Infos.forEach((TI, index) => {
             TI.Update()
-        })
-        //console.log(BoothIcons.length)
-}
+        });
+
+    OldX= 0.0;
+    OldY = 0.0;
+    lines.forEach((P,index) => {
+        console.log(P.x,P.y);
+
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.lineCap = "round";
+        ctx.moveTo(OldX,OldY);
+        ctx.lineTo(P.x, P.y);
+        ctx.strokeStyle = "#FF0000";
+        ctx.stroke();
+        OldX = P.x;
+        OldY = P.y;
+    });
+    //console.log(lines.length)
+} // .End animate
 
 function startRoute(e) {
     route = true;
@@ -70,6 +88,7 @@ function draw(e) {
     ctx.stroke();
     
 }
+
 canvas.addEventListener("mousedown", startRoute);
 canvas.addEventListener("mouseup", endRoute);
 canvas.addEventListener("mousemove", draw);
@@ -86,6 +105,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     var border = document.getElementById("canvas").getBoundingClientRect();
     MPos.x = event.clientX - border.left - 25
     MPos.y = event.clientY - border.top - 25
+    
     if (mode == 4) {
         BoothIcons.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
@@ -131,7 +151,8 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         }
 
         if (mode == 5) {
-            draw()
+            lines.push({x:MPos.x,y:MPos.y});
+            console.log(lines.length,"x:",MPos.x,",y:",MPos.y);
         }
 
         /*if (CheckCollition(event.clientX, event.clientY, eraser) == true) {
