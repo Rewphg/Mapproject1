@@ -14,10 +14,12 @@ const MPos = [{
 //   }
 // var ctx = setupCanvas(document.querySelector('.my-canvas'));
 
-const canvas = document.querySelector("canvas")
+const canvas = document.querySelector("#canvas")
 const ctx = canvas.getContext('2d')
 
 var mode = 0
+
+let route = false;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -48,12 +50,36 @@ function animate() {
         //console.log(BoothIcons.length)
 }
 
+function startRoute(e) {
+    route = true;
+    draw(e);
+}
+
+function endRoute() {
+    route = false;
+    ctx.beginPath();
+}
+
+function draw(e) {
+    if (!route) return;
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+    
+    ctx.lineTo(e.clientX, e.clientY);
+    ctx.strokeStyle = "#FF0000";
+    ctx.stroke();
+    
+}
+canvas.addEventListener("mousedown", startRoute);
+canvas.addEventListener("mouseup", endRoute);
+canvas.addEventListener("mousemove", draw);
+
 var ConX = 0
 var ConY = 0
 var On = 0
 var EditIndex = 0
 
-//mode 0 = none ,mode 1 = Booth ,mode 2 = Toilet ,mode 3 = info, mode 4 = eraser
+//mode 0 = none ,mode 1 = Booth ,mode 2 = Toilet ,mode 3 = info, mode 4 = eraser, mode 5 = route
 
 document.getElementById("canvas").addEventListener("click", (event) => {
     event.preventDefault()
@@ -102,6 +128,10 @@ document.getElementById("canvas").addEventListener("click", (event) => {
 
         if (mode == 3) {
             Infos.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/info.png", "Info"))
+        }
+
+        if (mode == 5) {
+            draw()
         }
 
         /*if (CheckCollition(event.clientX, event.clientY, eraser) == true) {
