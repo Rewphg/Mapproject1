@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang=eng>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Signup</title>
-        <style>
-            .center{
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                    }
-        </style>
-    </head>
-    <body>
-       <div class="center">
-           <div class="row">
-               <h2>Sign Up</h2>
-               <p>Please fill in this form to create the account.</p>
-               <form>
-                   <div>
-                       <label>UserName</label><br>
-                       <input type="text" name="name" class="form-control" id="signup-name" placeholder="Enter Username" required>
-                   </div>
-                   <div>
-                       <br><label>Email Address</label><br>
-                       <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" required>
-                   </div>
-                   <div>
-                       <br><label>Password</label><br>
-                       <input type="password" name="password" class="form-control" id="pw" placeholder="Enter Password" required>
-                   </div>
-                   <!--<div>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signup</title>
+    <style>
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <div class="row">
+            <h2>Sign Up</h2>
+            <p>Please fill in this form to create the account.</p>
+            <form METHOD="POST" action="/signup.html">
+                <div>
+                    <label>UserName</label><br>
+                    <input type="text" name="name" class="form-control" id="signupname" placeholder="Enter Username" required>
+                </div>
+                <div>
+                    <br><label>Email Address</label><br>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" required>
+                </div>
+                <div>
+                    <br><label>Password</label><br>
+                    <input type="password" name="password" class="form-control" id="pw" placeholder="Enter Password" required>
+                </div>
+                <!--<div>
                        <br><label>Confirm Password</label><br>
                        <input type="password" name="confirm_pw" class="form-control" placeholder="Confirm Password" required>
                    </div>-->
-                   <div>
-                       <br><input type="submit" name="submit" value="signup" onclick="store()">
-                   </div>
-                   <p>Already have an account?<a href="org.html">Login here</a></p>
-               </form>
-               <script src="{{url_for('static', filename='Javascript/signup.js')}}"></script>
-           </div>
-       </div> 
-    </body>
+                <div>
+                    <br><input type="submit" name="submit" value="signup" 2onclick="store()">
+                </div>
+                <p>Already have an account?<a href="org.html">Login here</a></p>
+            </form>
+            <script src="{{url_for('static', filename='Javascript/signup.js')}}"></script>
+        </div>
+    </div>
+</body>
+
 </html>

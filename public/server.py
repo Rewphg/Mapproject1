@@ -1,11 +1,13 @@
 # public/server.py
 from flask import Flask, render_template, request, url_for, redirect
+from flask.helpers import flash
 from werkzeug.datastructures import native_itermethods
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Username.db'
+app.config['SERVER_NAME'] = 'localhost:5000'
 db = SQLAlchemy(app)
 
 class Username(db.Model):
@@ -40,11 +42,12 @@ def userpage():
         print(username,password)
         return render_template("/user.html")
 
-@app.route("/org.html", methods=["GET","POST"])
-def loginpage():
+@app.route("/signup.html", methods=["GET","POST"])
+def singuppage():
     if request.method == "POST":
-        username = request.form['username']
-        password = request.form['pass']
+        username = request.form['name']
+        password = request.form['password']
+        print(username, password)
         new_username = Username(name = username, Password = password)
         try:
             db.session.add(new_username)
@@ -55,15 +58,29 @@ def loginpage():
             return "there is not filled"
     else:
         User = Username.query.order_by(Username.date_created)
-        return render_template("/org.html", User=User)
+        return render_template("/signup.html")
 
 @app.route("/custom.html")
 def editorpage():
     return render_template("custom.html")
 
-@app.route("/signup.html", method=["GET", "POST"])
-def signuppage():
-    return render_template("signup.html")
+@app.route("/org.html", methods=["GET", "POST"])
+def loginpage():
+    if request.method == "POST":
+        username = request.form['username']
+        password = request.form['pass']
+        Data = Username.query.order_by(Username.date_created)
+        for D in Data:
+            if D.name == username and D.Password == password:
+                return redirect("/TestMap.html")
+            else:
+                flash("Invalid Username or Password")
+                return redirect("/org.html")
+        error = "Invalid Password or Username"
+        return redirect("/org.html")
+    else:
+        User = Username.query.order_by(Username.date_created)
+        return render_template("/org.html", User=User)
 
 @app.route("/TestMap.html")
 def  MapEditerPage(): 
