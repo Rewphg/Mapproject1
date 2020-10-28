@@ -11,16 +11,17 @@ from csv import writer
 UN = "Rew"
 
 def AudenticateUser(UN):
-    CheckDB(UN) 
+    Ans = CheckDB(UN) 
+    return Ans
 
 def CheckDB(UN):
     Data = pd.read_csv("./static/Data/ProjectID.csv")
     Data.info()
+    AID = []
     for A in Data.itertuples():
         if A.Username == UN:
-            print(A.PID)
-        else:
-            return 0
+            AID.append(A.PID)
+    return AID
 
 def GenProjectID(U):
     ID = random.randrange(10000,99999)
@@ -40,12 +41,12 @@ def CreateFolder(ID):
     IDpath = os.path.join('ProjectContainer', ID)
     Data = os.path.join(IDpath,"Data")
     Img = os.path.join(IDpath,"Img")
-    Qr =  os.path.join(IDpath,"QR")
+    Qr = os.path.join(IDpath,"QR")
     if os.path.exists(IDpath) == False:
         os.makedirs(IDpath)
         os.makedirs(Data)
         os.makedirs(Img)
         os.makedirs(Qr)
 
-CheckDB(UN)
-GenProjectID(UN)
+# CheckDB(UN)
+# GenProjectID(UN)
