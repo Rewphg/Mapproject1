@@ -4,7 +4,6 @@ from flask.helpers import flash
 from werkzeug.datastructures import native_itermethods
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Username.db'
 app.config['SERVER_NAME'] = 'localhost:5000'
@@ -65,6 +64,10 @@ def singuppage():
 def editorpage():
     return render_template("custom.html")
 
+@app.route("/create")
+def ProjectPage(usr):
+    return render_template("/create.html",user=usr)
+
 @app.route("/org.html", methods=["GET", "POST"])
 def loginpage():
     if request.method == "POST":
@@ -73,7 +76,7 @@ def loginpage():
         Data = Username.query.order_by(Username.date_created)
         for D in Data:
             if D.name == username and D.Password == password:
-                return redirect("/TestMap")
+                return redirect(url_for("ProjectPage", usr= "Rew"))
         return redirect('/org.html')
     else:
         User = Username.query.order_by(Username.date_created)
