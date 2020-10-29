@@ -9,7 +9,7 @@ import logging
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Username.db'
-app.config['SERVER_NAME'] = 'localhost:5000'
+app.config['SERVER_NAME'] = '192.168.43.38:5000'
 app.config['SECRET_KEY'] = 'Hello'
 db = SQLAlchemy(app)
 
@@ -71,9 +71,10 @@ def editorpage():
 def ProjectPage():
     if "user" in session:
         usr = session["user"]
-        PID = CH.AudenticateUser(usr)
+        PID, Pname = CH.AudenticateUser(usr)
+        Number = len(PID)
         app.logger.info(PID)
-        return render_template("/create.html",user=usr, ID=PID)
+        return render_template("/create.html",user=usr, ID=PID, Name=Pname,Length = Number)
     else:
         return redirect("/org.html")
 
@@ -94,8 +95,10 @@ def loginpage():
 
 @app.route("/TestMap")
 def  MapEditerPage(): 
-    return render_template("/TestMap.html")
-
+    if "user" in session:
+        return render_template("/TestMap.html")
+    else:
+        return redirect("/org.html")
 # @app.route("/TestMap.html")
 # def realeditor():
 #     global mysql
@@ -109,4 +112,4 @@ def  MapEditerPage():
 #     return render_template("TestMap.html",data=data)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
