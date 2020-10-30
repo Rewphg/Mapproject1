@@ -73,15 +73,14 @@ def loginpage():
         Data = Username.query.order_by(Username.date_created)
         for D in Data:
             if D.name == username and D.Password == password:
-                return redirect("/create.html")
-        return redirect("/org.html")
+                return redirect("/TestMap")
     else:
         User = Username.query.order_by(Username.date_created)
         return render_template("/org.html", User=User)
 
-@app.route("/TestMap.html")
+@app.route("/TestMap")
 def  MapEditerPage(): 
-    return render_template("TestMap.html")
+    return render_template("/TestMap.html")
 
 @app.route("/create.html")
 def createpage():
