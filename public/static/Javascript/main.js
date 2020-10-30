@@ -8,28 +8,27 @@ window.addEventListener("load", () => {
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
     canvas.addEventListener("click", GenCan);
-    function GenCan(e){
-       var Border = document.getElementById("canvas").getBoundingClientRect();
-       PosX = e.clientX - Border.left -30;
-       PosY = e.clientY - Border.top - 30;
-       const ctx = canvas.getContext("2d");
-       ctx.drawImage(CreateImg("/static/Icons/Icon.png", 100, 100, "ssss"), PosX, PosY, 50,50);
-       console.log("Create", PosX, PosY);
-       var MarkerInfo = [
-           {
-               type: "booth",
-               x: PosX,
-               y: PosY,  
-               Number: Index,
-           }
-       ]
-       Marker.push(MarkerInfo)
-       console.log(Marker.length)
-       Index++
+
+    function GenCan(e) {
+        var Border = document.getElementById("canvas").getBoundingClientRect();
+        PosX = e.clientX - Border.left - 30;
+        PosY = e.clientY - Border.top - 30;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(CreateImg("/static/Icons/Icon.png", 100, 100, "ssss"), PosX, PosY, 50, 50);
+        console.log("Create", PosX, PosY);
+        var MarkerInfo = [{
+            type: "booth",
+            x: PosX,
+            y: PosY,
+            Number: Index,
+        }]
+        Marker.push(MarkerInfo)
+        console.log(Marker.length)
+        Index++
     }
 })
 
-function CreateImg(src, width, height, alt) { 
+function CreateImg(src, width, height, alt) {
     var ImageObj = new Image();
     ImageObj.src = src;
     ImageObj.width = width;
@@ -42,16 +41,16 @@ function CreateImg(src, width, height, alt) {
 var Number = 0
 window.addEventListener("click", function(e) {
     console.log('X:', e.x, 'Y:', e.y)
-    // GenPhoto("Icons/Icon.png", 1024/4, 1024/4, "ssss",3000,2000)
+        // GenPhoto("Icons/Icon.png", 1024/4, 1024/4, "ssss",3000,2000)
 })
 
-var createItem = function(Marker){
+var createItem = function(Marker) {
     var IconE = document.createElement('div');
     IconE.setAttribute('class', 'icon-button icon-radio-checked');
-    IconE.style.left = Marker.left+'px';
-    IconE.style.top = Marker.top+'px';
+    IconE.style.left = Marker.left + 'px';
+    IconE.style.top = Marker.top + 'px';
     $('.interactive-Image').append(IconE);
-    
+
     var titleE = document.createElement('span')
     titleE.setAttribute('class', 'title')
     titleE.appendChild(document.createTextNode(Marker.title))
@@ -67,7 +66,7 @@ var createItem = function(Marker){
     return $(containerElement);
 };
 
-function GenPhoto(src, width, height, alt,x, y) {
+function GenPhoto(src, width, height, alt, x, y) {
     var img = document.createElement("img");
     img.src = src;
     img.width = width;
@@ -83,7 +82,7 @@ function GenPhoto(src, width, height, alt,x, y) {
 document.getElementById("Clear").addEventListener('click', function() {
     var MyCan = document.getElementById("canvas");
     var ctx = MyCan.getContext('2d');
-    ctx.clearRect(0,0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 })
 
 function CreateImg(src, width, height, alt) {
@@ -101,14 +100,14 @@ function CreateImg(src, width, height, alt) {
 //     ctx.clearRect(0,0, canvas.width, canvas.height);
 // })
 
-window.addEventListener("resize" , function(){
+window.addEventListener("resize", function() {
     const canvas = document.querySelector("#canvas");
     var mW = window.innerWidth;
     var mH = window.innerHeight;
     canvas.width = mW
     canvas.width = mH
     canvas.fillStyle = '#00FFF'
-    canvas.fillRect(0,0)
+    canvas.fillRect(0, 0)
 }, false)
 
 var config = {
@@ -116,7 +115,7 @@ var config = {
     authDomain: "mapproject1-76680.firebaseio.com",
     databaseURL: "https://mapproject1-76680.firebaseio.com/",
     storageBucket: "mapproject1-76680.appspot.com"
-  };
+};
 firebase.initializeApp(config);
 
 var database = firebase.database();
@@ -131,11 +130,10 @@ function writeFirebaseData(Data, Index) {
 }
 
 function SaveData() {
-    for (i = 0; i< Marker.length; i++){
+    for (i = 0; i < Marker.length; i++) {
         var D = Marker[i]
         Mname = "Marker" + D.Number
         writeFirebaseData(D, Mname)
     }
-  }
+}
 document.getElementById("SaveBut").addEventListener('click', SaveData(Marker))
-

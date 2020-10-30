@@ -1,9 +1,11 @@
 # public/server.py
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, session
 from flask.helpers import flash
 from werkzeug.datastructures import native_itermethods
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import Project as CH
+import logging
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Username.db'
@@ -65,6 +67,16 @@ def singuppage():
 def editorpage():
     return render_template("custom.html")
 
+@app.route("/create.html")
+def ProjectPage():
+    if "user" in session:
+        usr = session["user"]
+        PID = CH.AudenticateUser(usr)
+        app.logger.info(PID)
+        return render_template("/create.html",user=usr, ID=PID)
+    else:
+        return redirect("/org.html")
+
 @app.route("/org.html", methods=["GET", "POST"])
 def loginpage():
     if request.method == "POST":
@@ -73,7 +85,9 @@ def loginpage():
         Data = Username.query.order_by(Username.date_created)
         for D in Data:
             if D.name == username and D.Password == password:
-                return redirect("/TestMap")
+                session["user"] = D.name
+                return redirect(url_for("ProjectPage"))
+        return redirect('/org.html')
     else:
         User = Username.query.order_by(Username.date_created)
         return render_template("/org.html", User=User)
