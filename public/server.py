@@ -9,7 +9,7 @@ import logging
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Username.db'
-app.config['SERVER_NAME'] = '192.168.43.38:5000'
+app.config['SERVER_NAME'] = 'localhost:5000'
 app.config['SECRET_KEY'] = 'Hello'
 db = SQLAlchemy(app)
 
@@ -112,4 +112,4 @@ def  MapEditerPage():
 #     return render_template("TestMap.html",data=data)
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=True)
