@@ -108,25 +108,10 @@ def  MapEditerPage():
     else:
         return redirect("/org.html")
 
-<<<<<<< HEAD
-@app.route('/test_template.html', methods=['GET', 'POST'])
-def upload_file():
-        return render_template("test_template.html")
-
-# @app.route("/TestMap.html")
-# def realeditor():
-#     global mysql
-#     #db = mysql.connect("localhost","myusername","mypassword","mydbname" )
-#     db = mysql.connect()
-#     cursor = db.cursor()
-#     query_string = "select * from maps;"
-#     cursor.execute(query_string)
-#     data = cursor.fetchall()
-#     db.close()
-#     return render_template("TestMap.html",data=data)
-=======
-
->>>>>>> 436d6b8b0f71ec99011c485860bea30d61c029d7
+@app.route("/test_template.html")
+def show():
+    
+    return render_template("test_template.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
