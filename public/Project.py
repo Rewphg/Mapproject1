@@ -107,6 +107,6 @@ def myconverter(o):
         return o.__str__()
 
 # CheckDB(UN)
-GenProject(UN,"helloworld")
+# GenProject(UN,"helloworld")
 # DeleteProject("ABDj2G")
 # DeleteDIR("ABDj2G")
