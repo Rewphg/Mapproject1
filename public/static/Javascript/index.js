@@ -50,8 +50,8 @@ function animate() {
             TI.Update()
         });
 
-    OldX= 0.0;
-    OldY = 0.0;
+    var OldX;
+    var OldY;
     lines.forEach((P,index) => {
         console.log(P.x,P.y);
 
