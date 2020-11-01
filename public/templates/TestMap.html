@@ -22,7 +22,7 @@
 </style>
 
 <body>
-    <form method="POST" action="/TestMap.html"></form>
+    <form method="POST"></form>
     <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
         <button id="clickbutton" onclick="toCanvas()">Display</button>
     <img id="display" hidden>
@@ -38,27 +38,30 @@
     <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-database.js"></script>
     <h3>QR Code Generator</h3>
 
-    <form method="POST" action="/TestMap.html">
+    <form method="POST">
         <div>
             <input id="qr-text" type="text" placeholder="Type message QR Code..." / name="qrcode"></div>
         <br />
         <div>
             <button class="qr-btn" onclick="generateQRCode()">create QR Code</button>
         </div>
-        <br />
     </form>
 
-    <canvas id="canvas" width="1000" height="1000"></canvas>
+    <form method="post" role="form">
+        <button class="btn btn-primary" name = "submit" id = "submit">Submit/Save</button>
+    </form>
+
+    <canvas id="canvas" width="1000" height="1000"></canvas> <br> <br>
     <div class="form-popup" id="CreateForm">
         <canvas id="qr-code"></canvas>
 
-        <form class="form-container" method="GET" action="/TestMap">
+        <form class="form-container" method="GET">
             <h1>BoothInfo</h1>
             <label for="text"><b>Booth Name</b></label>
             <input id="DisName" type="text" placeholder="Name" name="boothname">
             <label for="text"><b>Overview</b></label>
             <input id="Description" type="text" placeholder="This booth is...." name="boothdesc">
-            <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title"></input>
+            <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title" name="boothname"></input>
             <button type="button" class="btn cancel" onclick="Close('CreateForm')">Close</button>
         </form>
     </div>
@@ -137,5 +140,5 @@
     </script>
     <script src="./static/Javascript/CreateObj.js"></script>
     <script type=text/javascript src="{{url_for('static', filename='Javascript/index.js')}}"></script>
-    <script src="./static/Javascript/displayimage.js"></script>
+    <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}"></script>
 </body>
