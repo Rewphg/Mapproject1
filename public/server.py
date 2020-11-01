@@ -6,6 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import Project as CH
 import logging
+import os
+import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Username.db'
@@ -99,6 +101,11 @@ def  MapEditerPage():
         return render_template("/TestMap.html")
     else:
         return redirect("/org.html")
+
+@app.route('/test_template.html', methods=['GET', 'POST'])
+def upload_file():
+        return render_template("test_template.html")
+
 # @app.route("/TestMap.html")
 # def realeditor():
 #     global mysql
