@@ -76,13 +76,13 @@ function ShowMyForm(x, y, I) {
 
 function DisplayInfo() {
     var title = document.getElementById("DisName").value
-    var discript = document.getElementById("Discription").value
+    var discript = document.getElementById("Description").value
     BoothIcons.push(new BoothIcon(ConX, ConY, 50, 50, "./static/Icons/pin.png", title, discript))
     console.log(BoothIcons[BoothIcons.length - 1].title, MPos.x)
     document.getElementById("CreateForm").style.display = "none"
     On = 0
     document.getElementById("DisName").value = ""
-    document.getElementById("Discription").value = ""
+    document.getElementById("Description").value = ""
 }
 
 function Change(M) {
