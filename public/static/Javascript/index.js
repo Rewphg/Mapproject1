@@ -53,7 +53,7 @@ function animate() {
     var OldX;
     var OldY;
     lines.forEach((P,index) => {
-        console.log(P.x,P.y);
+        //console.log(P.x,P.y);
 
         ctx.beginPath();
         ctx.lineWidth = 5;
@@ -117,7 +117,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
                 qr2.set({
                     foreground: 'black', //  setup background color of qr code.
                     size: 100, // size image qr code
-                    value: BoothIcons[index].title // set text for qr
+                    value: BoothIcons[index].title + "," + BoothIcons[index].dis + "," + BoothIcons[index].x + "," + BoothIcons[index].y   // set text for qr
                 });
             }
         });
