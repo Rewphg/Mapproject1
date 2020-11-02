@@ -1,76 +1,97 @@
 <!DOCTYPE html>
 <html lang=eng>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Create your project</title>
-        <!-- <script scr="stylesheets" href="/public/static/stylesheets/form.css"></script> -->
-        <style>
-            body {
-                font-family:Arial, Helvetica, sans-serif;
-            }
-            h1 {
-                text-align: center;
-            }
-            .button1 {
-                background-color:turquoise;
-                border: none;
-                border-radius: 12px;
-                color: white;
-                padding: 32px 32px;
-                text-align: center;
-                display: inline-block;
-                font-size: 16px;
-                margin-left: 30px;
-            }
-            .form-popup {
-                display: none;
-                position: fixed;
-                right: 15px;
-                border: 3px solid #f1f1f1;
-                z-index: 9;
-            }
 
-                    /* Add styles to the form container*/
-            .form-container {
-                max-width: 300px;
-                padding: 10px;
-                background-color: white;
-            
-            }
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{user}}</title>
+    <!-- <script scr="stylesheets" href="/public/static/stylesheets/form.css"></script> -->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        .button1 {
+            background-color: turquoise;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            padding: 32px 32px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin-left: 30px;
+        }
+        
+        .form-popup {
+            display: none;
+            position: fixed;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+        /* Add styles to the form container*/
+        
+        .form-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+        }
+        /* Full-width input fields */
+        
+        .form-container input[type=text],
+        .form-container input[type=password] {
+            width: 90%;
+            padding: 15px;
+            margin: 5px 0 15px 0;
+            border: none;
+            background: #f1f1f1;
+        }
+    </style>
+</head>
 
-                    /* Full-width input fields */
-            .form-container input[type=text], .form-container input[type=password] {
-                width: 90%;
-                padding: 15px;
-                margin: 5px 0 15px 0;
-                border: none;
-                background: #f1f1f1;
-            } 
-        </style>
-    </head>
-    <body>
-<!-- add a project page -->
-        <h1>Create your project</h1>
-        <div>
-            <button class="button1" onclick="openForm()">Create</button>
-            <div class="form-popup" id="myForm">
-              <form action="#" class="form-container">
+<body>
+    <h1>Create your project</h1>
+    {% if Lenght >= 1%}
+    <p>This is all project of {{user}}</p>
+    {%else%}
+    <p>You did not have any project yet</p>
+    {%endif%}
+    <div>
+        {% for i in range(Lenght)%}
+        <form METHOD="DELETE"></form>
+        <button class="button1" onclick="" type="menu">{{Name[i]}} <br> {{ID[i]}}</button> {% endfor %}
+    </div>
+    <div>
+        <button class="button1" onclick="openForm()">Create</button>
+        <div class="form-popup" id="myForm">
+            <form action="#" class="form-container" METHOD="POST">
                 <h1>New Project</h1>
                 <label for="text"><b>Project Name</b></label>
-                <input type="text" placeholder="">
+                <input type="text" placeholder="" name="ProjectNameInput">
                 <button type="submit" class="btn">Create</button>
                 <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
-              </form>
-            </div>
-          </div>
-       <head>
-    <script>
-        function openForm() {
-            document.getElementById("myForm").style.display = "block";
+            </form>
+        </div>
+    </div>
+
+    <head>
+        <script>
+            function openForm() {
+                document.getElementById("myForm").style.display = "block";
             }
-        function closeForm() {
-              document.getElementById("myForm").style.display = "none";
+
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
             }
-    </script>
-    </body>
+
+            function EditProjectName() {
+
+            }
+        </script>
+</body>
+
 </html>

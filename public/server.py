@@ -6,6 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import Project as CH
 import logging
+import os
+import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Username.db'
@@ -39,11 +41,10 @@ def home():
 
 @app.route("/user.html", methods=["GET", "POST"])
 def userpage():
-    if request.method == "POST":
-        username = request.form['username']
-        password = request.form['pass']
-        print(username,password)
-        return render_template("/user.html")
+    if request.method=="GET":
+        RoomId = request.form[""]
+
+    return render_template("/user.html")
 
 @app.route("/signup.html", methods=["GET","POST"])
 def singuppage():
@@ -67,14 +68,21 @@ def singuppage():
 def editorpage():
     return render_template("custom.html")
 
-@app.route("/create.html")
+@app.route("/create.html", methods=["GET", "POST", "DELETE"])
 def ProjectPage():
+    if request.method == "DELETE":
+        DPID = request.form['PID']
+    if request.method == "POST":
+        ProjectName = request.form["ProjectNameInput"]
+        CH.GenProject(session["user"], ProjectName)
+        app.logger.info("CreateProject")
+        return redirect(url_for("ProjectPage"))
     if "user" in session:
         usr = session["user"]
         PID, Pname = CH.AudenticateUser(usr)
         Number = len(PID)
         app.logger.info(PID)
-        return render_template("/create.html",user=usr, ID=PID, Name=Pname,Length = Number)
+        return render_template("/create.html",user=usr, ID=PID, Name=Pname, Lenght = Number)
     else:
         return redirect("/org.html")
 
@@ -99,17 +107,11 @@ def  MapEditerPage():
         return render_template("/TestMap.html")
     else:
         return redirect("/org.html")
-# @app.route("/TestMap.html")
-# def realeditor():
-#     global mysql
-#     #db = mysql.connect("localhost","myusername","mypassword","mydbname" )
-#     db = mysql.connect()
-#     cursor = db.cursor()
-#     query_string = "select * from maps;"
-#     cursor.execute(query_string)
-#     data = cursor.fetchall()
-#     db.close()
-#     return render_template("TestMap.html",data=data)
+
+@app.route("/test_template.html")
+def show():
+    
+    return render_template("test_template.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

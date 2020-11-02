@@ -16,7 +16,7 @@ def AudenticateUser(UN):
     return Ans
 
 def CheckDB(UN):
-    Data = pd.read_csv("./static/Data/ProjectID.csv")
+    Data = pd.read_csv("ProjectID.csv")
     Data.info()
     AID = []
     Aname = []
@@ -28,7 +28,7 @@ def CheckDB(UN):
 
 def GenProject(U, Pname):
     Fn = GenID()
-    append_list_as_row("./static/Data/ProjectID.csv", Fn, U, Pname)
+    append_list_as_row("ProjectID.csv", Fn, U, Pname)
     CreateFolder(Fn, U, Pname)
 
 def append_list_as_row(file_name, list_of_elem, U,Pname):
@@ -66,14 +66,14 @@ def GenID():
 
 def DeleteProject(ID):
     lines = list()
-    with open('./static/Data/ProjectID.csv', 'r') as readFile:
+    with open('ProjectID.csv', 'r') as readFile:
         reader = csv.reader(readFile)
         for row in reader:
             lines.append(row)
             for field in row:
                 if field == ID:
                     lines.remove(row)
-    with open('./static/Data/ProjectID.csv', 'w') as writeFile:
+    with open('ProjectID.csv', 'w') as writeFile:
         writer = csv.writer(writeFile)
         writer.writerows(lines)
     DeleteDIR(ID)
@@ -107,6 +107,6 @@ def myconverter(o):
         return o.__str__()
 
 # CheckDB(UN)
-GenProject(UN,"helloworld")
+# GenProject(UN,"helloworld")
 # DeleteProject("ABDj2G")
 # DeleteDIR("ABDj2G")
