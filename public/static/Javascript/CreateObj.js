@@ -77,8 +77,8 @@ function ShowMyForm(x, y, I) {
 function DisplayInfo() {
     var title = document.getElementById("DisName").value
     var discript = document.getElementById("Description").value
-    BoothIcons.push(new BoothIcon(ConX, ConY, 50, 50, "./static/Icons/pin.png", title, discript))
-    console.log(BoothIcons[BoothIcons.length - 1].title, MPos.x)
+    object.booth.push(new BoothIcon(ConX, ConY, 50, 50, "./static/Icons/pin.png", title, discript))
+    console.log(object.booth[object.booth.length - 1].title, object)
     document.getElementById("CreateForm").style.display = "none"
     On = 0
     document.getElementById("DisName").value = ""
@@ -87,7 +87,7 @@ function DisplayInfo() {
 
 function Change(M) {
     mode = M
-    console.log(M)
+    console.log(object)
 }
 
 function OpenEdit(B) {
