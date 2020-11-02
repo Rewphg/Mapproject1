@@ -9,7 +9,7 @@ import random
 from csv import writer
 import json
 
-UN = "Rew"
+# UN = "Rew"
 
 def AudenticateUser(UN):
     Ans = CheckDB(UN)

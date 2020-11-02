@@ -23,6 +23,14 @@ class Username(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.id
 
+class Coordinate(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    x = db.Column(db.Integer(), nullable=False)
+    y = db.Column(db.Integer(), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    def __repr__(self):
+        return '<x %r>', '<y %r>' % self.id
+
 @app.after_request
 def add_header(r):
     """
@@ -41,9 +49,6 @@ def home():
 
 @app.route("/user.html", methods=["GET", "POST"])
 def userpage():
-    if request.method=="GET":
-        RoomId = request.form[""]
-
     return render_template("/user.html")
 
 @app.route("/signup.html", methods=["GET","POST"])
@@ -51,15 +56,18 @@ def singuppage():
     if request.method == "POST":
         username = request.form['name']
         password = request.form['password']
-        print(username, password)
-        new_username = Username(name = username, Password = password)
-        try:
-            db.session.add(new_username)
-            db.session.commit()
-            print(new_username.name)
-            return redirect('/org.html')
-        except:
-            return "there is not filled"
+        if Username.query.filter_by(name=username).first() is None:
+            print(username, password)
+            new_username = Username(name = username, Password = password)
+            try:
+                db.session.add(new_username)
+                db.session.commit()
+                print(new_username.name)
+                return redirect('/org.html')
+            except:
+                return "there is not filled"
+        else:
+            return "Username taken"
     else:
         User = Username.query.order_by(Username.date_created)
         return render_template("/signup.html")
