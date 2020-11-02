@@ -10,6 +10,7 @@ import os
 import json
 
 app = Flask(__name__)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Coordinate.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Username.db'
 app.config['SERVER_NAME'] = 'localhost:5000'
 app.config['SECRET_KEY'] = 'Hello'
@@ -22,14 +23,6 @@ class Username(db.Model):
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     def __repr__(self):
         return '<Name %r>' % self.id
-
-class Coordinate(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    x = db.Column(db.Integer(), nullable=False)
-    y = db.Column(db.Integer(), nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    def __repr__(self):
-        return '<x %r>', '<y %r>' % self.id
 
 @app.after_request
 def add_header(r):
@@ -49,6 +42,9 @@ def home():
 
 @app.route("/user.html", methods=["GET", "POST"])
 def userpage():
+    if request.method=="GET":
+        RoomId = request.form[""]
+
     return render_template("/user.html")
 
 @app.route("/signup.html", methods=["GET","POST"])
@@ -67,7 +63,7 @@ def singuppage():
             except:
                 return "there is not filled"
         else:
-            return "Username taken"
+            return "Username is already taken"
     else:
         User = Username.query.order_by(Username.date_created)
         return render_template("/signup.html")
@@ -90,7 +86,7 @@ def ProjectPage():
         PID, Pname = CH.AudenticateUser(usr)
         Number = len(PID)
         app.logger.info(PID)
-        return render_template("/create.html",user=usr, ID=PID, Name=Pname, Lenght = Number)
+        return render_template("/create.html", user=usr, ID=PID, Name=Pname, Lenght = Number)
     else:
         return redirect("/org.html")
 
@@ -109,17 +105,27 @@ def loginpage():
         User = Username.query.order_by(Username.date_created)
         return render_template("/org.html", User=User)
 
-@app.route("/TestMap")
+@app.route("/TestMap", methods=["GET", "POST"])
 def  MapEditerPage(): 
+    if request.method == "POST":
+        #save = request.form['submit']
+        save = request.get_json()
+        print(save)
+        with open('mapdata.json', 'w') as f:
+            json.dump(save, f)
+            return 'created', 200
     if "user" in session:
         return render_template("/TestMap.html")
     else:
-        return redirect("/org.html")
+        return redirect("/org.html")   
 
 @app.route("/test_template.html")
 def show():
-    
     return render_template("test_template.html")
+
+@app.route("/mapdata.json")
+def getSampleData():
+    return render_template("mapdata.json")
 
 if __name__ == "__main__":
     app.run(debug=True)
