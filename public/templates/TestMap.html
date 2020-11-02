@@ -103,9 +103,17 @@
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    
+    
+    <script src="./static/Javascript/CreateObj.js"></script>
+    <script type=text/javascript src="{{url_for('static', filename='Javascript/index.js')}}"></script>
+    <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}"></script>
+
     <script>
         var qr;
         var qr2;
+
+        var savedContent = new Object();
 
         (function() {
             qr = new QRious({
@@ -118,6 +126,17 @@
                 element: document.getElementById('qr-code2'), // canvas object
                 size: 100, // size image qr code
                 value: 'Event Me!!!' // value default text
+            });
+
+
+            $.getJSON("./static/Data/mapdata.json", function(data){
+                savedContent = data;
+                console.log(savedContent[0].booth[0].x); // Prints: Harry
+                console.log(savedContent[0].booth[0].y); // Prints: 14
+                console.log(savedContent[0].booth[0].boothname); // Prints: 14
+                console.log(savedContent[0].booth[0].boothdescription); // Prints: 14
+            }).fail(function(){
+                console.log("An error has occurred.");
             });
         })();
 
@@ -138,7 +157,5 @@
             });
         }
     </script>
-    <script src="./static/Javascript/CreateObj.js"></script>
-    <script type=text/javascript src="{{url_for('static', filename='Javascript/index.js')}}"></script>
-    <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}"></script>
+
 </body>
