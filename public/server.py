@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, jsonify
 from flask.helpers import flash
 from werkzeug.datastructures import native_itermethods
 from flask_sqlalchemy import SQLAlchemy
@@ -6,6 +6,7 @@ from datetime import datetime
 import Project as CH
 import logging
 import os
+from os import path
 import json
 
 app = Flask(__name__)
@@ -58,7 +59,7 @@ def singuppage():
                 db.session.add(new_username)
                 db.session.commit()
                 print(new_username.name)
-                return redirect('/org.html')
+                return redirect('/login.html')
             except:
                 return "there is not filled"
         else:
@@ -67,40 +68,7 @@ def singuppage():
         User = Username.query.order_by(Username.date_created)
         return render_template("/signup")
 
-@app.route("/custom/")
-def editorpage():
-    return render_template("custom.html")
-
-@app.route('/create/delete/<ID>')
-def Delete_Project(ID):
-    CH.DeleteProject(ID)
-    CH.DeleteDIR(ID)
-    return redirect("/create")
-
-@app.route('/create/open/<ID>')
-def OpenProject(ID):
-    app.logger.info("Redirect to ", ID)
-    return "Project: "+ID
-
-@app.route('/create/rename/<ID>')
-
-@app.route("/create/", methods=["GET", "POST"])
-def ProjectPage():
-    if request.method == "POST":
-        ProjectName = request.form["ProjectNameInput"]
-        CH.GenProject(session["user"], ProjectName)
-        app.logger.info("CreateProject")
-        return redirect(url_for("ProjectPage"))
-    if "user" in session:
-        usr = session["user"]
-        PID, Pname = CH.AudenticateUser(usr)
-        Number = len(PID)
-        app.logger.info(PID)
-        return render_template("/create.html", user=usr, ID=PID, Name=Pname, Lenght = Number)
-    else:
-        return redirect("/org")
-
-@app.route("/org", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def loginpage():
     if request.method == "POST":
         username = request.form['username']
@@ -109,25 +77,84 @@ def loginpage():
         for D in Data:
             if D.name == username and D.Password == password:
                 session["user"] = D.name
-                return redirect(url_for("ProjectPage"))
+                return redirect("/org/{}/project".format(D.name))
         return redirect('/org')
     else:
-        User = Username.query.order_by(Username.date_created)
-        return render_template("/org.html", User=User)
+        # User = Username.query.order_by(Username.date_created)
+        return render_template("/login.html")
 
-@app.route("/TestMap", methods=["GET", "POST"])
-def  MapEditerPage(): 
-    if request.method == "POST":
-        #save = request.form['submit']
+# @app.route("/custom/")
+# def editorpage():
+#     return render_template("custom.html")
+
+@app.route('/create/delete/<ID>')
+def Delete_Project(ID):
+    CH.DeleteProject(ID)
+    CH.DeleteDIR(ID)
+    return redirect("/create")
+
+# @app.route('/create/open/<ID>')
+# def OpenProject(ID):
+#     app.logger.info("Redirect to ", ID)
+#     return "Project: "+ID
+
+# @app.route('/create/rename/<ID>')
+
+@app.route("/org/<name>/project", methods=["GET", "POST"])
+def ProjectPage(name=None):
+    if request.method == "GET":
+        if "user" in session:
+            usr = session["user"]
+            PID, Pname = CH.AudenticateUser(usr)
+            Number = len(PID)
+            app.logger.info(PID)
+            return render_template("/home.html", user=usr, ID=PID, Name=Pname, Length = Number)
+    else:
+        ProjectName = request.form["ProjectNameInput"]
+        CH.GenProject(session["user"], ProjectName)
+        app.logger.info("CreateProject")
+        return redirect("/org/{}/project".format(session["user"]))
+
+@app.route("/org/<name>/project/<PID>", methods=["GET","POST"])
+def ProjID(name,PID):
+    if request.method == "GET":
+        # if path.exists(os.path.join("ProjectContainer\{}\Data\mapdata.json".format(PID))):
+        #     with open(os.path.join("ProjectContainer\{}\Data\mapdata.json".format(PID))) as jsonfile:
+        #         mapdata = json.load(jsonfile)
+        # else:
+        #     mapdata = []
+        return render_template("/TestMap.html", username=name, pid=PID)
+    else:
         save = request.get_json()
         print(save)
-        with open('mapdata.json', 'w') as f:
+        with open(os.path.join("ProjectContainer\{}\Data\mapdata.json".format(PID)), 'w') as f:
             json.dump(save, f)
-            return 'created', 200
-    if "user" in session:
-        return render_template("/TestMap")
-    else:
-        return redirect("/org.html")   
+            return 'created', 201
+
+@app.route("/org/<name>/project/<PID>/json", methods=["GET","POST"])
+def getJson(name,PID):
+    if request.method == "GET":
+        if path.exists(os.path.join("ProjectContainer\{}\Data\mapdata.json".format(PID))):
+            with open(os.path.join("ProjectContainer\{}\Data\mapdata.json".format(PID))) as jsonfile:
+                mapdata = (json.load(jsonfile))
+                
+        else:
+            mapdata = {"object":[]}
+        return jsonify(mapdata)
+
+# @app.route("/TestMap", methods=["GET", "POST"])
+# def  MapEditerPage(): 
+#     if request.method == "POST":
+        #save = request.form['submit']
+    #     save = request.get_json()
+    #     print(save)
+    #     with open('mapdata.json', 'w') as f:
+    #         json.dump(save, f)
+    #         return 'created', 200
+    # if "user" in session:
+    #     return render_template("/TestMap")
+    # else:
+    #     return redirect("/login.html")   
 
 @app.route("/test_template.html")
 def show():
@@ -136,6 +163,7 @@ def show():
 @app.route("/mapdata.json")
 def getSampleData():
     return render_template("mapdata.json")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
