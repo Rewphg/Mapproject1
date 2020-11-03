@@ -21,7 +21,7 @@
 <body>
     <div class="center">
         <h1>Login</h1>
-        <form METHOD="POST" action="/org.html">
+        <form METHOD="POST" action="/org">
             <div class="txt_field"><br>
                 <label>Username</label><br>
                 <input type="text" name="username" id="username" placeholder="Enter Username" required><br>
@@ -32,7 +32,7 @@
             </div><br>
             <br><input id="login_btn" type="submit" value="Login">
             <div class="signup_link">
-                Create an account <a href="signup.html">Signup</a>
+                Create an account <a href="signup">Signup</a>
             </div>
         </form>
         <script src="{{url_for('static', filename='Javascript/signup.js')}}"></script>
@@ -49,8 +49,8 @@
                     }
                     }
             </script>-->
-    <!-- </div> -->
-    <!-- <div>
+        <!-- </div> -->
+        <!-- <div>
         <h1>Test Data</h1><br/> {% for U in User %}
         <h4>
             {{ U.name , U.id}}
