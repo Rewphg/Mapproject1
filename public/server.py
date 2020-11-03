@@ -1,4 +1,3 @@
-# public/server.py
 from flask import Flask, render_template, request, url_for, redirect, session
 from flask.helpers import flash
 from werkzeug.datastructures import native_itermethods
@@ -40,14 +39,14 @@ def add_header(r):
 def home():
     return render_template("index.html")
 
-@app.route("/user.html", methods=["GET", "POST"])
+@app.route("/user/", methods=["GET", "POST"])
 def userpage():
     if request.method=="GET":
         RoomId = request.form[""]
 
     return render_template("/user.html")
 
-@app.route("/signup.html", methods=["GET","POST"])
+@app.route("/signup/", methods=["GET","POST"])
 def singuppage():
     if request.method == "POST":
         username = request.form['name']
@@ -66,16 +65,27 @@ def singuppage():
             return "Username is already taken"
     else:
         User = Username.query.order_by(Username.date_created)
-        return render_template("/signup.html")
+        return render_template("/signup")
 
-@app.route("/custom.html")
+@app.route("/custom/")
 def editorpage():
     return render_template("custom.html")
 
-@app.route("/create.html", methods=["GET", "POST", "DELETE"])
+@app.route('/create/delete/<ID>')
+def Delete_Project(ID):
+    CH.DeleteProject(ID)
+    CH.DeleteDIR(ID)
+    return redirect("/create")
+
+@app.route('/create/open/<ID>')
+def OpenProject(ID):
+    app.logger.info("Redirect to ", ID)
+    return "Project: "+ID
+
+@app.route('/create/rename/<ID>')
+
+@app.route("/create/", methods=["GET", "POST"])
 def ProjectPage():
-    if request.method == "DELETE":
-        DPID = request.form['PID']
     if request.method == "POST":
         ProjectName = request.form["ProjectNameInput"]
         CH.GenProject(session["user"], ProjectName)
@@ -88,9 +98,9 @@ def ProjectPage():
         app.logger.info(PID)
         return render_template("/create.html", user=usr, ID=PID, Name=Pname, Lenght = Number)
     else:
-        return redirect("/org.html")
+        return redirect("/org")
 
-@app.route("/org.html", methods=["GET", "POST"])
+@app.route("/org", methods=["GET", "POST"])
 def loginpage():
     if request.method == "POST":
         username = request.form['username']
@@ -100,7 +110,7 @@ def loginpage():
             if D.name == username and D.Password == password:
                 session["user"] = D.name
                 return redirect(url_for("ProjectPage"))
-        return redirect('/org.html')
+        return redirect('/org')
     else:
         User = Username.query.order_by(Username.date_created)
         return render_template("/org.html", User=User)
@@ -115,7 +125,7 @@ def  MapEditerPage():
             json.dump(save, f)
             return 'created', 200
     if "user" in session:
-        return render_template("/TestMap.html")
+        return render_template("/TestMap")
     else:
         return redirect("/org.html")   
 
