@@ -5,8 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import Project as CH
 import logging
+import os
+import json
 
 app = Flask(__name__)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Coordinate.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Username.db'
 app.config['SERVER_NAME'] = 'localhost:5000'
 app.config['SECRET_KEY'] = 'Hello'
@@ -48,6 +51,7 @@ def singuppage():
     if request.method == "POST":
         username = request.form['name']
         password = request.form['password']
+<<<<<<< HEAD
         print(username, password)
         new_username = Username(name = username, Password = password)
         try:
@@ -57,6 +61,20 @@ def singuppage():
             return redirect('/org')
         except:
             return "there is not filled"
+=======
+        if Username.query.filter_by(name=username).first() is None:
+            print(username, password)
+            new_username = Username(name = username, Password = password)
+            try:
+                db.session.add(new_username)
+                db.session.commit()
+                print(new_username.name)
+                return redirect('/org.html')
+            except:
+                return "there is not filled"
+        else:
+            return "Username is already taken"
+>>>>>>> ed5e62091241e1e4e186d3153969bfbe8373da59
     else:
         User = Username.query.order_by(Username.date_created)
         return render_template("/signup")
@@ -90,7 +108,7 @@ def ProjectPage():
         PID, Pname = CH.AudenticateUser(usr)
         Number = len(PID)
         app.logger.info(PID)
-        return render_template("/create.html",user=usr, ID=PID, Name=Pname, Lenght = Number)
+        return render_template("/create.html", user=usr, ID=PID, Name=Pname, Lenght = Number)
     else:
         return redirect("/org")
 
@@ -109,12 +127,35 @@ def loginpage():
         User = Username.query.order_by(Username.date_created)
         return render_template("/org.html", User=User)
 
+<<<<<<< HEAD
 @app.route("/TestMap/")
+=======
+@app.route("/TestMap", methods=["GET", "POST"])
+>>>>>>> ed5e62091241e1e4e186d3153969bfbe8373da59
 def  MapEditerPage(): 
+    if request.method == "POST":
+        #save = request.form['submit']
+        save = request.get_json()
+        print(save)
+        with open('mapdata.json', 'w') as f:
+            json.dump(save, f)
+            return 'created', 200
     if "user" in session:
         return render_template("/TestMap")
     else:
+<<<<<<< HEAD
         return redirect("/org")
+=======
+        return redirect("/org.html")   
+
+@app.route("/test_template.html")
+def show():
+    return render_template("test_template.html")
+
+@app.route("/mapdata.json")
+def getSampleData():
+    return render_template("mapdata.json")
+>>>>>>> ed5e62091241e1e4e186d3153969bfbe8373da59
 
 if __name__ == "__main__":
     app.run(debug=True)

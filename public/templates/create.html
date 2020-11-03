@@ -63,9 +63,15 @@
     {%endif%}
     <div>
         {% for i in range(Lenght)%}
+<<<<<<< HEAD
         <form action='/create/open/{{ID[i]}}' class="list">
             <button class="button1" onclick="" type="menu">{{Name[i]}} <br> {{ID[i]}}</button> </form> {% endfor %}
     </div>
+=======
+        <form METHOD="DELETE"></form>
+        <button class="button1" onclick="" type="menu">{{Name[i]}} <br> {{ID[i]}}</button> {% endfor %}
+    </div><br>
+>>>>>>> ed5e62091241e1e4e186d3153969bfbe8373da59
     <div>
         <button class="button1" onclick="openForm()">Create</button>
         <div class="form-popup" id="myForm">
@@ -78,11 +84,15 @@
             </form>
         </div>
     </div>
+<<<<<<< HEAD
     <button id="Delete">Delete</button>
 
     <head>
+=======
+>>>>>>> ed5e62091241e1e4e186d3153969bfbe8373da59
         <script>
             function openForm() {
+                console.log("asds")
                 document.getElementById("myForm").style.display = "block";
             }
 

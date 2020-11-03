@@ -1,12 +1,9 @@
 {
-<<<<<<< HEAD
     "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true
-=======
+    "python.linting.enabled": true,
     "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.9/bin/python3",
     "python.linting.pylintArgs": [
         "--load-plugins",
         "pylint-flask"
     ]
->>>>>>> 626d21531cedc10f5bf9936513b715227e8a3007
 }

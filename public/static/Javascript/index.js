@@ -1,3 +1,5 @@
+//Reference: Stackoverflow, TowardDataScience, Reddit Forum
+
 const MPos = [{
     x: 0,
     y: 0,
@@ -30,30 +32,38 @@ const ToiletIcons = []
 const Infos = []
 const lines = []
 
+var object = {
+    "toilet": [],
+    "booth": [],
+    "info": [],
+    "route": [],
+    "map": [],
+}
+
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     if (Background.length > 0) {
         Background[Background.length - 1].Draw()
     }
     requestAnimationFrame(animate)
-    BoothIcons.forEach((BoothIcon, index) => {
+    object.booth.forEach((BoothIcon, index) => {
         BoothIcon.Update()
             /*if (CheckCollitionImg(BoothIcon, Eraser) == true) {
                 BoothIcons.splice(BoothIcon, 1)
             }*/
     });
-    ToiletIcons.forEach((TI, index) => {
+    object.toilet.forEach((TI, index) => {
         TI.Update()
     });
 
-    Infos.forEach((TI, index) => {
+    object.info.forEach((TI, index) => {
             TI.Update()
         });
 
     var OldX;
     var OldY;
-    lines.forEach((P,index) => {
-        console.log(P.x,P.y);
+    object.route.forEach((P,index) => {
+        console.log(object);
 
         ctx.beginPath();
         ctx.lineWidth = 5;
@@ -107,28 +117,26 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     MPos.y = event.clientY - border.top - 25
     
     if (mode == 4) {
-        BoothIcons.forEach((A, index) => {
+        object.booth.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
-                OpenEdit(BoothIcons[index])
+                OpenEdit(object.booth[index])
                 EditIndex = index
-
-
 
                 qr2.set({
                     foreground: 'black', //  setup background color of qr code.
                     size: 100, // size image qr code
-                    value: BoothIcons[index].title // set text for qr
+                    value: object.booth[index].title // set text for qr
                 });
             }
         });
-        ToiletIcons.forEach((B, index) => {
+        object.toilet.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                ToiletIcons.splice(index, 1)
+                object.toilet.splice(index, 1)
             }
         });
-        Infos.forEach((B, index) => {
+        object.info.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                Infos.splice(index, 1)
+                object.info.splice(index, 1)
             }
         });
     }
@@ -139,27 +147,44 @@ document.getElementById("canvas").addEventListener("click", (event) => {
             ConX = event.clientX - border.left - 25
             ConY = event.clientY - border.top - 25
             var index = 1
-            ShowMyForm(MPos.x, MPos.y, index)
+            ShowMyForm(object, index)
         }
 
         if (mode == 2) {
-            ToiletIcons.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/toilet.png", "Toilet"))
-            console.log(ToiletIcons.length,"x:",MPos.x,",y:",MPos.y);
+            object.toilet.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/toilet.png", "Toilet"))
+            console.log(object);
         }
 
         if (mode == 3) {
-            Infos.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/info.png", "Info"))
-            console.log(Infos.length,"x:",MPos.x,",y:",MPos.y);
+            object.info.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/info.png", "Info"))
+            console.log(object);
         }
 
         if (mode == 5) {
-            lines.push({x:MPos.x,y:MPos.y});
-            console.log(lines.length,"x:",MPos.x,",y:",MPos.y);
+            object.route.push({x:MPos.x,y:MPos.y});
+            console.log(object);
         }
 
-        /*if (CheckCollition(event.clientX, event.clientY, eraser) == true) {
-            console.log("Eraser")
-        }*/
+    }
+})
+
+document.getElementById("submit").addEventListener("click", function (event) {
+    event.preventDefault()
+    xmlObj = new XMLHttpRequest();
+    xmlObj.open("POST", "http://localhost:5000/TestMap", true);
+    xmlObj.setRequestHeader("Content-Type", "application/json");
+    var data = JSON.stringify(object);
+    xmlObj.send(data);
+    xmlObj.onreadystatechange = handleRequest();
+
+    function handleRequest() {
+        if (xmlObj.readyState == 4 && xmlObj.status == 200) {
+            var myJSON = JSON.parse(xmlObj.responseText);
+            document.getElementById("response").innerHTML = myJSON.prediction;
+            alert("loaded");
+        } else {
+            alert(xmlObj.status);
+        }
     }
 })
 
