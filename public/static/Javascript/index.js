@@ -144,10 +144,12 @@ document.getElementById("canvas").addEventListener("click", (event) => {
 
         if (mode == 2) {
             ToiletIcons.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/toilet.png", "Toilet"))
+            console.log(ToiletIcons.length,"x:",MPos.x,",y:",MPos.y);
         }
 
         if (mode == 3) {
             Infos.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/info.png", "Info"))
+            console.log(Infos.length,"x:",MPos.x,",y:",MPos.y);
         }
 
         if (mode == 5) {
