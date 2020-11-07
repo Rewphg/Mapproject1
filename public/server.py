@@ -68,24 +68,9 @@ def singuppage():
         User = Username.query.order_by(Username.date_created)
         return render_template("/signup.html")
 
-@app.route("/login", methods=["GET", "POST"])
-def loginpage():
-    if request.method == "POST":
-        username = request.form['username']
-        password = request.form['pass']
-        Data = Username.query.order_by(Username.date_created)
-        for D in Data:
-            if D.name == username and D.Password == password:
-                session["user"] = D.name
-                return redirect("/org/{}/project".format(D.name))
-        return redirect('/org')
-    else:
-        # User = Username.query.order_by(Username.date_created)
-        return render_template("/login.html")
-
-# @app.route("/custom/")
-# def editorpage():
-#     return render_template("custom.html")
+@app.route("/custom/")
+def editorpage():
+    return render_template("custom.html")
 
 # @app.route('/create/open/<ID>')
 # def OpenProject(ID):
@@ -95,7 +80,7 @@ def loginpage():
 # @app.route('/create/rename/<ID>')
 
 @app.route("/org/<name>/project", methods=["GET", "POST"])
-def ProjectPage(name=None):
+def ProjectPage(name):
     if request.method == "GET":
         if "user" in session:
             usr = session["user"]
@@ -132,6 +117,27 @@ def ProjID(name,PID):
         #     mapdata = []
         return render_template("/TestMap.html", username=name, pid=PID)
     else:
+        return redirect("/org")
+
+@app.route("/org", methods=["GET", "POST"])
+def loginpage():
+    if request.method == "POST":
+        username = request.form['username']
+        password = request.form['pass']
+        Data = Username.query.order_by(Username.date_created)
+        for D in Data:
+            if D.name == username and D.Password == password:
+                session["user"] = D.name
+                return redirect("/org/{}/project".format(session["user"]))
+        return redirect("/login")
+    else:
+        User = Username.query.order_by(Username.date_created)
+        return render_template("/org.html", User=User)
+
+@app.route("/org/<name>/project/<PID>/save", methods=["GET", "POST"])
+def  MapEditerPage(name, PID): 
+    if request.method == "POST":
+        #save = request.form['submit']
         save = request.get_json()
         print(save)
         filepath = os.path.join("ProjectContainer",PID,"Data","mapdata.json")
@@ -162,7 +168,6 @@ def show():
 @app.route("/mapdata.json")
 def getSampleData():
     return render_template("mapdata.json")
-
 
 if __name__ == "__main__":
     app.run(debug=True)

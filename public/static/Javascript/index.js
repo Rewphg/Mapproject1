@@ -32,32 +32,12 @@ const ToiletIcons = []
 const Infos = []
 const lines = []
 
-// var object = [{
-//     "x":"",
-//     "y":"",
-//     "type":"",
-//     "info":{
-//         "height":"",
-//         "width":"",
-//         "src":"",
-//         "title":"",
-//         "description":""
-//     }
-// }
-// ]
-// var arr_object = []
-
-function preview(object) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-        document.getElementById("display").setAttribute("src", e.target.result);
-    };
-    reader.readAsDataURL(arr_object[0]);
-}
-
-function toCanvas() {
-    var image = document.getElementById("display").getAttribute("src");
-    canvas.style.backgroundImage = "url(" + image + ")"
+var object = {
+    "toilet": [],
+    "booth": [],
+    "info": [],
+    "route": [],
+    "map": [],
 }
 
 function animate() {
@@ -149,7 +129,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 //BoothIcons.splice(index, 1)
-                OpenEdit(arr_object[index])
+                OpenEdit(object.booth[index])
                 EditIndex = index
 
                 qr2.set({
@@ -163,26 +143,41 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     }
 
     if (mode == 4) {
-        arr_object.forEach((A, index) => {
+        object.booth.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
-                OpenEdit(arr_object[index])
+                object.booth.splice(index, 1)
+                    /*OpenEdit(BoothIcons[index])
+                    //EditIndex = index
+
+                    qr2.set({
+                        foreground: 'black', //  setup background color of qr code.
+                        size: 100, // size image qr code
+                        value: BoothIcons[index].title + "," + BoothIcons[index].dis + "," + BoothIcons[index].x + "," + BoothIcons[index].y   // set text for qr
+                    });
+                    */
+            }
+        });
+
+        object.booth.forEach((A, index) => {
+            if (CheckCollition(MPos.x, MPos.y, A) == true) {
+                OpenEdit(object.booth[index])
                 EditIndex = index
 
                 qr2.set({
                     foreground: 'black', //  setup background color of qr code.
                     size: 100, // size image qr code
-                    value: arr_object[index].title // set text for qr
+                    value: object.booth[index].title // set text for qr
                 });
             }
         });
-        arr_object.forEach((B, index) => {
+        object.toilet.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                arr_object.splice(index, 1)
+                object.toilet.splice(index, 1)
             }
         });
-        arr_object.forEach((B, index) => {
+        object.info.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                arr_object.splice(index, 1)
+                object.info.splice(index, 1)
             }
         });
     }
@@ -193,7 +188,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
             ConX = event.clientX - border.left - 25
             ConY = event.clientY - border.top - 25
             var index = 1
-            ShowMyForm(arr_object, index)
+            ShowMyForm(object, index)
         }
 
         if (mode == 2) {
@@ -232,7 +227,7 @@ function initObject(arr) {
 
 document.getElementById("submit").addEventListener("click", function(event) {
     xmlObj = new XMLHttpRequest();
-    xmlObj.open("POST", `http://localhost:5000/org/${user}/project/${pid}`, true);
+    xmlObj.open("POST", "http://localhost:5000/TestMap", true);
     xmlObj.setRequestHeader("Content-Type", "application/json");
     var data = JSON.stringify({ "object": arr_object });
     xmlObj.send(data);
@@ -247,7 +242,6 @@ document.getElementById("submit").addEventListener("click", function(event) {
             alert(xmlObj.status);
         }
     }
-    event.preventDefault()
 })
 
-// animate()
+animate()
