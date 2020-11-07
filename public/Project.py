@@ -18,12 +18,12 @@ def AudenticateUser(UN):
     return Ans
 
 def CheckDB(UN):
-    Data = pd.read_csv("./static/Data/ProjectID.csv")
+    Data = pd.read_csv("./static/Data/ProjectID.csv", error_bad_lines=False)
     Data.info()
     AID = []
     Aname = []
     for A in Data.itertuples():
-        if A.Username == UN:
+        if Aname == UN:
             AID.append(A.PID)
             Aname.append(A.Name)
     return AID, Aname
@@ -121,6 +121,7 @@ def ChangeName(New,ID):
     with open('./static/Data/ProjectID.csv', 'w') as writeFile:
         writer = csv.writer(writeFile)
         writer.writerows(lines)
+        
 # CheckDB(UN)
 # ChangeName("Test2","AW6Dj0")
 # GenProject(UN,"helloworld")

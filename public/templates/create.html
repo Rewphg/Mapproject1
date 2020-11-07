@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{user}}</title>
     <script scr="stylesheets" href=".\static\stylesheets\switch.css"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" async></script>
     <!-- <script scr="stylesheets" href="/public/static/stylesheets/form.css"></script> -->
     <style>
         body {
@@ -138,7 +138,7 @@
     <Br> {%endif%}
     <div>
         {% for i in range(Lenght)%}
-        <form action="#" class="list">
+        <form class="list">
             <button class="button1" onclick="" type="menu">{{Name[i]}} <br> {{ID[i]}}</button> </form> {% endfor %}
         <div class="form-popup" id='{{ID[i]}}'>
             <form action="#" class="form-container" METHOD="POST">
@@ -169,9 +169,9 @@
     <button id="Delete">Delete</button>
 
     <head>
-        <script>
+        <script async>
             function openForm(FormName) {
-                console.log("asds")
+                //console.log("asds")
                 document.getElementById(FormName).style.display = "block";
             }
 

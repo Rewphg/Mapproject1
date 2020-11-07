@@ -59,7 +59,7 @@ def singuppage():
                 db.session.add(new_username)
                 db.session.commit()
                 print(new_username.name)
-                return redirect('/login')
+                return redirect('/org')
             except:
                 return "there is not filled"
         else:
@@ -116,8 +116,8 @@ def ProjID(name,PID):
         # else:
         #     mapdata = []
         return render_template("/TestMap.html", username=name, pid=PID)
-    else:
-        return redirect("/org")
+    # else:
+    #     return redirect("/org")
 
 @app.route("/org", methods=["GET", "POST"])
 def loginpage():
@@ -129,7 +129,7 @@ def loginpage():
             if D.name == username and D.Password == password:
                 session["user"] = D.name
                 return redirect("/org/{}/project".format(session["user"]))
-        return redirect("/login")
+        return redirect("/org")
     else:
         User = Username.query.order_by(Username.date_created)
         return render_template("/org.html", User=User)
@@ -137,7 +137,7 @@ def loginpage():
 @app.route("/org/<name>/project/<PID>/save", methods=["GET", "POST"])
 def  MapEditerPage(name, PID): 
     if request.method == "POST":
-        #save = request.form['submit']
+        save = request.form['submit']
         save = request.get_json()
         print(save)
         filepath = os.path.join("ProjectContainer",PID,"Data","mapdata.json")
@@ -168,6 +168,9 @@ def show():
 @app.route("/mapdata.json")
 def getSampleData():
     return render_template("mapdata.json")
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
