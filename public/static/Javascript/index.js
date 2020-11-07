@@ -69,7 +69,7 @@ function animate() {
     var OldX;
     var OldY;
     arr_object.forEach((BoothIcon, index) => {
-        if (BoothIcon["type"] != 'line'){
+        if (BoothIcon["type"] != 'line') {
             BoothIcon.Update()
         } else {
             ctx.beginPath();
@@ -82,9 +82,9 @@ function animate() {
             OldX = BoothIcon.x;
             OldY = BoothIcon.y;
         }
-            /*if (CheckCollitionImg(BoothIcon, Eraser) == true) {
-                BoothIcons.splice(BoothIcon, 1)
-            }*/
+        /*if (CheckCollitionImg(BoothIcon, Eraser) == true) {
+            BoothIcons.splice(BoothIcon, 1)
+        }*/
     });
     // arr_object.forEach((TI, index) => {
     //     TI.Update()
@@ -100,7 +100,7 @@ function animate() {
     //     if (P.type == 'line') {
     //         console.log(arr_object);
 
-            
+
     //     }
     // });
     //console.log(lines.length)
@@ -120,11 +120,11 @@ function draw(e) {
     if (!route) return;
     ctx.lineWidth = 5;
     ctx.lineCap = "round";
-    
+
     ctx.lineTo(e.clientX, e.clientY);
     ctx.strokeStyle = "#FF0000";
     ctx.stroke();
-    
+
 }
 
 canvas.addEventListener("mousedown", startRoute);
@@ -143,9 +143,9 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     var border = document.getElementById("canvas").getBoundingClientRect();
     MPos.x = event.clientX - border.left - 25
     MPos.y = event.clientY - border.top - 25
-    
-    if(mode==7){
-        
+
+    if (mode == 7) {
+
         arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 //BoothIcons.splice(index, 1)
@@ -155,13 +155,13 @@ document.getElementById("canvas").addEventListener("click", (event) => {
                 qr2.set({
                     foreground: 'black', //  setup background color of qr code.
                     size: 100, // size image qr code
-                    value: arr_object[index].title + "," + arr_object[index].dis + "," + arr_object[index].x + "," + arr_object[index].y   // set text for qr
+                    value: arr_object[index].title + "," + arr_object[index].dis + "," + arr_object[index].x + "," + arr_object[index].y // set text for qr
                 });
-                
+
             }
         });
     }
-    
+
     if (mode == 4) {
         arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
@@ -198,17 +198,17 @@ document.getElementById("canvas").addEventListener("click", (event) => {
 
         if (mode == 2) {
             // object.toilet.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
-            arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
+            arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/toilet.png", "Toilet"))
             console.log(arr_object);
         }
 
         if (mode == 3) {
-            arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/info.png", "Info"))
+            arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/info.png", "Info"))
             console.log(arr_object);
         }
 
         if (mode == 5) {
-            arr_object.push({x:MPos.x,y:MPos.y, "type": 'line'});
+            arr_object.push({ x: MPos.x, y: MPos.y, "type": 'line' });
             console.log(arr_object);
             console.log(arr_object[0].type)
         }
@@ -216,26 +216,25 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     }
 })
 
-function initObject(arr){
+function initObject(arr) {
     new_arr = []
     arr.forEach(elem => {
-        if (elem['type'] != 'line'){
+        if (elem['type'] != 'line') {
             new_arr.push(new BoothIcon(elem.x, elem.y, elem.width, elem.height, elem.src, elem.title))
-        }
-        else {
+        } else {
             new_arr.push(elem)
         }
-        
+
     })
     return new_arr
-    
+
 }
 
-document.getElementById("submit").addEventListener("click", function (event) {
+document.getElementById("submit").addEventListener("click", function(event) {
     xmlObj = new XMLHttpRequest();
     xmlObj.open("POST", `http://localhost:5000/org/${user}/project/${pid}`, true);
     xmlObj.setRequestHeader("Content-Type", "application/json");
-    var data = JSON.stringify({"object": arr_object});
+    var data = JSON.stringify({ "object": arr_object });
     xmlObj.send(data);
     xmlObj.onreadystatechange = handleRequest();
 

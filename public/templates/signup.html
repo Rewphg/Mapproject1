@@ -8,6 +8,7 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
         }
+        
         .center {
             position: absolute;
             top: 50%;
@@ -22,7 +23,7 @@
         <div class="row">
             <h2>Sign Up</h2>
             <p>Please fill in this form to create the account.</p>
-            <form METHOD="POST" action="/signup.html">
+            <form METHOD="POST" action="#">
                 <div>
                     <label>UserName</label><br>
                     <input type="text" name="name" class="form-control" id="signupname" placeholder="Enter Username" required>
@@ -42,7 +43,7 @@
                 <div>
                     <br><input type="submit" name="submit" value="signup" 2onclick="store()">
                 </div>
-                <p>Already have an account?<a href="login.html">Login here</a></p>
+                <p>Already have an account?<a href="/login">Login here</a></p>
             </form>
             <script src="{{url_for('static', filename='Javascript/signup.js')}}"></script>
         </div>
