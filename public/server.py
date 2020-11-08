@@ -138,9 +138,9 @@ def loginpage():
 @app.route("/org/<name>/project/<PID>/save", methods=["GET", "POST"])
 def  MapEditerPage(name, PID): 
     if request.method == "POST":
-        save = request.form['submit']
+        #save = request.form['submit']
         save = request.get_json()
-        print(save)
+        #print(save)
         filepath = os.path.join("ProjectContainer",PID,"Data","mapdata.json")
         with open(filepath, 'w') as f:
             json.dump(save, f)
