@@ -23,7 +23,9 @@
 </style>
 
 <body>
-    <form action="#" method="POST"></form>
+    <div style="display:none;">
+
+<form action="#" method="POST"></form>
     <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
     <button id="clickbutton" onclick="toCanvas()">Display</button>
     <img id="display" hidden>
@@ -38,6 +40,8 @@
             <button class="qr-btn" onclick="generateQRCode()">create QR Code</button>
         </div>
     </form>
+    </div>
+    
 
     <form action="#" method="post" role="form">
         <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
@@ -116,6 +120,7 @@
         <script async>
             var user = '{{username}}'
             var pid = '{{pid}}'
+            /*
             var xhttp = new XMLHttpRequest();
             xhttp.open("GET", `/org/${user}/project/${pid}/json`, true);
             xhttp.onreadystatechange = function() {
@@ -134,7 +139,7 @@
                         // console.log(xhttp.responseText)
                 }
             };
-            xhttp.send();
+            xhttp.send();*/
 
             var qr;
             var qr2;
@@ -203,6 +208,13 @@
             }
 
             function renderData(data) {
+
+
+
+
+
+
+
                 //     var OldX;
                 //     var OldY;
                 //     data.forEach((BoothIcon, index) => {
