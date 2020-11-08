@@ -32,13 +32,16 @@ const ToiletIcons = []
 const Infos = []
 const lines = []
 
-var object = {
-    "toilet": [],
-    "booth": [],
-    "info": [],
-    "route": [],
-    "map": [],
-}
+// var object = {
+//     "toilet": [],
+//     "booth": [],
+//     "info": [],
+//     "route": [],
+//     "map": [],
+// }
+
+var arr_object = []
+console.log(arr_object)
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -129,7 +132,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 //BoothIcons.splice(index, 1)
-                OpenEdit(object.booth[index])
+                OpenEdit(arr_object[index])
                 EditIndex = index
 
                 qr2.set({
@@ -143,9 +146,9 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     }
 
     if (mode == 4) {
-        object.booth.forEach((A, index) => {
+        arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
-                object.booth.splice(index, 1)
+                arr_object.splice(index, 1)
                     /*OpenEdit(BoothIcons[index])
                     //EditIndex = index
 
@@ -158,26 +161,26 @@ document.getElementById("canvas").addEventListener("click", (event) => {
             }
         });
 
-        object.booth.forEach((A, index) => {
+        arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
-                OpenEdit(object.booth[index])
+                OpenEdit(arr_object[index])
                 EditIndex = index
 
                 qr2.set({
                     foreground: 'black', //  setup background color of qr code.
                     size: 100, // size image qr code
-                    value: object.booth[index].title // set text for qr
+                    value: arr_object[index].title // set text for qr
                 });
             }
         });
-        object.toilet.forEach((B, index) => {
+        arr_object.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                object.toilet.splice(index, 1)
+                arr_object.splice(index, 1)
             }
         });
-        object.info.forEach((B, index) => {
+        arr_object.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                object.info.splice(index, 1)
+                arr_object.splice(index, 1)
             }
         });
     }
@@ -188,17 +191,17 @@ document.getElementById("canvas").addEventListener("click", (event) => {
             ConX = event.clientX - border.left - 25
             ConY = event.clientY - border.top - 25
             var index = 1
-            ShowMyForm(object, index)
+            ShowMyForm(arr_object, index)
         }
 
         if (mode == 2) {
             // object.toilet.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
-            arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/toilet.png", "Toilet"))
+            arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
             console.log(arr_object);
         }
 
         if (mode == 3) {
-            arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/info.png", "Info"))
+            arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/info.png", "Info"))
             console.log(arr_object);
         }
 
@@ -225,9 +228,11 @@ function initObject(arr) {
 
 }
 
-document.getElementById("submit").addEventListener("click", function(event) {
+document.getElementById("sent").addEventListener("click", function(event) {
+    var user = '{{username}}'
+    var pid = '{{pid}}'
     xmlObj = new XMLHttpRequest();
-    xmlObj.open("POST", "http://localhost:5000/TestMap", true);
+    xmlObj.open("POST", "http://localhost:5000/org/" + user + "/project/" + pid, true);
     xmlObj.setRequestHeader("Content-Type", "application/json");
     var data = JSON.stringify({ "object": arr_object });
     xmlObj.send(data);

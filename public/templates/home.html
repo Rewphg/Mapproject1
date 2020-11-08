@@ -148,7 +148,11 @@
             <br><button type="button" class="button2" onclick="deleteProject()">DELETE</button><br>
             <br><button type="button" class="btn cancel" onclick="closeForm1()">Cancel</button>
             <label class="switch">
-                <input type="checkbox">
+                {% if PB[i] == "true" %}
+                    <input type="checkbox" checked>
+                {% else%}
+                    <input type="checkbox">
+                {%endif%}
                 <span class="slider round"></span>
             </label>
             <!-- </form> -->

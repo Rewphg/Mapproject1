@@ -23,23 +23,14 @@
 </style>
 
 <body>
-    <form method="POST"></form>
+    <form action="#" method="POST"></form>
     <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
     <button id="clickbutton" onclick="toCanvas()">Display</button>
     <img id="display" hidden>
     </form>
-    <img hidden class="testing" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxjaXJjbGUgc3R5bGU9ImZpbGw6I0I5RUFGRjsiIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI1NiIvPg0KPHBhdGggc3R5bGU9ImZpbGw6IzM1Q0NGRjsiIGQ9Ik0xMzIuMTY4LDQ4MC4wOTJDMTY4Ljg2Nyw1MDAuNDE1LDIxMS4wNzgsNTEyLDI1Niw1MTJjMTQxLjM4NSwwLDI1Ni0xMTQuNjE1LDI1Ni0yNTYNCgljMC01MC4zNC0xNC41NC05Ny4yNzktMzkuNjM1LTEzNi44NjdMNDM1LjIzMiw4Mkw2Ni4wNzYsMTY4LjVsMzIuNzMsMzIuNzNsNC43NDUsMTYuNDUxTDY2LjA3Niw0MTRMMTMyLjE2OCw0ODAuMDkyeiIvPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6IzY2MkU1NzsiIHBvaW50cz0iMjgzLjY2NiwyMjAuMzYzIDI1NS42NjQsMjY4Ljg2NSAyMjcuNjYxLDIyMC4zNjMgIi8+DQo8cG9seWdvbiBzdHlsZT0iZmlsbDojNTkwRjM4OyIgcG9pbnRzPSIyNTUuNjY0LDIyMC4zNjMgMjU1LjY2NCwyNjguODY1IDI4My42NjYsMjIwLjM2MyAiLz4NCjxwb2x5Z29uIHN0eWxlPSJmaWxsOiM5ODMyNjI7IiBwb2ludHM9IjMzNi4zNTQsMjAwLjM2MiAzMjkuMDQ0LDI1NS44ODggMjg0LjYxMywyMjEuNzk0ICIvPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6IzU5MEYzODsiIHBvaW50cz0iMzc3LjM0NSwxNTkuNDE2IDM5MS44NCwyMTMuNTEzIDMzNy43NDMsMTk5LjAxOCAiLz4NCjxwb2x5Z29uIHN0eWxlPSJmaWxsOiNGRjNGODQ7IiBwb2ludHM9IjE3NS45MiwxOTcuNTg1IDE4My4yMywyNTMuMTEgMjI3LjY2MSwyMTkuMDE3ICIvPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6IzY2MkU1NzsiIHBvaW50cz0iMTM2LjQ1NywxNTkuNDE2IDEyMS45NjIsMjEzLjUxMyAxNzYuMDU5LDE5OS4wMTggIi8+DQo8cmVjdCB4PSIzNDMiIHk9IjI0OC4zMyIgc3R5bGU9ImZpbGw6I0ZGQjM0NDsiIHdpZHRoPSI0OC43MiIgaGVpZ2h0PSI2Ni4xNyIvPg0KPHJlY3QgeD0iMzEwLjMzIiB5PSIyODEuNDIiIHN0eWxlPSJmaWxsOiNGRkZGRkY7IiB3aWR0aD0iNDAuNjY3IiBoZWlnaHQ9IjMzLjA4Ii8+DQo8cmVjdCB4PSIxMzcuNjciIHk9IjI4MS40MiIgc3R5bGU9ImZpbGw6I0ZGQjM0NDsiIHdpZHRoPSI0MC42NjciIGhlaWdodD0iMzMuMDgiLz4NCjxnPg0KCTxyZWN0IHg9IjgwLjUiIHk9IjE1OCIgc3R5bGU9ImZpbGw6IzMzMzMzMzsiIHdpZHRoPSIyNC41IiBoZWlnaHQ9IjE3MC41Ii8+DQoJPHJlY3QgeD0iNDA3IiB5PSIxNTgiIHN0eWxlPSJmaWxsOiMzMzMzMzM7IiB3aWR0aD0iMjQuNSIgaGVpZ2h0PSIxNzAuNSIvPg0KPC9nPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6I0YxMzMzRjsiIHBvaW50cz0iNDQ1LjkyNCwxNjguNSA2Ni4wNzYsMTY4LjUgNzYuNzY4LDgyIDQzNS4yMzIsODIgIi8+DQo8cG9seWdvbiBzdHlsZT0iZmlsbDojQUUyODNGOyIgcG9pbnRzPSI0MzUuMjMyLDgyIDI1Ni4zMzMsODIgMjU2LjMzMywxNjguNSA0NDUuOTI0LDE2OC41ICIvPg0KPHJlY3QgeD0iMjI5LjExIiB5PSI4MiIgc3R5bGU9ImZpbGw6I0ZGRkZGRjsiIHdpZHRoPSI1NC4yIiBoZWlnaHQ9Ijg2LjUiLz4NCjxnPg0KCTxyZWN0IHg9IjI1Ni4zMyIgeT0iODIiIHN0eWxlPSJmaWxsOiNFMEUwRTA7IiB3aWR0aD0iMjYuOTc3IiBoZWlnaHQ9Ijg2LjUiLz4NCgk8cmVjdCB4PSIzMzcuNTEiIHk9IjgyIiBzdHlsZT0iZmlsbDojRTBFMEUwOyIgd2lkdGg9IjU0LjIiIGhlaWdodD0iODYuNSIvPg0KPC9nPg0KPHJlY3QgeD0iMTIwLjciIHk9IjgyIiBzdHlsZT0iZmlsbDojRkZGRkZGOyIgd2lkdGg9IjU0LjIiIGhlaWdodD0iODYuNSIvPg0KPHJlY3QgeD0iNjYuMDgiIHk9IjMxNC41IiBzdHlsZT0iZmlsbDojRjEzMzNGOyIgd2lkdGg9IjM3OS44NSIgaGVpZ2h0PSI5OS41Ii8+DQo8cmVjdCB4PSIyNTYuMzMiIHk9IjMxNC41IiBzdHlsZT0iZmlsbDojQUUyODNGOyIgd2lkdGg9IjE4OS41OSIgaGVpZ2h0PSI5OS41Ii8+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg=="
-        id="testing">
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-database.js"></script>
     <h3>QR Code Generator</h3>
 
-    <form method="POST">
+    <form action="#" method="POST">
         <div>
             <input id="qr-text" type="text" placeholder="Type message QR Code..." / name="qrcode"></div>
         <br />
@@ -48,86 +39,87 @@
         </div>
     </form>
 
-    <form method="POST" role="form">
-        <button class="btn btn-primary" name="submit" id="submit">Submit/Save</button>
-    </form>
-
-    <div>
-
-        <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
-        <button id="save_temp" onclick="saveTemp();">Save Draft</button>
-
-        <button id="clear_map" onclick="clearMap();">Clear Map</button>
-        <button id="read_temp" onclick="doRenderTemp();">Undo</button> |
-        <button id="edit_mode" onclick="Change(7);">Edit Booth</button> |
-        <button id="save_img" onclick="saveImageAndDownload();">Save To PNG</button>
-    </div>
-
-    <canvas id="canvas" width="1000" height="1000"></canvas> <br> <br>
-    <div class="form-popup" id="CreateForm">
-        <canvas id="qr-code"></canvas>
-
-        <form class="form-container" method="GET">
-            <h1>BoothInfo</h1>
-            <label for="text"><b>Booth Name</b></label>
-            <input id="DisName" type="text" placeholder="Name" name="boothname">
-            <label for="text"><b>Overview</b></label>
-            <input id="Description" type="text" placeholder="This booth is...." name="boothdesc">
-            <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title" name="boothname"></input>
-            <button type="button" class="btn cancel" onclick="Close('CreateForm')">Close</button>
+    <<<<<<< HEAD <form method="POST" role="form">
+        <button class="btn btn-primary" name="submit" id="submit">Submit/Save</button> =======
+        <form action="#" method="post" role="form">
+            <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button> >>>>>>> ef0159510bb44aa46ccd63e38bef511b8fcbd9da
         </form>
-    </div>
-    <div class="form-popup" id="EditForm">
-        <canvas id="qr-code2"></canvas>
-        <form class="form-container">
-            <h1>Edit Booth Information</h1>
-            <label for="text"><b>Booth Name</b></label>
-            <input id="EditName" type="text" placeholder="New Name">
-            <label for="text"><b>Overview</b></label>
-            <input id="EditDis" type="text" placeholder="New Discription">
-            <button type="button" class="btn" onclick="ApplyEditBoothInfo()">Add Booth</button>
-            <button type="button" class="btn cancel" onclick="Close('EditForm')">Close</button>
-        </form>
-    </div>
-    </div>
-
-    <div id="MenuContainer">
-        <div>
-            <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\toilet.png" width="50"
-          length="50"></button>
-        </div>
 
         <div>
-            <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/pin.png" width="50"
-          length="50"></button>
-        </div>
-        <div>
-            <button class="open-button" onclick="Change(3)">Info<img src="./static/Icons/info.png" width="50"
-          length="50"></button>
-        </div>
-        <div>
-            <button class="open-button" onclick="Change(4)">Edit/Delete<img src="./static/Icons/Eraser.png" width="50"
-          length="50"></button>
-        </div>
-        <div>
-            <button class="open-button" onclick="Change(5)">Route<img src="./static/Icons/route.png" width="50"
-          length="50"></button>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
-    <script>
-    </script>
-    < <script src="/static/Javascript/CreateObj.js"></script>
-        <script type=text/javascript src="{{url_for('static', filename='Javascript/index.js')}}"></script>
-        <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}"></script>
+            <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
+            <button id="save_temp" onclick="saveTemp();">Save Draft</button>
+
+            <button id="clear_map" onclick="clearMap();">Clear Map</button>
+            <button id="read_temp" onclick="doRenderTemp();">Undo</button> |
+            <button id="edit_mode" onclick="Change(7);">Edit Booth</button> |
+            <button id="save_img" onclick="saveImageAndDownload();">Save To PNG</button>
+        </div>
+
+        <canvas id="canvas" width="1000" height="1000"></canvas> <br> <br>
+        <div class="form-popup" id="CreateForm">
+            <canvas id="qr-code"></canvas>
+
+            <form class="form-container" method="GET">
+                <h1>BoothInfo</h1>
+                <label for="text"><b>Booth Name</b></label>
+                <input id="DisName" type="text" placeholder="Name" name="boothname">
+                <label for="text"><b>Overview</b></label>
+                <input id="Description" type="text" placeholder="This booth is...." name="boothdesc">
+                <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title" name="boothname"></input>
+                <button type="button" class="btn cancel" onclick="Close('CreateForm')">Close</button>
+            </form>
+        </div>
+        <div class="form-popup" id="EditForm">
+            <canvas id="qr-code2"></canvas>
+            <form class="form-container">
+                <h1>Edit Booth Information</h1>
+                <label for="text"><b>Booth Name</b></label>
+                <input id="EditName" type="text" placeholder="New Name">
+                <label for="text"><b>Overview</b></label>
+                <input id="EditDis" type="text" placeholder="New Discription">
+                <button type="button" class="btn" onclick="ApplyEditBoothInfo()">Add Booth</button>
+                <button type="button" class="btn cancel" onclick="Close('EditForm')">Close</button>
+            </form>
+        </div>
+        </div>
+
+        <div id="MenuContainer">
+            <div>
+                <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src="\static\Icons\toilet.png" width="50"
+          length="50"></button>
+            </div>
+
+            <div>
+                <button class="open-button" onclick="Change(1)">Booth<img src="/static/Icons/pin.png" width="50"
+          length="50"></button>
+            </div>
+            <div>
+                <button class="open-button" onclick="Change(3)">Info<img src="/static/Icons/info.png" width="50"
+          length="50"></button>
+            </div>
+            <div>
+                <button class="open-button" onclick="Change(4)">Edit/Delete<img src="/static/Icons/Eraser.png" width="50"
+          length="50"></button>
+            </div>
+            <div>
+                <button class="open-button" onclick="Change(5)">Route<img src="/static/Icons/route.png" width="50"
+          length="50"></button>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
         <script>
-            var arr_object = []
-            console.log(arr_object)
+        </script>
+        <script src="/static/Javascript/CreateObj.js" async></script>
+        <script type=text/javascript src="{{url_for('static', filename='Javascript/index.js')}}" async></script>
+        <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}" async></script>
+
+        <script async>
             var user = '{{username}}'
             var pid = '{{pid}}'
             var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", `/org/${user}/project/${pid}/json`, true);
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     // Typical action to be performed when the document is ready:
@@ -144,7 +136,6 @@
                         // console.log(xhttp.responseText)
                 }
             };
-            xhttp.open("GET", `/org/${temp_username}/project/${temp_pid}/json`, true);
             xhttp.send();
 
             var qr;
@@ -186,7 +177,7 @@
             }
 
             function refreshServer() {
-                $.getJSON("./static/Data/mapdata.json", function(data) {
+                $.getJSON("./ProjectContainer/{{pid}}/Data/mapdata.json", function(data) {
                     savedContent = data;
 
                     // Put the object into storage

@@ -59,7 +59,7 @@ def singuppage():
                 db.session.add(new_username)
                 db.session.commit()
                 print(new_username.name)
-                return redirect('/login')
+                return redirect('/org')
             except:
                 return "there is not filled"
         else:
@@ -84,11 +84,12 @@ def ProjectPage(name):
     if request.method == "GET":
         if "user" in session:
             usr = session["user"]
-            PID, Pname = CH.AudenticateUser(usr)
+            PID, Pname = CH.CheckDB(usr)
+            PB = CH.CheckMetadata(PID)
             Number = len(PID)
-            app.logger.info(PID)
-            return render_template("/home.html", user=usr, ID=PID, Name=Pname, Length = Number)
-    else:
+            app.logger.info(PB)
+            return render_template("/home.html", user=usr, ID=PID, Name=Pname, Length = Number, PB=PB)
+    elif request.method == "POST":
         ProjectName = request.form["ProjectNameInput"]
         CH.GenProject(session["user"], ProjectName)
         app.logger.info("CreateProject")
@@ -116,8 +117,8 @@ def ProjID(name,PID):
         # else:
         #     mapdata = []
         return render_template("/TestMap.html", username=name, pid=PID)
-    else:
-        return redirect("/org")
+    # else:
+    #     return redirect("/org")
 
 @app.route("/org", methods=["GET", "POST"])
 def loginpage():
@@ -129,7 +130,7 @@ def loginpage():
             if D.name == username and D.Password == password:
                 session["user"] = D.name
                 return redirect("/org/{}/project".format(session["user"]))
-        return redirect("/login")
+        return redirect("/org")
     else:
         User = Username.query.order_by(Username.date_created)
         return render_template("/org.html", User=User)
@@ -137,7 +138,7 @@ def loginpage():
 @app.route("/org/<name>/project/<PID>/save", methods=["GET", "POST"])
 def  MapEditerPage(name, PID): 
     if request.method == "POST":
-        #save = request.form['submit']
+        save = request.form['submit']
         save = request.get_json()
         print(save)
         filepath = os.path.join("ProjectContainer",PID,"Data","mapdata.json")
@@ -168,6 +169,9 @@ def show():
 @app.route("/mapdata.json")
 def getSampleData():
     return render_template("mapdata.json")
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

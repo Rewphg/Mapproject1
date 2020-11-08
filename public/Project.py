@@ -1,7 +1,9 @@
 import datetime
 import os
 from os import name, path, remove
+from os.path import join
 import shutil
+from flask.app import Flask
 import pandas as pd
 import csv
 
@@ -11,14 +13,14 @@ import random
 from csv import writer
 import json
 
-# UN = "Rew"
+UN = "Rew"
 
 def AudenticateUser(UN):
     Ans = CheckDB(UN)
     return Ans
 
 def CheckDB(UN):
-    Data = pd.read_csv("./static/Data/ProjectID.csv")
+    Data = pd.read_csv("./static/Data/ProjectID.csv", error_bad_lines=False)
     Data.info()
     AID = []
     Aname = []
@@ -27,6 +29,17 @@ def CheckDB(UN):
             AID.append(A.PID)
             Aname.append(A.Name)
     return AID, Aname
+
+def CheckMetadata(AID):
+    PB = []
+    for ID in AID:
+        with open(os.path.join("ProjectContainer",ID,"metadata.json"), 'r') as File:
+            Data = json.load(File)
+            if Data["Public"] == True:
+                PB.append("true")
+            elif Data["Public"] == False:
+                PB.append("false")
+    return PB
 
 def GenProject(U, Pname):
     Fn = GenID()
@@ -108,6 +121,16 @@ def myconverter(o):
     if isinstance(o, datetime.datetime):
         return o.__str__()
         
+def ChangePublic(PID,OnOff) :
+    Data = ""
+    with open(os.path.join("ProjectContainer",PID,"metadata.json"), 'r') as D:
+        Data = json.load(D)
+        Data["Public"] = OnOff
+    with open(os.path.join("ProjectContainer",PID,"metadata.json"), 'w') as RD:
+        WD = json.dumps(Data, default = myconverter)
+        print(WD)
+        RD.write(WD)
+
 
 def ChangeName(New,ID):
     lines = list()
@@ -121,7 +144,9 @@ def ChangeName(New,ID):
     with open('./static/Data/ProjectID.csv', 'w') as writeFile:
         writer = csv.writer(writeFile)
         writer.writerows(lines)
-# CheckDB(UN)
+        
+CheckDB(UN)
+
 # ChangeName("Test2","AW6Dj0")
 # GenProject(UN,"helloworld")
 # DeleteProject("ABDj2G")
