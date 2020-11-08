@@ -41,7 +41,6 @@ const lines = []
 // }
 
 var arr_object = []
-console.log(arr_object)
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -52,9 +51,8 @@ function animate() {
     var OldX;
     var OldY;
     arr_object.forEach((BoothIcon, index) => {
-        if (BoothIcon["type"] != 'line') {
-            BoothIcon.Update()
-        } else {
+        if (BoothIcon.hasOwnProperty("type")) {
+            
             ctx.beginPath();
             ctx.lineWidth = 5;
             ctx.lineCap = "round";
@@ -64,29 +62,15 @@ function animate() {
             ctx.stroke();
             OldX = BoothIcon.x;
             OldY = BoothIcon.y;
+        } else {
+            //console.log(arr_object);
+            BoothIcon.Update()
         }
         /*if (CheckCollitionImg(BoothIcon, Eraser) == true) {
             BoothIcons.splice(BoothIcon, 1)
         }*/
     });
-    // arr_object.forEach((TI, index) => {
-    //     TI.Update()
-    // });
-
-    // arr_object.forEach((TI, index) => {
-    //     TI.Update()
-    //     });
-
-    // var OldX;
-    // var OldY;
-    // arr_object.forEach((P, index) => {
-    //     if (P.type == 'line') {
-    //         console.log(arr_object);
-
-
-    //     }
-    // });
-    //console.log(lines.length)
+      
 } // .End animate
 
 function startRoute(e) {
@@ -197,18 +181,18 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         if (mode == 2) {
             // object.toilet.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
             arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
-            console.log(arr_object);
+            //console.log(arr_object);
         }
 
         if (mode == 3) {
             arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/info.png", "Info"))
-            console.log(arr_object);
+            //console.log(arr_object);
         }
 
         if (mode == 5) {
             arr_object.push({ x: MPos.x, y: MPos.y, "type": 'line' });
-            console.log(arr_object);
-            console.log(arr_object[0].type)
+            //console.log(arr_object);
+            //console.log(arr_object[0].type)
         }
 
     }

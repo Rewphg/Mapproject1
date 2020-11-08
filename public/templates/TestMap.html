@@ -43,105 +43,87 @@
     </div>
     
 
-    <<<<<<< HEAD <form method="POST" role="form">
-        <button class="btn btn-primary" name="submit" id="submit">Submit/Save</button> =======
-        <form action="#" method="post" role="form">
-            <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button> >>>>>>> ef0159510bb44aa46ccd63e38bef511b8fcbd9da
+    <form action="#" method="post" role="form">
+        <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
+    </form>
+
+    <div>
+
+        <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
+        <button id="save_temp" onclick="saveTemp();">Save Draft</button>
+
+        <button id="clear_map" onclick="clearMap();">Clear Map</button>
+        <button id="read_temp" onclick="doRenderTemp();">Undo</button> |
+        <button id="edit_mode" onclick="Change(7);">Edit Booth</button> |
+        <button id="save_img" onclick="saveImageAndDownload();">Save To PNG</button>
+    </div>
+
+    <canvas id="canvas" width="1000" height="1000"></canvas> <br> <br>
+    <div class="form-popup" id="CreateForm">
+        <canvas id="qr-code"></canvas>
+
+        <form class="form-container" method="GET">
+            <h1>BoothInfo</h1>
+            <label for="text"><b>Booth Name</b></label>
+            <input id="DisName" type="text" placeholder="Name" name="boothname">
+            <label for="text"><b>Overview</b></label>
+            <input id="Description" type="text" placeholder="This booth is...." name="boothdesc">
+            <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title" name="boothname"></input>
+            <button type="button" class="btn cancel" onclick="Close('CreateForm')">Close</button>
         </form>
+    </div>
+    <div class="form-popup" id="EditForm">
+        <canvas id="qr-code2"></canvas>
+        <form class="form-container">
+            <h1>Edit Booth Information</h1>
+            <label for="text"><b>Booth Name</b></label>
+            <input id="EditName" type="text" placeholder="New Name">
+            <label for="text"><b>Overview</b></label>
+            <input id="EditDis" type="text" placeholder="New Discription">
+            <button type="button" class="btn" onclick="ApplyEditBoothInfo()">Add Booth</button>
+            <button type="button" class="btn cancel" onclick="Close('EditForm')">Close</button>
+        </form>
+    </div>
+    </div>
+
+    <div id="MenuContainer">
+        <div>
+            <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src="\static\Icons\toilet.png" width="50"
+          length="50"></button>
+        </div>
 
         <div>
-
-            <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
-            <button id="save_temp" onclick="saveTemp();">Save Draft</button>
-
-            <button id="clear_map" onclick="clearMap();">Clear Map</button>
-            <button id="read_temp" onclick="doRenderTemp();">Undo</button> |
-            <button id="edit_mode" onclick="Change(7);">Edit Booth</button> |
-            <button id="save_img" onclick="saveImageAndDownload();">Save To PNG</button>
-        </div>
-
-        <canvas id="canvas" width="1000" height="1000"></canvas> <br> <br>
-        <div class="form-popup" id="CreateForm">
-            <canvas id="qr-code"></canvas>
-
-            <form class="form-container" method="GET">
-                <h1>BoothInfo</h1>
-                <label for="text"><b>Booth Name</b></label>
-                <input id="DisName" type="text" placeholder="Name" name="boothname">
-                <label for="text"><b>Overview</b></label>
-                <input id="Description" type="text" placeholder="This booth is...." name="boothdesc">
-                <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title" name="boothname"></input>
-                <button type="button" class="btn cancel" onclick="Close('CreateForm')">Close</button>
-            </form>
-        </div>
-        <div class="form-popup" id="EditForm">
-            <canvas id="qr-code2"></canvas>
-            <form class="form-container">
-                <h1>Edit Booth Information</h1>
-                <label for="text"><b>Booth Name</b></label>
-                <input id="EditName" type="text" placeholder="New Name">
-                <label for="text"><b>Overview</b></label>
-                <input id="EditDis" type="text" placeholder="New Discription">
-                <button type="button" class="btn" onclick="ApplyEditBoothInfo()">Add Booth</button>
-                <button type="button" class="btn cancel" onclick="Close('EditForm')">Close</button>
-            </form>
-        </div>
-        </div>
-
-        <div id="MenuContainer">
-            <div>
-                <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src="\static\Icons\toilet.png" width="50"
+            <button class="open-button" onclick="Change(1)">Booth<img src="/static/Icons/pin.png" width="50"
           length="50"></button>
-            </div>
-
-            <div>
-                <button class="open-button" onclick="Change(1)">Booth<img src="/static/Icons/pin.png" width="50"
-          length="50"></button>
-            </div>
-            <div>
-                <button class="open-button" onclick="Change(3)">Info<img src="/static/Icons/info.png" width="50"
-          length="50"></button>
-            </div>
-            <div>
-                <button class="open-button" onclick="Change(4)">Edit/Delete<img src="/static/Icons/Eraser.png" width="50"
-          length="50"></button>
-            </div>
-            <div>
-                <button class="open-button" onclick="Change(5)">Route<img src="/static/Icons/route.png" width="50"
-          length="50"></button>
-            </div>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+        <div>
+            <button class="open-button" onclick="Change(3)">Info<img src="/static/Icons/info.png" width="50"
+          length="50"></button>
+        </div>
+        <div>
+            <button class="open-button" onclick="Change(4)">Edit/Delete<img src="/static/Icons/Eraser.png" width="50"
+          length="50"></button>
+        </div>
+        <div>
+            <button class="open-button" onclick="Change(5)">Route<img src="/static/Icons/route.png" width="50"
+          length="50"></button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
-        <script>
-        </script>
-        <script src="/static/Javascript/CreateObj.js" async></script>
-        <script type=text/javascript src="{{url_for('static', filename='Javascript/index.js')}}" async></script>
-        <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}" async></script>
+    <script>
+    </script>
+     <script src="/static/Javascript/CreateObj.js"></script>
+        <script type=text/javascript src="/static/Javascript/index.js"></script>
+        <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}"></script>
 
-        <script async>
+        <script type="text/javascript">
+
+            var arr_object = [];
+            console.log(arr_object);
             var user = '{{username}}'
             var pid = '{{pid}}'
-            /*
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("GET", `/org/${user}/project/${pid}/json`, true);
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    // Typical action to be performed when the document is ready:
-                    // document.getElementById("demo").innerHTML = xhttp.responseText;
-                    // console.log(xhttp.responseText)
-                    arr_object = JSON.parse(xhttp.responseText)
-                        // console.log(JSON.parse(arr_object))
-                    arr_object = initObject(arr_object['object'])
-
-                    console.log(arr_object)
-                    animate()
-                        // animate(JSON.parse(arr_object))
-                        // animation(xhttp.responseText)
-                        // console.log(xhttp.responseText)
-                }
-            };
-            xhttp.send();*/
+            
 
             var qr;
             var qr2;
@@ -162,6 +144,7 @@
                 });
 
                 doRenderTemp();
+                
             })();
 
             function generateQRCode() {
@@ -182,18 +165,18 @@
             }
 
             function refreshServer() {
-                $.getJSON("./ProjectContainer/{{pid}}/Data/mapdata.json", function(data) {
-                    savedContent = data;
+                // $.getJSON("/org/{{username}}/project/{{pid}}/json", function(data) {
+                //     savedContent = data;
 
-                    // Put the object into storage
-                    if (localStorage.getItem('mapObject') != null) {
-                        localStorage.setItem('mapsObject', JSON.stringify(savedContent));
-                        renderData(data);
-                    }
+                //     // Put the object into storage
+                //     if (localStorage.getItem('mapObject') != null) {
+                //         localStorage.setItem('mapsObject', JSON.stringify(savedContent));
+                //         renderData(data);
+                //     }
 
-                }).fail(function() {
-                    console.log("An error has occurred.");
-                });
+                // }).fail(function() {
+                //     console.log("An error has occurred.");
+                // });
             }
 
             function clearMap() {
@@ -210,61 +193,36 @@
             }
 
             function renderData(data) {
+                    var OldX;
+                    var OldY;
+                    data.forEach((el, index) => {
+                        
+                        if (el.hasOwnProperty("type")){
+                            console.log(el.type)
+                            arr_object.push({x:el.x,y:el.y, "type": "line"}); 
+                        }
+                    })
+                
 
+                    data.forEach(function(el,i) {
+                        if (el.hasOwnProperty("src") && (el.src == "/static/Icons/pin.png" || el.src == "../../../static/Icons/pin.png")){
+                            arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/pin.png", el.title))
+                        }
+                    });
 
+                    data.forEach(function(el,i) {
+                        if (el.hasOwnProperty("src") && (el.src == "/static/Icons/info.png" || el.src == "../../../static/Icons/info.png")){
+                            arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/info.png", el.title))
+                        }
+                    });
 
+                    data.forEach(function(el,i) {
+                        if (el.hasOwnProperty("src") && (el.src == "/static/Icons/toilet.png" || el.src == "../../../static/Icons/toilet.png" )){
+                            arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/toilet.png", el.title))
+                        }
+                    });
 
-
-
-
-                //     var OldX;
-                //     var OldY;
-                //     data.forEach((BoothIcon, index) => {
-                //         if (BoothIcon["type"] != 'line'){
-                //             BoothIcon.Update()
-                //         } else {
-                //             ctx.beginPath();
-                //             ctx.lineWidth = 5;
-                //             ctx.lineCap = "round";
-                //             ctx.moveTo(OldX, OldY);
-                //             ctx.lineTo(BoothIcon.x, BoothIcon.y);
-                //             ctx.strokeStyle = "#FF0000";
-                //             ctx.stroke();
-                //             OldX = BoothIcon.x;
-                //             OldY = BoothIcon.y;
-                //         }
-                //     })
-                // }
-
-                //     if(Array.isArray(data[0].arr_object)) {
-                //     data[0].arr_object.forEach(function(el,i) {
-                //         arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "./static/Icons/pin.png", el.title))
-                //     });
-                //     }
-
-                //     if(Array.isArray(data[0].arr_object)){
-                //     data[0].arr_object.forEach(function(el,i) {
-                //         arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "./static/Icons/info.png", "Info"))
-                //     });
-                //     }
-
-                //     if(Array.isArray(data[0].arr_object)){
-                //     data[0].arr_object.forEach(function(el,i) {
-                //         arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "./static/Icons/toilet.png", "Toilet"))
-                //     });
-                //     }
-
-                //     if(Array.isArray(data[0].arr_object)){
-                //         data[0].arr_object.forEach(function(el,i) {
-                //             console.log(el);
-                //             MPos.x = el.x;
-                //             MPos.y = el.y;
-
-                //         arr_object.push({x:MPos.x,y:MPos.y}); 
-
-                //     });
-                //     }
-
+                    
             } // load data
 
             function readTemp() {
