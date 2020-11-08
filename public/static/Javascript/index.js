@@ -229,10 +229,10 @@ function initObject(arr) {
 }
 
 document.getElementById("sent").addEventListener("click", function(event) {
-    var user = '{{username}}'
-    var pid = '{{pid}}'
+    //var user = '{{username}}'
+    //var pid = '{{pid}}'
     xmlObj = new XMLHttpRequest();
-    xmlObj.open("POST", "http://localhost:5000/org/" + user + "/project/" + pid, true);
+    xmlObj.open("POST", "http://localhost:5000/org/" + user + "/project/" + pid + "/save", true);
     xmlObj.setRequestHeader("Content-Type", "application/json");
     var data = JSON.stringify({ "object": arr_object });
     xmlObj.send(data);
