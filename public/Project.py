@@ -15,10 +15,6 @@ import json
 
 UN = "Rew"
 
-def AudenticateUser(UN):
-    Ans = CheckDB(UN)
-    return Ans
-
 def CheckDB(UN):
     Data = pd.read_csv("./static/Data/ProjectID.csv", error_bad_lines=False)
     Data.info()
@@ -43,12 +39,12 @@ def CheckMetadata(AID):
 
 def GenProject(U, Pname):
     Fn = GenID()
-    append_list_as_row("./static/Data/ProjectID.csv", Fn, U, Pname)
+    AddIdToCSV("./static/Data/ProjectID.csv", Fn, U, Pname)
     CreateFolder(Fn, U, Pname)
 
-def append_list_as_row(file_name, list_of_elem, U,Pname):
-    WD = U + "," + list_of_elem + "," + Pname
-    with open(file_name, 'a+') as write_obj:
+def AddIdToCSV(Fname, PID, U,Pname):
+    WD = U + "," + PID + "," + Pname
+    with open(Fname, 'a+') as write_obj:
         csv_writer = writer(write_obj, delimiter=' ', quoting=csv.QUOTE_MINIMAL, dialect='excel')
         write_obj.write(WD)
         csv_writer.writerow([])
@@ -145,8 +141,7 @@ def ChangeName(New,ID):
         writer = csv.writer(writeFile)
         writer.writerows(lines)
         
-CheckDB(UN)
-
+# CheckDB(UN)
 # ChangeName("Test2","AW6Dj0")
 # GenProject(UN,"helloworld")
 # DeleteProject("ABDj2G")
