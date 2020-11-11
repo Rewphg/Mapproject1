@@ -4,6 +4,7 @@ from werkzeug.datastructures import native_itermethods
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import Project as CH
+import User as U
 import logging
 import os
 from os import name, path
@@ -42,10 +43,19 @@ def home():
 
 @app.route("/user/", methods=["GET", "POST"])
 def userpage():
-    if request.method=="GET":
-        RoomId = request.form[""]
-
+    if request.method=="POST":
+        RoomId = request.form["EventID"]
+        if U.CheckProjectId(RoomId) == True:
+            return redirect("/user/Homepage/{}".format(RoomId))
+        else:
+            return "Invalid room id or Room is not public"
     return render_template("/user.html")
+
+@app.route("/user/Homepage/<ProjectID>")
+def Homepage(ProjectID):
+    Roomname = U.GetProjectName(ProjectID)
+    # JsonObject = ReadMapData(ProjectID)
+    return render_template("Userpage.html", RoomName=Roomname)
 
 @app.route("/signup/", methods=["GET","POST"])
 def singuppage():
@@ -71,13 +81,6 @@ def singuppage():
 @app.route("/custom/")
 def editorpage():
     return render_template("custom.html")
-
-# @app.route('/create/open/<ID>')
-# def OpenProject(ID):
-#     app.logger.info("Redirect to ", ID)
-#     return "Project: "+ID
-
-# @app.route('/create/rename/<ID>')
 
 @app.route("/org/<name>/project", methods=["GET", "POST"])
 def ProjectPage(name):
@@ -144,7 +147,7 @@ def  MapEditerPage(name, PID):
         filepath = os.path.join("ProjectContainer",PID,"Data","mapdata.json")
         with open(filepath, 'w') as f:
             json.dump(save, f)
-            return 'created', 201
+            return redirect("/org/{}/project".format(session["user"]))
 
 @app.route("/org/<name>/project/<PID>/json", methods=["GET","POST"])
 def getJson(name,PID):

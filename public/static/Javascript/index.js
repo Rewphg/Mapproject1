@@ -52,7 +52,7 @@ function animate() {
     var OldY;
     arr_object.forEach((BoothIcon, index) => {
         if (BoothIcon.hasOwnProperty("type")) {
-            
+
             ctx.beginPath();
             ctx.lineWidth = 5;
             ctx.lineCap = "round";
@@ -70,7 +70,7 @@ function animate() {
             BoothIcons.splice(BoothIcon, 1)
         }*/
     });
-      
+
 } // .End animate
 
 function startRoute(e) {
@@ -181,12 +181,12 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         if (mode == 2) {
             // object.toilet.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
             arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
-            //console.log(arr_object);
+                //console.log(arr_object);
         }
 
         if (mode == 3) {
             arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/info.png", "Info"))
-            //console.log(arr_object);
+                //console.log(arr_object);
         }
 
         if (mode == 5) {

@@ -23,16 +23,15 @@
 </style>
 
 <body>
-    <div style="display:none;">
 
-<form action="#" method="POST"></form>
+    <form action="#" method="POST"></form>
     <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
     <button id="clickbutton" onclick="toCanvas()">Display</button>
     <img id="display" hidden>
     </form>
-    <h3>QR Code Generator</h3>
+    <!-- <h3>QR Code Generator</h3> -->
 
-    <form action="#" method="POST">
+    <!-- <form action="#" method="POST">
         <div>
             <input id="qr-text" type="text" placeholder="Type message QR Code..." / name="qrcode"></div>
         <br />
@@ -40,16 +39,13 @@
             <button class="qr-btn" onclick="generateQRCode()">create QR Code</button>
         </div>
     </form>
-    </div>
-    
+    </div> -->
 
-    <form action="#" method="post" role="form">
-        <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
-    </form>
+    <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
 
     <div>
-
-        <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
+        <!-- 
+        <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button> -->
         <button id="save_temp" onclick="saveTemp();">Save Draft</button>
 
         <button id="clear_map" onclick="clearMap();">Clear Map</button>
@@ -113,144 +109,147 @@
 
     <script>
     </script>
-     <script src="/static/Javascript/CreateObj.js"></script>
-        <script type=text/javascript src="/static/Javascript/index.js"></script>
-        <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}"></script>
+    <script src="/static/Javascript/CreateObj.js"></script>
+    <script type=text/javascript src="/static/Javascript/index.js"></script>
+    <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}"></script>
 
-        <script type="text/javascript">
+    <script type="text/javascript">
+        var arr_object = [];
+        console.log(arr_object);
+        var user = '{{username}}'
+        var pid = '{{pid}}'
 
-            var arr_object = [];
-            console.log(arr_object);
-            var user = '{{username}}'
-            var pid = '{{pid}}'
-            
 
-            var qr;
-            var qr2;
+        var qr;
+        var qr2;
 
-            var savedContent = new Object();
+        var savedContent = new Object();
 
-            (function() {
-                qr = new QRious({
-                    element: document.getElementById('qr-code'), // canvas object
-                    size: 100, // size image qr code
-                    value: 'Event Me!!!' // value default text
-                });
+        (function() {
+            qr = new QRious({
+                element: document.getElementById('qr-code'), // canvas object
+                size: 100, // size image qr code
+                value: 'Event Me!!!' // value default text
+            });
 
-                qr2 = new QRious({
-                    element: document.getElementById('qr-code2'), // canvas object
-                    size: 100, // size image qr code
-                    value: 'Event Me!!!' // value default text
-                });
+            qr2 = new QRious({
+                element: document.getElementById('qr-code2'), // canvas object
+                size: 100, // size image qr code
+                value: 'Event Me!!!' // value default text
+            });
 
-                doRenderTemp();
-                
-            })();
+            doRenderTemp();
 
-            function generateQRCode() {
-                var qrtext = document.getElementById("qr-text").value; // value  text from text box
-                //document.getElementById("qr-result").innerHTML = "QR code for " + qrtext +":"; // get element p object to assign text
-                //alert(qrtext); 
-                qr.set({
-                    foreground: 'black', //  setup background color of qr code.
-                    size: 100, // size image qr code
-                    value: qrtext // set text for qr
-                });
+        })();
 
-                qr2.set({
-                    foreground: 'black', //  setup background color of qr code.
-                    size: 100, // size image qr code
-                    value: qrtext // set text for qr
-                });
-            }
+        function generateQRCode() {
+            var qrtext = document.getElementById("qr-text").value; // value  text from text box
+            //document.getElementById("qr-result").innerHTML = "QR code for " + qrtext +":"; // get element p object to assign text
+            //alert(qrtext); 
+            qr.set({
+                foreground: 'black', //  setup background color of qr code.
+                size: 100, // size image qr code
+                value: qrtext // set text for qr
+            });
 
-            function refreshServer() {
-                // $.getJSON("/org/{{username}}/project/{{pid}}/json", function(data) {
-                //     savedContent = data;
+            qr2.set({
+                foreground: 'black', //  setup background color of qr code.
+                size: 100, // size image qr code
+                value: qrtext // set text for qr
+            });
+        }
 
-                //     // Put the object into storage
-                //     if (localStorage.getItem('mapObject') != null) {
-                //         localStorage.setItem('mapsObject', JSON.stringify(savedContent));
-                //         renderData(data);
-                //     }
+        function refreshServer() {
+            // $.getJSON("/org/{{username}}/project/{{pid}}/json", function(data) {
+            //     savedContent = data;
 
-                // }).fail(function() {
-                //     console.log("An error has occurred.");
-                // });
-            }
+            //     // Put the object into storage
+            //     if (localStorage.getItem('mapObject') != null) {
+            //         localStorage.setItem('mapsObject', JSON.stringify(savedContent));
+            //         renderData(data);
+            //     }
 
-            function clearMap() {
-                arr_object = [];
-                saveTemp();
-                doRenderTemp()
-            }
+            // }).fail(function() {
+            //     console.log("An error has occurred.");
+            // });
+        }
 
-            function saveTemp() {
-                // Put the object into storage
-                var tempData = arr_object
+        function clearMap() {
+            arr_object = [];
+            saveTemp();
+            doRenderTemp()
+        }
 
-                localStorage.setItem('mapsObject', JSON.stringify(tempData));
-            }
+        function saveTemp() {
+            // Put the object into storage
+            var tempData = arr_object
 
-            function renderData(data) {
-                    var OldX;
-                    var OldY;
-                    data.forEach((el, index) => {
-                        
-                        if (el.hasOwnProperty("type")){
-                            console.log(el.type)
-                            arr_object.push({x:el.x,y:el.y, "type": "line"}); 
-                        }
-                    })
-                
+            localStorage.setItem('mapsObject', JSON.stringify(tempData));
+        }
 
-                    data.forEach(function(el,i) {
-                        if (el.hasOwnProperty("src") && (el.src == "/static/Icons/pin.png" || el.src == "../../../static/Icons/pin.png")){
-                            arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/pin.png", el.title))
-                        }
+        function renderData(data) {
+            var OldX;
+            var OldY;
+            data.forEach((el, index) => {
+
+                if (el.hasOwnProperty("type")) {
+                    console.log(el.type)
+                    arr_object.push({
+                        x: el.x,
+                        y: el.y,
+                        "type": "line"
                     });
-
-                    data.forEach(function(el,i) {
-                        if (el.hasOwnProperty("src") && (el.src == "/static/Icons/info.png" || el.src == "../../../static/Icons/info.png")){
-                            arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/info.png", el.title))
-                        }
-                    });
-
-                    data.forEach(function(el,i) {
-                        if (el.hasOwnProperty("src") && (el.src == "/static/Icons/toilet.png" || el.src == "../../../static/Icons/toilet.png" )){
-                            arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/toilet.png", el.title))
-                        }
-                    });
-
-                    
-            } // load data
-
-            function readTemp() {
-                // Retrieve the object from storage
-
-                var retrievedObject = JSON.parse(localStorage.getItem('mapsObject')); //JSON.stringify());
-                if (retrievedObject != null && retrievedObject.length > 0) {
-                    return retrievedObject;
                 }
-                return [];
+            })
 
+
+            data.forEach(function(el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/pin.png" || el.src == "../../../static/Icons/pin.png")) {
+                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/pin.png", el.title))
+                }
+            });
+
+            data.forEach(function(el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/info.png" || el.src == "../../../static/Icons/info.png")) {
+                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/info.png", el.title))
+                }
+            });
+
+            data.forEach(function(el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/toilet.png" || el.src == "../../../static/Icons/toilet.png")) {
+                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/toilet.png", el.title))
+                }
+            });
+
+
+        } // load data
+
+        function readTemp() {
+            // Retrieve the object from storage
+
+            var retrievedObject = JSON.parse(localStorage.getItem('mapsObject')); //JSON.stringify());
+            if (retrievedObject != null && retrievedObject.length > 0) {
+                return retrievedObject;
             }
+            return [];
 
-            function doRenderTemp() {
-                renderData(readTemp());
-            }
+        }
 
-            function saveImageAndDownload() {
-                let downloadLink = document.createElement('a');
-                downloadLink.setAttribute('download', 'CanvasAsImage.png');
-                let canvas = document.getElementById('canvas');
-                let dataURL = canvas.toDataURL('image/png');
-                let url = dataURL.replace(/^data:image\/png/, 'data:application/octet-stream');
-                downloadLink.setAttribute('href', url);
-                downloadLink.click();
+        function doRenderTemp() {
+            renderData(readTemp());
+        }
 
-            }
+        function saveImageAndDownload() {
+            let downloadLink = document.createElement('a');
+            downloadLink.setAttribute('download', 'CanvasAsImage.png');
+            let canvas = document.getElementById('canvas');
+            let dataURL = canvas.toDataURL('image/png');
+            let url = dataURL.replace(/^data:image\/png/, 'data:application/octet-stream');
+            downloadLink.setAttribute('href', url);
+            downloadLink.click();
 
-            //setInterval(saveTemp,15000);
-        </script>
+        }
+
+        //setInterval(saveTemp,15000);
+    </script>
 </body>

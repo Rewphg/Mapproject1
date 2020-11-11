@@ -10,8 +10,8 @@ function preview(input) {
     reader.readAsDataURL(input.files[0]);
 }
 
-
 function toCanvas() {
     var image = document.getElementById("display").getAttribute("src");
+    var Thisimage = document.querySelector("")
     showcanvas.style.backgroundImage = "url(" + image + ")"
 }
