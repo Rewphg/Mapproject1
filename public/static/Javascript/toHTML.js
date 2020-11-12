@@ -26,7 +26,6 @@
 //                 "x":"100.0",
 //                 "y":"325.0"
 //             },
-    
 //             {
 //                 "x":"12.0",
 //                 "y":"212.0"
@@ -35,6 +34,10 @@
 //         maptemplate:"https://yt3.ggpht.com/a/AATXAJywokR9YldORmSqcR0rgcqeH94IYEM9fNP2-SmHpA=s900-c-k-c0x00ffffff-no-rj"
 //     }
 // ]
+
+// const { pid } = require("process");
+
+// const { pid } = require("process");
 
 // //Real zone
 // document.getElementById("app").innerHTML = `
@@ -48,13 +51,27 @@
 // }).join("")}
 // `
 
-var xmlhttp = new XMLHttpRequest();
+var canvas = document.getElementById("canvas")
+var ctx = canvas.getContext("2d");
 
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var data = JSON.parse(this.responseText);
-            document.getElementById("canvas").innerHTML = data.name;
-            xmlhttp.open("GET", "http://localhost:5000/testing/" + pid + "/load", true);
-            xmlhttp.send();
+var pid = "GnRrzG"
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.open("GET", "http://localhost:5000/user/" + pid + "/load", true);
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+xmlhttp.send();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        //console.log(data)
+        ctx.beginPath();
+        for (var i in data) {
+            ctx.lineTo(data.object[i], data.object[i])
         }
+        ctx.closePath();
+        ctx.fillStyle="#ffca05";
+        ctx.strokeStyle="#ffca05"
+        ctx.fill()
+        ctx.stroke();
+        console.log(data.object)
     }
+}
