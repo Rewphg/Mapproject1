@@ -3,11 +3,11 @@
     <title>
         EventMe
     </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <body>
-        <div id="app">
-            <canvas id="canvas"></canvas>
-        </div>
+        <form method="GET" action="#">
+            <canvas id="canvas" height="1000px" width="1000px"></canvas>
+        </form>
     </body>
-    <script type="text/javascript" src="{{url_for('static', filename='Data/mapdata.json')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='Javascript/toHTML.js')}}"></script>
 </html>

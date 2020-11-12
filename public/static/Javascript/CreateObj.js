@@ -56,7 +56,10 @@ function CheckCollition(X, Y, rect2) {
         X > rect2.x - rect2.width / 2 &&
         Y < rect2.y + rect2.height / 2 &&
         Y > rect2.y - rect2.height / 2) {
-        return true
+            current_booth = rect2;
+        return true;
+    }else{
+        return false;
     }
 }
 
