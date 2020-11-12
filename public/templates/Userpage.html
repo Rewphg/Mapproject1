@@ -23,16 +23,24 @@
     <title>Welcome to {{RoomName}}</title>
 </head>
 
-<body>
+<center>
     <div id="SearchBox">
         <input type="text" id="current" placeholder="Your location">
         <p1> to </p1>
         <input type="text" id="destination" placeholder="Your Destination">
+        <button class="Dbtn">Direct</button>
     </div>
+</center>
+
+<body>
     <canvas id="Canvas" width="200" height="400"></canvas>
-    <div>
-        <span id="minus">-Zoom Out</span>&nbsp;&nbsp;<span id="plus">+Zoom In</span>
-    </div>
+    <script type="text/javascript" src="/static/Javascript/RenderData.js"></script>
 </body>
+<center>
+    <div class="ActionBar">
+        <button class="btn" id="ZoomIn" style="margin-left: 5px;" style="margin-right: 5px;">+</button>
+        <button class="btn" id="ZoomOut" style="margin-left: 5px;" style="margin-right: 5 px;">-</button>
+    </div>
+</center>
 
 </html>

@@ -1,6 +1,6 @@
-var canvas = document.getElementsByTagName('canvas');
-canvas.width = 800;
-canvas.height = 600;
+var canvas = document.getElementsByTagName('canvas')[0];
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight - 130;
 
 var gkhead = new Image;
 
@@ -21,7 +21,7 @@ window.onload = function() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.restore();
 
-        ctx.drawImage("/static/Icons/info.png", 0, 0);
+        ctx.drawImage(gkhead, 0, 0);
 
     }
     redraw();
@@ -52,7 +52,7 @@ window.onload = function() {
 
     canvas.addEventListener('mouseup', function(evt) {
         dragStart = null;
-        if (!dragged) zoom(evt.shiftKey ? -1 : 1);
+        // if (!dragged) zoom(evt.shiftKey ? -1 : 1);
     }, false);
 
     var scaleFactor = 1.1;
@@ -66,17 +66,24 @@ window.onload = function() {
         redraw();
     }
 
-    var handleScroll = function(evt) {
-        var delta = evt.wheelDelta ? evt.wheelDelta / 40 : evt.detail ? -evt.detail : 0;
-        if (delta) zoom(delta);
-        return evt.preventDefault() && false;
-    };
+    document.getElementById("ZoomIn").addEventListener("click", (event) => {
+        zoom(event ? 1 : -1)
+    })
+    document.getElementById("ZoomOut").addEventListener("click", (event) => {
+        zoom(event ? -1 : 1)
+    })
 
-    canvas.addEventListener('DOMMouseScroll', handleScroll, false);
-    canvas.addEventListener('mousewheel', handleScroll, false);
+    // var handleScroll = function(evt) {
+    //     var delta = evt.wheelDelta ? evt.wheelDelta / 40 : evt.detail ? -evt.detail : 0;
+    //     if (delta) zoom(delta);
+    //     return evt.preventDefault() && false;
+    // };
+
+    // canvas.addEventListener('DOMMouseScroll', handleScroll, false);
+    // canvas.addEventListener('mousewheel', handleScroll, false);
 };
 
-gkhead.src = 'http://phrogz.net/tmp/gkhead.jpg';
+gkhead.src = '/static/Icons/route.png';
 
 // Adds ctx.getTransform() - returns an SVGMatrix
 // Adds ctx.transformedPoint(x,y) - returns an SVGPoint
@@ -147,3 +154,6 @@ function trackTransforms(ctx) {
         return pt.matrixTransform(xform.inverse());
     }
 }
+
+
+//referecne https://codepen.io/techslides/details/zowLd
