@@ -52,13 +52,12 @@ function animate() {
     var OldY;
     arr_object.forEach((BoothIcon, index) => {
         if (BoothIcon.hasOwnProperty("type")) {
-            
             ctx.beginPath();
             ctx.lineWidth = 5;
             ctx.lineCap = "round";
             ctx.moveTo(OldX, OldY);
             ctx.lineTo(BoothIcon.x, BoothIcon.y);
-            ctx.strokeStyle = "#FF0000";
+            ctx.strokeStyle = '#FF0000'
             ctx.stroke();
             OldX = BoothIcon.x;
             OldY = BoothIcon.y;
@@ -91,7 +90,6 @@ function draw(e) {
     ctx.lineTo(e.clientX, e.clientY);
     ctx.strokeStyle = "#FF0000";
     ctx.stroke();
-
 }
 
 canvas.addEventListener("mousedown", startRoute);
@@ -110,16 +108,18 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     var border = document.getElementById("canvas").getBoundingClientRect();
     MPos.x = event.clientX - border.left - 25
     MPos.y = event.clientY - border.top - 25
-
+    mode = 7
+    console.log(MPos.x, MPos.y)
     if (mode == 7) {
 
         arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 //BoothIcons.splice(index, 1)
-                OpenEdit(object.booth[index])
+                //OpenEdit(arr_object[index])
+                document.getElementById("info").style = "display: block";
                 EditIndex = index
 
-                qr2.set({
+                qr.set({
                     foreground: 'black', //  setup background color of qr code.
                     size: 100, // size image qr code
                     value: arr_object[index].title + "," + arr_object[index].dis + "," + arr_object[index].x + "," + arr_object[index].y // set text for qr
@@ -130,22 +130,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     }
 
     if (mode == 4) {
-        object.booth.forEach((A, index) => {
-            if (CheckCollition(MPos.x, MPos.y, A) == true) {
-                object.booth.splice(index, 1)
-                /*OpenEdit(BoothIcons[index])
-                //EditIndex = index
-
-                qr2.set({
-                    foreground: 'black', //  setup background color of qr code.
-                    size: 100, // size image qr code
-                    value: BoothIcons[index].title + "," + BoothIcons[index].dis + "," + BoothIcons[index].x + "," + BoothIcons[index].y   // set text for qr
-                });
-                */
-            }
-        });
-
-        object.booth.forEach((A, index) => {
+        arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 arr_object.splice(index, 1)
                     /*OpenEdit(BoothIcons[index])
@@ -168,18 +153,18 @@ document.getElementById("canvas").addEventListener("click", (event) => {
                 qr2.set({
                     foreground: 'black', //  setup background color of qr code.
                     size: 100, // size image qr code
-                    value: object.booth[index].title // set text for qr
+                    value: arr_object[index].title // set text for qr
                 });
             }
         });
-        object.toilet.forEach((B, index) => {
+        arr_object.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                object.toilet.splice(index, 1)
+                arr_object.splice(index, 1)
             }
         });
-        object.info.forEach((B, index) => {
+        arr_object.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                object.info.splice(index, 1)
+                arr_object.splice(index, 1)
             }
         });
     }
@@ -190,7 +175,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
             ConX = event.clientX - border.left - 25
             ConY = event.clientY - border.top - 25
             var index = 1
-            ShowMyForm(object, index)
+            ShowMyForm(arr_object, index)
         }
 
         if (mode == 2) {
