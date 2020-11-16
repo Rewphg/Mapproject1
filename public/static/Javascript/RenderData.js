@@ -8,14 +8,13 @@ Background.src = "/static/Icons/Background.png"
 var Pin = []
 Pin.push(new BoothClass(20, 2000, 50, 50, "/static/Icons/toilet.png", "Toilet", "toilet", "Booth"))
 Pin.push(new BoothClass(30, 50, 50, 50, "/static/Icons/toilet.png", "Toilet", "toilet", "Booth"))
+
 window.onload = function() {
 
     var ctx = canvas.getContext('2d');
     trackTransforms(ctx);
 
     function redraw() {
-
-        // Clear the entire canvas
         var p1 = ctx.transformedPoint(0, 0);
         var p2 = ctx.transformedPoint(canvas.width, canvas.height);
         ctx.clearRect(p1.x, p1.y, p2.x - p1.x, p2.y - p1.y);
@@ -30,7 +29,6 @@ window.onload = function() {
         Pin.forEach((Icons) => {
             Icons.Update()
         })
-
     }
     redraw();
 

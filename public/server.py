@@ -54,8 +54,10 @@ def userpage():
 @app.route("/user/Homepage/<ProjectID>")
 def Homepage(ProjectID):
     Roomname = U.GetProjectName(ProjectID)
-    # JsonObject = ReadMapData(ProjectID)
-    return render_template("Userpage.html", RoomName=Roomname)
+    BN = 5
+    BoothName = ["Booth 1", "Booth2", "Booth3", "Booth4", "Booth5"]
+    Info = ["Booth 1", "Booth2", "Booth3", "Booth4", "Booth5"]
+    return render_template("Userpage.html", RoomName=Roomname, BN=BN,BoothName = BoothName, info=Info)
 
 @app.route("/signup/", methods=["GET","POST"])
 def singuppage():
