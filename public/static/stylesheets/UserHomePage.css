@@ -7,6 +7,12 @@
     text-align: center;
 }
 
+.Discription {
+    width: 200px;
+    height: 600px;
+    position: fixed;
+}
+
 .box {
     position: absolute;
     left: 50%;

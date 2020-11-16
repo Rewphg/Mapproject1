@@ -55,6 +55,8 @@ function animate() {
             
             ctx.setLineDash([5, 15]);
             ctx.beginPath();
+            if(BoothIcon.type == "line"){
+                ctx.beginPath();
             ctx.lineWidth = 5;
             ctx.lineCap = "round";
             ctx.moveTo(OldX, OldY);
@@ -63,9 +65,19 @@ function animate() {
             ctx.stroke();
             OldX = BoothIcon.x;
             OldY = BoothIcon.y;
+            }
+
+            if(BoothIcon.type=="background") {
+                var B = new Image();
+                B.width = canvas.width;
+                B.height = canvas.height;
+                B.src = BoothIcon.filename;
+                ctx.drawImage(B, 0, 0, canvas.width, canvas.height);
+            }
+            
         } else {
             //console.log(arr_object);
-            BoothIcon.Update()
+            BoothIcon.Update();
         }
         /*if (CheckCollitionImg(BoothIcon, Eraser) == true) {
             BoothIcons.splice(BoothIcon, 1)
@@ -117,7 +129,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 //BoothIcons.splice(index, 1)
-                OpenEdit(object.booth[index])
+                OpenEdit(arr_object[index])
                 EditIndex = index
 
                 qr2.set({
@@ -131,9 +143,9 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     }
 
     if (mode == 4) {
-        object.booth.forEach((A, index) => {
+        arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
-                object.booth.splice(index, 1)
+                arr_object.splice(index, 1)
                 /*OpenEdit(BoothIcons[index])
                 //EditIndex = index
 
@@ -146,7 +158,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
             }
         });
 
-        object.booth.forEach((A, index) => {
+        arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 arr_object.splice(index, 1)
                     /*OpenEdit(BoothIcons[index])
@@ -173,14 +185,14 @@ document.getElementById("canvas").addEventListener("click", (event) => {
                 });
             }
         });
-        object.toilet.forEach((B, index) => {
+        arr_object.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                object.toilet.splice(index, 1)
+                arr_object.splice(index, 1)
             }
         });
-        object.info.forEach((B, index) => {
+        arr_object.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                object.info.splice(index, 1)
+                arr_object.splice(index, 1)
             }
         });
     }
@@ -191,7 +203,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
             ConX = event.clientX - border.left - 25
             ConY = event.clientY - border.top - 25
             var index = 1
-            ShowMyForm(object, index)
+            ShowMyForm(arr_object, index)
         }
 
         if (mode == 2) {
