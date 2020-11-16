@@ -116,7 +116,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 //BoothIcons.splice(index, 1)
-                OpenEdit(arr_object[index])
+                OpenEdit(object.booth[index])
                 EditIndex = index
 
                 qr2.set({
@@ -130,7 +130,22 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     }
 
     if (mode == 4) {
-        arr_object.forEach((A, index) => {
+        object.booth.forEach((A, index) => {
+            if (CheckCollition(MPos.x, MPos.y, A) == true) {
+                object.booth.splice(index, 1)
+                /*OpenEdit(BoothIcons[index])
+                //EditIndex = index
+
+                qr2.set({
+                    foreground: 'black', //  setup background color of qr code.
+                    size: 100, // size image qr code
+                    value: BoothIcons[index].title + "," + BoothIcons[index].dis + "," + BoothIcons[index].x + "," + BoothIcons[index].y   // set text for qr
+                });
+                */
+            }
+        });
+
+        object.booth.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 arr_object.splice(index, 1)
                     /*OpenEdit(BoothIcons[index])
@@ -153,18 +168,18 @@ document.getElementById("canvas").addEventListener("click", (event) => {
                 qr2.set({
                     foreground: 'black', //  setup background color of qr code.
                     size: 100, // size image qr code
-                    value: arr_object[index].title // set text for qr
+                    value: object.booth[index].title // set text for qr
                 });
             }
         });
-        arr_object.forEach((B, index) => {
+        object.toilet.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                arr_object.splice(index, 1)
+                object.toilet.splice(index, 1)
             }
         });
-        arr_object.forEach((B, index) => {
+        object.info.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                arr_object.splice(index, 1)
+                object.info.splice(index, 1)
             }
         });
     }
@@ -175,7 +190,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
             ConX = event.clientX - border.left - 25
             ConY = event.clientY - border.top - 25
             var index = 1
-            ShowMyForm(arr_object, index)
+            ShowMyForm(object, index)
         }
 
         if (mode == 2) {

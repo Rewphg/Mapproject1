@@ -1,9 +1,13 @@
-var canvas = document.getElementsByTagName('canvas');
-canvas.width = 800;
-canvas.height = 600;
+var canvas = document.getElementsByTagName('canvas')[0];
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight - 140;
 
-var gkhead = new Image;
+var Background = new Image()
+Background.src = "/static/Icons/Background.png"
 
+var Pin = []
+Pin.push(new BoothClass(20, 2000, 50, 50, "/static/Icons/toilet.png", "Toilet", "toilet", "Booth"))
+Pin.push(new BoothClass(30, 50, 50, 50, "/static/Icons/toilet.png", "Toilet", "toilet", "Booth"))
 window.onload = function() {
 
     var ctx = canvas.getContext('2d');
@@ -21,7 +25,11 @@ window.onload = function() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.restore();
 
-        ctx.drawImage("/static/Icons/info.png", 0, 0);
+        ctx.drawImage(Background, 0, 0)
+
+        Pin.forEach((Icons) => {
+            Icons.Update()
+        })
 
     }
     redraw();
@@ -52,7 +60,12 @@ window.onload = function() {
 
     canvas.addEventListener('mouseup', function(evt) {
         dragStart = null;
-        if (!dragged) zoom(evt.shiftKey ? -1 : 1);
+        // if (!dragged) zoom(evt.shiftKey ? -1 : 1);
+        if (!dragged) Pin.forEach((item) => {
+            if (CheckCollition(evt.clientX, evt.clientX, item) == true) {
+                console.log("Hit")
+            }
+        })
     }, false);
 
     var scaleFactor = 1.1;
@@ -66,20 +79,14 @@ window.onload = function() {
         redraw();
     }
 
-    var handleScroll = function(evt) {
-        var delta = evt.wheelDelta ? evt.wheelDelta / 40 : evt.detail ? -evt.detail : 0;
-        if (delta) zoom(delta);
-        return evt.preventDefault() && false;
-    };
-
-    canvas.addEventListener('DOMMouseScroll', handleScroll, false);
-    canvas.addEventListener('mousewheel', handleScroll, false);
+    document.getElementById("ZoomIn").addEventListener("click", (event) => {
+        zoom(event ? 1 : -1)
+    })
+    document.getElementById("ZoomOut").addEventListener("click", (event) => {
+        zoom(event ? -1 : 1)
+    })
 };
 
-gkhead.src = 'http://phrogz.net/tmp/gkhead.jpg';
-
-// Adds ctx.getTransform() - returns an SVGMatrix
-// Adds ctx.transformedPoint(x,y) - returns an SVGPoint
 function trackTransforms(ctx) {
     var svg = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
     var xform = svg.createSVGMatrix();
@@ -147,3 +154,17 @@ function trackTransforms(ctx) {
         return pt.matrixTransform(xform.inverse());
     }
 }
+
+function CheckCollition(X, Y, rect2) {
+    if (X < rect2.x + rect2.width / 2 &&
+        X > rect2.x - rect2.width / 2 &&
+        Y < rect2.y + rect2.height / 2 &&
+        Y > rect2.y - rect2.height / 2) {
+        current_booth = rect2;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//referecne https://codepen.io/techslides/details/zowLd

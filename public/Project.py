@@ -31,9 +31,9 @@ def CheckMetadata(AID):
     for ID in AID:
         with open(os.path.join("ProjectContainer",ID,"metadata.json"), 'r') as File:
             Data = json.load(File)
-            if Data["Public"] == True:
+            if Data["Public"] == "true":
                 PB.append("true")
-            elif Data["Public"] == False:
+            elif Data["Public"] == "false":
                 PB.append("false")
     return PB
 

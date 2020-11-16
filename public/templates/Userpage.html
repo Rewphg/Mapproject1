@@ -4,35 +4,67 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="\static\stylesheets\Userpage.css">
+    <link rel="stylesheet" href="\static\stylesheets\UserpageCss\Menu.css">
+    <link rel="stylesheet" href="\static\stylesheets\UserpageCss\DiscriptionBox.css">
     <script type="text/javascript" src="/static/Javascript/RenderData.js"></script>
-    <ul>
-        <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">Icons</a>
-            <div class="dropdown-content">
-                <a href="#">Booth</a>
-                <a href="#">Info</a>
-                <a href="#">Toilet</a>
+    <div class="page">
+        <header tabindex="0">{{RoomName}}</header>
+        <div id="nav-container">
+            <div class="bg"></div>
+            <div class="button" tabindex="0">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </div>
-        </li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#about">About</a></li>
-    </ul>
+            <div id="nav-content" tabindex="0">
+                <ul>
+                    <li><a href="#0" onclick="">Booth</a></li>
+                    <li><a href="#0">Icons</a></li>
+                    <li><a href="#0">Information</a></li>
+                    <li><a href="#0">Support</a></li>
+                    <li><a href="http://localhost:5000/user">Exit</a></li>
+                </ul>
+            </div>
+        </div>
+        <main>
+        </main>
+    </div>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to {{RoomName}}</title>
 </head>
 
-<body>
+<center>
     <div id="SearchBox">
         <input type="text" id="current" placeholder="Your location">
         <p1> to </p1>
         <input type="text" id="destination" placeholder="Your Destination">
+        <button class="Dbtn">Direct</button>
     </div>
+</center>
+
+<body>
     <canvas id="Canvas" width="200" height="400"></canvas>
-    <div>
-        <span id="minus">-Zoom Out</span>&nbsp;&nbsp;<span id="plus">+Zoom In</span>
-    </div>
+    <script type="text/javascript" src="/static/Javascript/UserpageJs/Class.js"></script>
+    <script type="text/javascript" src="/static/Javascript/RenderData.js"></script>
+    <!-- <form id="InfoForm">
+        <div class="modal_info">
+            <h1>Simple jQuery Modal</h1>
+            <p>It may not look like much, but it still does exactly what it says straight out of the box.</p>
+        </div>
+        <div class="modal_overlay">
+        </div>
+    </form> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        // document.getElementById("InfoForm").style.display = "none"
+    </script>
 </body>
+<center>
+    <div class="ActionBar">
+        <button class="btn" id="ZoomIn" style="margin-left: 5px;" style="margin-right: 5px;">+</button>
+        <button class="btn" id="ZoomOut" style="margin-left: 5px;" style="margin-right: 5 px;">-</button>
+    </div>
+</center>
 
 </html>

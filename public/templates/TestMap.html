@@ -23,30 +23,30 @@
 </style>
 
 <body>
-    
+
 
 
     <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
     <button id="clickbutton" onclick="toCanvas()">Display</button>
     <img id="display" hidden>
-    
 
-    
-<div style="display:none;">
-    <h3>QR Code Generator</h3>
-    <form action="#" method="POST">
-        <div>
-            <input id="qr-text" type="text" placeholder="Type message QR Code..." / name="qrcode"></div>
-        <br />
-        <div>
-            <button class="qr-btn" onclick="generateQRCode()">create QR Code</button>
-        </div>
-    </form>
+
+
+    <div style="display:none;">
+        <h3>QR Code Generator</h3>
+        <form action="#" method="POST">
+            <div>
+                <input id="qr-text" type="text" placeholder="Type message QR Code..." / name="qrcode"></div>
+            <br />
+            <div>
+                <button class="qr-btn" onclick="generateQRCode()">create QR Code</button>
+            </div>
+        </form>
     </div>
-    
 
-   <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
-  
+
+    <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
+
 
     <div>
         <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
@@ -87,27 +87,27 @@
 
     <div id="MenuContainer">
         <div>
-            <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src="\static\Icons\toilet.png" width="50"
+            <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\toilet.png" width="50"
           length="50"></button>
         </div>
 
         <div>
-            <button class="open-button" onclick="Change(1)">Booth<img src="/static/Icons/pin.png" width="50"
+            <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/pin.png" width="50"
           length="50"></button>
         </div>
 
         <div>
-            <button class="open-button" onclick="Change(3)">Info<img src="/static/Icons/info.png" width="50"
+            <button class="open-button" onclick="Change(3)">Info<img src="./static/Icons/info.png" width="50"
           length="50"></button>
         </div>
 
         <div>
-            <button class="open-button" onclick="Change(4)">Edit/Delete<img src="/static/Icons/Eraser.png" width="50"
+            <button class="open-button" onclick="Change(4)">Edit/Delete<img src="./static/Icons/Eraser.png" width="50"
           length="50"></button>
         </div>
 
         <div>
-            <button class="open-button" onclick="Change(5)">Route<img src="/static/Icons/route.png" width="50"
+            <button class="open-button" onclick="Change(5)">Route<img src="./static/Icons/route.png" width="50"
           length="50"></button>
         </div>
     </div>
@@ -115,167 +115,171 @@
 
     <script>
     </script>
-     <script src="/static/Javascript/CreateObj.js"></script>
-        <script type=text/javascript src="/static/Javascript/index.js"></script>
-        <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}"></script>
+    <script src="/static/Javascript/CreateObj.js"></script>
+    <script type=text/javascript src="/static/Javascript/index.js"></script>
+    <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}"></script>
 
-        <script type="text/javascript">
-            var current_booth;
-            var arr_object = [];
-            console.log(arr_object);
-            var user = '{{username}}'
-            var pid = '{{pid}}'
-            
+    <script type="text/javascript">
+        var current_booth;
+        var arr_object = [];
+        console.log(arr_object);
+        var user = '{{username}}'
+        var pid = '{{pid}}'
 
-            var qr;
-            var qr2;
 
-            var savedContent = new Object();
+        var qr;
+        var qr2;
 
-            (function() {
-                qr = new QRious({
-                    element: document.getElementById('qr-code'), // canvas object
-                    size: 100, // size image qr code
-                    value: 'Event Me!!!' // value default text
-                });
+        var savedContent = new Object();
 
-                qr2 = new QRious({
-                    element: document.getElementById('qr-code2'), // canvas object
-                    size: 100, // size image qr code
-                    value: 'Event Me!!!' // value default text
-                });
+        (function() {
+            qr = new QRious({
+                element: document.getElementById('qr-code'), // canvas object
+                size: 100, // size image qr code
+                value: 'Event Me!!!' // value default text
+            });
 
-                doRenderTemp();
-                
-            })();
+            qr2 = new QRious({
+                element: document.getElementById('qr-code2'), // canvas object
+                size: 100, // size image qr code
+                value: 'Event Me!!!' // value default text
+            });
 
-            function generateQRCode() {
-                var qrtext = document.getElementById("qr-text").value; // value  text from text box
-                //document.getElementById("qr-result").innerHTML = "QR code for " + qrtext +":"; // get element p object to assign text
-                //alert(qrtext); 
-                qr.set({
-                    foreground: 'black', //  setup background color of qr code.
-                    size: 100, // size image qr code
-                    value: qrtext // set text for qr
-                });
+            doRenderTemp();
 
-                qr2.set({
-                    foreground: 'black', //  setup background color of qr code.
-                    size: 100, // size image qr code
-                    value: qrtext // set text for qr
-                });
-            }
+        })();
 
-            function refreshServer() {
-                $.getJSON("/org/{{username}}/project/{{pid}}/json", function(d) {
-                    //console.log(d.object);
-                    // Put the object into storage
-                    if (localStorage.getItem('mapObject') != null) {
-                        localStorage.setItem('mapsObject', JSON.stringify(d.object));
-                    }
-                    renderData(d.object);
-                    
-                }).fail(function() {
-                    console.log("An error has occurred.");
-                });
-            }
+        function generateQRCode() {
+            var qrtext = document.getElementById("qr-text").value; // value  text from text box
+            //document.getElementById("qr-result").innerHTML = "QR code for " + qrtext +":"; // get element p object to assign text
+            //alert(qrtext); 
+            qr.set({
+                foreground: 'black', //  setup background color of qr code.
+                size: 100, // size image qr code
+                value: qrtext // set text for qr
+            });
 
-            function clearMap() {
-                arr_object = [];
-                saveTemp();
-                doRenderTemp()
-            }
+            qr2.set({
+                foreground: 'black', //  setup background color of qr code.
+                size: 100, // size image qr code
+                value: qrtext // set text for qr
+            });
+        }
 
-            function saveTemp() {
+        function refreshServer() {
+            $.getJSON("/org/{{username}}/project/{{pid}}/json", function(d) {
+                //console.log(d.object);
                 // Put the object into storage
-                var tempData = arr_object
-
-                localStorage.setItem('mapsObject', JSON.stringify(tempData));
-            }
-
-            function renderData(data) {
-                    var OldX;
-                    var OldY;
-                    data.forEach((el, index) => {
-                        
-                        if (el.hasOwnProperty("type")){
-                            console.log(el.type)
-                            arr_object.push({x:el.x,y:el.y, "type": "line"}); 
-                        }
-                    })
-                
-
-                    data.forEach(function(el,i) {
-                        if (el.hasOwnProperty("src") && (el.src == "/static/Icons/pin.png" || el.src == "../../../static/Icons/pin.png")){
-                            arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/pin.png", el.title))
-                        }
-                    });
-
-                    data.forEach(function(el,i) {
-                        if (el.hasOwnProperty("src") && (el.src == "/static/Icons/info.png" || el.src == "../../../static/Icons/info.png")){
-                            arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/info.png", el.title))
-                        }
-                    });
-
-                    data.forEach(function(el,i) {
-                        if (el.hasOwnProperty("src") && (el.src == "/static/Icons/toilet.png" || el.src == "../../../static/Icons/toilet.png" )){
-                            arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/toilet.png", el.title))
-                        }
-                    });
-
-                    
-            } // load data
-
-            function readTemp() {
-                // Retrieve the object from storage
-
-                var retrievedObject = JSON.parse(localStorage.getItem('mapsObject')); //JSON.stringify());
-                if (retrievedObject != null && retrievedObject.length > 0) {
-                    return retrievedObject;
+                if (localStorage.getItem('mapObject') != null) {
+                    localStorage.setItem('mapsObject', JSON.stringify(d.object));
                 }
-                return [];
+                renderData(d.object);
 
+            }).fail(function() {
+                console.log("An error has occurred.");
+            });
+        }
+
+        function clearMap() {
+            arr_object = [];
+            saveTemp();
+            doRenderTemp()
+        }
+
+        function saveTemp() {
+            // Put the object into storage
+            var tempData = arr_object
+
+            localStorage.setItem('mapsObject', JSON.stringify(tempData));
+        }
+
+        function renderData(data) {
+            var OldX;
+            var OldY;
+            data.forEach((el, index) => {
+
+                if (el.hasOwnProperty("type")) {
+                    console.log(el.type)
+                    arr_object.push({
+                        x: el.x,
+                        y: el.y,
+                        "type": "line"
+                    });
+                }
+            })
+
+
+            data.forEach(function(el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/pin.png" || el.src == "../../../static/Icons/pin.png")) {
+                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/pin.png", el.title))
+                }
+            });
+
+            data.forEach(function(el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/info.png" || el.src == "../../../static/Icons/info.png")) {
+                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/info.png", el.title))
+                }
+            });
+
+            data.forEach(function(el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/toilet.png" || el.src == "../../../static/Icons/toilet.png")) {
+                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/toilet.png", el.title))
+                }
+            });
+
+
+        } // load data
+
+        function readTemp() {
+            // Retrieve the object from storage
+
+            var retrievedObject = JSON.parse(localStorage.getItem('mapsObject')); //JSON.stringify());
+            if (retrievedObject != null && retrievedObject.length > 0) {
+                return retrievedObject;
             }
+            return [];
 
-            function doRenderTemp() {
-                renderData(readTemp());
-            }
+        }
 
-            function saveImageAndDownload() {
-                let downloadLink = document.createElement('a');
-                downloadLink.setAttribute('download', 'CanvasAsImage.png');
-                let canvas = document.getElementById('canvas');
-                let dataURL = canvas.toDataURL('image/png');
-                let url = dataURL.replace(/^data:image\/png/, 'data:application/octet-stream');
-                downloadLink.setAttribute('href', url);
-                downloadLink.click();
+        function doRenderTemp() {
+            renderData(readTemp());
+        }
 
-            }
+        function saveImageAndDownload() {
+            let downloadLink = document.createElement('a');
+            downloadLink.setAttribute('download', 'CanvasAsImage.png');
+            let canvas = document.getElementById('canvas');
+            let dataURL = canvas.toDataURL('image/png');
+            let url = dataURL.replace(/^data:image\/png/, 'data:application/octet-stream');
+            downloadLink.setAttribute('href', url);
+            downloadLink.click();
 
-            function updateQrCode(){
-                var title = $("#DisName").val();
-                var desc = $("#Description").val();
-                var new_x = MPos.x;
-                var new_y = MPos.y;
-                qr.set({
-                    foreground: 'black', //  setup background color of qr code.
-                    size: 100, // size image qr code
-                    value: title + "," + desc + "," + new_x + "," + new_y // set text for qr
-                });
-            }
+        }
 
-            function updateQrCode2(){
-                var title = $("#EditName").val();
-                var desc = $("#EditDis").val();
-                var new_x = current_booth.x;
-                var new_y = current_booth.y;
-                qr2.set({
-                    foreground: 'black', //  setup background color of qr code.
-                    size: 100, // size image qr code
-                    value: title + "," + desc + "," + new_x + "," + new_y // set text for qr
-                });
-            }
+        function updateQrCode() {
+            var title = $("#DisName").val();
+            var desc = $("#Description").val();
+            var new_x = MPos.x;
+            var new_y = MPos.y;
+            qr.set({
+                foreground: 'black', //  setup background color of qr code.
+                size: 100, // size image qr code
+                value: title + "," + desc + "," + new_x + "," + new_y // set text for qr
+            });
+        }
 
-            //setInterval(saveTemp,15000);
-        </script>
+        function updateQrCode2() {
+            var title = $("#EditName").val();
+            var desc = $("#EditDis").val();
+            var new_x = current_booth.x;
+            var new_y = current_booth.y;
+            qr2.set({
+                foreground: 'black', //  setup background color of qr code.
+                size: 100, // size image qr code
+                value: title + "," + desc + "," + new_x + "," + new_y // set text for qr
+            });
+        }
+
+        //setInterval(saveTemp,15000);
+    </script>
 </body>

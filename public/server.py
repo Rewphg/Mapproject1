@@ -71,16 +71,32 @@ def singuppage():
                 print(new_username.name)
                 return redirect('/org')
             except:
-                return "there is not filled"
+                return "The form is not filled"
         else:
             return "Username is already taken"
     else:
         User = Username.query.order_by(Username.date_created)
         return render_template("/signup.html")
 
-@app.route("/custom/")
-def editorpage():
-    return render_template("custom.html")
+@app.route("/org", methods=["GET", "POST"])
+def loginpage():
+    if request.method == "POST":
+        username = request.form['username']
+        password = request.form['pass']
+        Data = Username.query.order_by(Username.date_created)
+        for D in Data:
+            if D.name == username and D.Password == password:
+                session["user"] = D.name
+                return redirect("/org/{}/project".format(D.name))
+        return redirect('/org')
+    else:
+        return render_template("/login.html")
+
+@app.route('/create/delete/<ID>')
+def Delete_Project(ID):
+    CH.DeleteProject(ID)
+    CH.DeleteDIR(ID)
+    return redirect("/create")
 
 @app.route("/org/<name>/project", methods=["GET", "POST"])
 def ProjectPage(name):
@@ -89,6 +105,7 @@ def ProjectPage(name):
             usr = session["user"]
             PID, Pname = CH.CheckDB(usr)
             PB = CH.CheckMetadata(PID)
+            print(PB)
             Number = len(PID)
             app.logger.info(PB)
             return render_template("/home.html", user=usr, ID=PID, Name=Pname, Length = Number, PB=PB)
@@ -111,6 +128,12 @@ def RenameProject(PID,New):
     app.logger.info("Rename")
     return redirect("/org/{}/project".format(session["user"]))
 
+@app.route("/org/project/<PID>/public/<ispublic>", methods=["PUT"])
+def Switchpublic(PID,ispublic):
+    CH.ChangePublic(PID,ispublic)
+    return ""
+
+
 @app.route("/org/<name>/project/<PID>", methods=["GET","POST"])
 def ProjID(name,PID):
     if request.method == "GET":
@@ -122,21 +145,6 @@ def ProjID(name,PID):
         return render_template("/TestMap.html", username=name, pid=PID)
     # else:
     #     return redirect("/org")
-
-@app.route("/org", methods=["GET", "POST"])
-def loginpage():
-    if request.method == "POST":
-        username = request.form['username']
-        password = request.form['pass']
-        Data = Username.query.order_by(Username.date_created)
-        for D in Data:
-            if D.name == username and D.Password == password:
-                session["user"] = D.name
-                return redirect("/org/{}/project".format(session["user"]))
-        return redirect("/org")
-    else:
-        User = Username.query.order_by(Username.date_created)
-        return render_template("/org.html", User=User)
 
 @app.route("/org/<name>/project/<PID>/save", methods=["GET", "POST"])
 def  MapEditerPage(name, PID): 
