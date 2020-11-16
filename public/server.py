@@ -220,12 +220,16 @@ def upload_file(name, PID):
             
         filename = secure_filename(file.filename)
         file.save(os.path.join("./ProjectContainer/{}/Img".format(PID), filename))
-        mapdata = {"status":"true","msg":"save image success"}
+        mapdata = {"status":"true","msg":"save image success","filename":file.filename}
         return jsonify(mapdata)
     else:
         mapdata = {"status":"false","msg":"not found file path"}
         return jsonify(mapdata)
 
+
+@app.route("/org/background/<PID>/<Image>", methods=["GET"])
+def getBgImage(Image, PID):
+    return send_file(os.path.join("./ProjectContainer/{}/Img".format(PID), Image), mimetype='image/png')
 
 if __name__ == "__main__":
     app.run(debug=True)
