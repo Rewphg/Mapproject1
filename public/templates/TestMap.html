@@ -5,40 +5,36 @@
     body {
         margin: 0;
     }
-    
+
     .npm canvas {
         background-color: black;
     }
-    
+
     .qr-btn {
         background-color: #8c52ff;
         padding: 8px;
         color: white;
         cursor: pointer;
     }
-    
+
     canvas {
         border: 2px solid;
     }
 </style>
 
 <body>
-    <form action="/org/{{username}}/project/{{pid}}/savebg" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-          <label>Select image</label>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" name="image" id="image">
-            <label class="custom-file-label" for="image">Select image...</label>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Upload</button>
-      </form>
+    
+    <div>
+        <span>Change Background</span>
+        <input type="file" name="image" id="image"  />
+        <button onclick="uploadFile();">Upload</button>
+    </div>
 
-    <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
+    <div style="display:none;">
+        <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
     <button id="clickbutton" onclick="toCanvas()">Display</button>
     <img id="display" hidden>
 
-    <div style="display:none;">
         <h3>QR Code Generator</h3>
         <form action="#" method="POST">
             <div>
@@ -50,7 +46,7 @@
         </form>
     </div>
 
-     <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
+    <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
     <div>
         <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
         <button id="save_temp" onclick="saveTemp();">Save Draft</button>
@@ -69,7 +65,8 @@
             <label for="text"><b>Booth Name</b></label>
             <input id="DisName" type="text" placeholder="Name" name="boothname" onchange="updateQrCode();">
             <label for="text"><b>Overview</b></label>
-            <input id="Description" type="text" placeholder="This booth is...." name="boothdesc" onchange="updateQrCode();">
+            <input id="Description" type="text" placeholder="This booth is...." name="boothdesc"
+                onchange="updateQrCode();">
             <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title" name="boothname"></input>
             <button type="button" class="btn cancel" onclick="Close('CreateForm')">Close</button>
         </form>
@@ -90,28 +87,28 @@
 
     <div id="MenuContainer">
         <div>
-            <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\toilet.png" width="50"
-          length="50"></button>
+            <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\toilet.png"
+                    width="50" length="50"></button>
         </div>
 
         <div>
             <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/pin.png" width="50"
-          length="50"></button>
+                    length="50"></button>
         </div>
 
         <div>
             <button class="open-button" onclick="Change(3)">Info<img src="./static/Icons/info.png" width="50"
-          length="50"></button>
+                    length="50"></button>
         </div>
 
         <div>
             <button class="open-button" onclick="Change(4)">Edit/Delete<img src="./static/Icons/Eraser.png" width="50"
-          length="50"></button>
+                    length="50"></button>
         </div>
 
         <div>
             <button class="open-button" onclick="Change(5)">Route<img src="./static/Icons/route.png" width="50"
-          length="50"></button>
+                    length="50"></button>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
@@ -128,6 +125,7 @@
         console.log(arr_object);
         var user = '{{username}}'
         var pid = '{{pid}}'
+        var imgUri = "";
 
 
         var qr;
@@ -135,7 +133,7 @@
 
         var savedContent = new Object();
 
-        (function() {
+        (function () {
             qr = new QRious({
                 element: document.getElementById('qr-code'), // canvas object
                 size: 100, // size image qr code
@@ -170,7 +168,7 @@
         }
 
         function refreshServer() {
-            $.getJSON("/org/{{username}}/project/{{pid}}/json", function(d) {
+            $.getJSON("/org/{{username}}/project/{{pid}}/json", function (d) {
                 //console.log(d.object);
                 // Put the object into storage
                 if (localStorage.getItem('mapObject') != null) {
@@ -178,7 +176,7 @@
                 }
                 renderData(d.object);
 
-            }).fail(function() {
+            }).fail(function () {
                 console.log("An error has occurred.");
             });
         }
@@ -187,6 +185,12 @@
             arr_object = [];
             saveTemp();
             doRenderTemp()
+            if(imgUri != "") {
+                arr_object.push({
+                            "filename":imgUri,
+                            "type": "background"
+                        });
+            }
         }
 
         function saveTemp() {
@@ -202,31 +206,46 @@
             data.forEach((el, index) => {
 
                 if (el.hasOwnProperty("type")) {
-                    console.log(el.type)
-                    arr_object.push({
-                        x: el.x,
-                        y: el.y,
-                        "type": "line"
-                    });
+                    if(el.type == "line"){
+                        console.log(el.type)
+                        arr_object.push({
+                            x: el.x,
+                            y: el.y,
+                            "type": "line"
+                        });
+                    }
+
+                    if(el.type == "background"){
+                        arr_object.push({
+                            "filename":el.filename,
+                            "type": "background"
+                        });
+                    }
                 }
             })
 
 
-            data.forEach(function(el, i) {
-                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/pin.png" || el.src == "../../../static/Icons/pin.png")) {
-                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/pin.png", el.title))
+            data.forEach(function (el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/pin.png" || el.src ==
+                        "../../../static/Icons/pin.png")) {
+                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/pin.png", el
+                        .title))
                 }
             });
 
-            data.forEach(function(el, i) {
-                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/info.png" || el.src == "../../../static/Icons/info.png")) {
-                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/info.png", el.title))
+            data.forEach(function (el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/info.png" || el.src ==
+                        "../../../static/Icons/info.png")) {
+                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/info.png", el
+                        .title))
                 }
             });
 
-            data.forEach(function(el, i) {
-                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/toilet.png" || el.src == "../../../static/Icons/toilet.png")) {
-                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/toilet.png", el.title))
+            data.forEach(function (el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/toilet.png" || el.src ==
+                        "../../../static/Icons/toilet.png")) {
+                    arr_object.push(new BoothIcon(el.x, el.y, 50, 50, "../../../static/Icons/toilet.png", el
+                        .title))
                 }
             });
 
@@ -283,6 +302,44 @@
             });
         }
 
+        function uploadFile() {
+            var input = document.getElementById("image");
+            file = input.files[0];
+            if (file != undefined) {
+                formData = new FormData();
+                if (!!file.type.match(/image.*/)) {
+                    formData.append("image", file);
+                    $.ajax({
+                        url: "/org/{{username.strip()}}/project/{{pid}}/savebg",
+                        type: "POST",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            alert('success');
+                            imgUri = "../../org/background/{{pid}}/" + data.filename;
+                            arr_object.push({
+                            "filename":"../../org/background/{{pid}}/" + data.filename,
+                            "type": "background"
+                        });
+                            console.log(data);
+                            preview2("../../org/background/{{pid}}/" + data.filename);
+                            
+                        }
+                    });
+                } else {อก
+                    alert('Not a valid image!');
+                }
+            } else {
+                alert('Input something!');
+            }
+        }
+
+        function preview2(uri) {
+            document.getElementById("display").setAttribute("src", uri);
+        }
+
+
         //setInterval(saveTemp,15000);
     </script>
-</body>
+</body>a
