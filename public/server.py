@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, session, jsonify, send_file
 from flask.helpers import flash
 from werkzeug.datastructures import native_itermethods
+from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import Project as CH
@@ -155,7 +156,8 @@ def  MapEditerPage(name, PID):
         filepath = os.path.join("ProjectContainer",PID,"Data","mapdata.json")
         with open(filepath, 'w') as f:
             json.dump(save, f)
-            return redirect("/org/{}/project".format(session["user"]))
+            return 'created'
+            #redirect("/org/{}/project".format(session["user"]))
 
 @app.route("/org/<name>/project/<PID>/json", methods=["GET","POST"])
 def getJson(name,PID):
@@ -200,7 +202,29 @@ def toHTML(PID):
 def getSampleData():
     return render_template("mapdata.json")
 
+@app.route("/org/<name>/project/<PID>/savebg", methods=["POST"])
+def upload_file(name, PID):
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'image' not in request.files:
+            flash('No file part')
+            mapdata = {"status":"false","msg":"not found file path"}
+            return jsonify(mapdata)
 
+        file = request.files['image']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            mapdata = {"status":"false","msg":"file not found"}
+            return jsonify(mapdata)
+            
+        filename = secure_filename(file.filename)
+        file.save(os.path.join("./ProjectContainer/{}/Img".format(PID), filename))
+        mapdata = {"status":"true","msg":"save image success"}
+        return jsonify(mapdata)
+    else:
+        mapdata = {"status":"false","msg":"not found file path"}
+        return jsonify(mapdata)
 
 
 if __name__ == "__main__":

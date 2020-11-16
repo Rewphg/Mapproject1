@@ -23,14 +23,20 @@
 </style>
 
 <body>
-
-
+    <form action="/org/{{username}}/project/{{pid}}/savebg" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Select image</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" name="image" id="image">
+            <label class="custom-file-label" for="image">Select image...</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </form>
 
     <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
     <button id="clickbutton" onclick="toCanvas()">Display</button>
     <img id="display" hidden>
-
-
 
     <div style="display:none;">
         <h3>QR Code Generator</h3>
@@ -44,10 +50,7 @@
         </form>
     </div>
 
-
-    <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
-
-
+     <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
     <div>
         <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
         <button id="save_temp" onclick="saveTemp();">Save Draft</button>
