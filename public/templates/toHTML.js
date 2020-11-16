@@ -54,6 +54,9 @@
 // var user = document.getElementById("user")
 // var ctxuser = user.getContext("2d");
 
+//This part of code, I was implemented from an old code into this one by simply use the benefit of arr_object then
+//ask this from server to make it render from JSON.parse()
+
 var pid = `{{pid}}`
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.open("GET", "http://localhost:5000/user/" + pid + "/json", true);
@@ -62,8 +65,21 @@ xmlhttp.send();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var data = JSON.parse(this.responseText);
+        var desc = document.getElementById("info");
+        // for (var i = 0; i < data.length; i++) {
+        //     if (data.object.hasOwnProperty("dis")) {
+        //         desc.innerHTML = "Description" + data[i].object
+        //         desc.appendChild(desc.innerHTML)
+        //     }
+        // }
         renderData(data.object);
-        console.log(data)
+        //console.log(data)
+        arr_object.forEach((Description, index) => {
+            if (Description.hasOwnProperty("dis") && Description != undefined) {
+                desc.innerHTML += Description
+                console.log(Description)
+            }
+        })
     }
 }
 
@@ -184,3 +200,4 @@ xmlhttp.onreadystatechange = function() {
                     value: title + "," + desc + "," + new_x + "," + new_y // set text for qr
                 });
             }
+            
