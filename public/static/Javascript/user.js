@@ -16,17 +16,17 @@ const MPos = [{
 //   }
 // var ctx = setupCanvas(document.querySelector('.my-canvas'));
 
-const canvas = document.querySelector("#canvas")
-const ctx = canvas.getContext('2d')
+//const canvas = document.querySelector("#Canvas")
+// const ctx = canvas.getContext('2d')
 
 var mode = 0
 
 let route = false;
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
 
-const Background = []
+const BackgroundUser = []
 const BoothIcons = []
 const ToiletIcons = []
 const Infos = []
@@ -43,9 +43,9 @@ const lines = []
 var arr_object = []
 
 function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    if (Background.length > 0) {
-        Background[Background.length - 1].Draw()
+    ctx.clearRect(0, 0, Canvas.width, Canvas.height)
+    if (BackgroundUser.length > 0) {
+        BackgroundUser[BackgroundUser.length - 1].Draw()
     }
     requestAnimationFrame(animate)
     var OldX;
@@ -92,9 +92,9 @@ function draw(e) {
     ctx.stroke();
 }
 
-canvas.addEventListener("mousedown", startRoute);
-canvas.addEventListener("mouseup", endRoute);
-canvas.addEventListener("mousemove", draw);
+// canvas.addEventListener("mousedown", startRoute);
+// canvas.addEventListener("mouseup", endRoute);
+// canvas.addEventListener("mousemove", draw);
 
 var ConX = 0
 var ConY = 0
@@ -103,9 +103,9 @@ var EditIndex = 0
 
 //mode 0 = none ,mode 1 = Booth ,mode 2 = Toilet ,mode 3 = info, mode 4 = eraser, mode 5 = route
 
-document.getElementById("canvas").addEventListener("click", (event) => {
+document.getElementById("Canvas").addEventListener("click", (event) => {
     event.preventDefault()
-    var border = document.getElementById("canvas").getBoundingClientRect();
+    var border = document.getElementById("Canvas").getBoundingClientRect();
     MPos.x = event.clientX - border.left - 25
     MPos.y = event.clientY - border.top - 25
     mode = 7
@@ -169,7 +169,7 @@ document.getElementById("canvas").addEventListener("click", (event) => {
         });
     }
 
-    if (MPos.y < canvas.height && MPos.x < canvas.width) {
+    if (MPos.y < Canvas.height && MPos.x < Canvas.width) {
         On = 1
         if (mode == 1) {
             ConX = event.clientX - border.left - 25
@@ -212,25 +212,25 @@ function initObject(arr) {
 
 }
 
-document.getElementById("sent").addEventListener("click", function(event) {
-    //var user = '{{username}}'
-    //var pid = '{{pid}}'
-    xmlObj = new XMLHttpRequest();
-    xmlObj.open("POST", "http://localhost:5000/org/" + user + "/project/" + pid + "/save", true);
-    xmlObj.setRequestHeader("Content-Type", "application/json");
-    var data = JSON.stringify({ "object": arr_object });
-    xmlObj.send(data);
-    xmlObj.onreadystatechange = handleRequest();
+// document.getElementById("sent").addEventListener("click", function(event) {
+//     //var user = '{{username}}'
+//     //var pid = '{{pid}}'
+//     xmlObj = new XMLHttpRequest();
+//     xmlObj.open("POST", "http://localhost:5000/org/" + user + "/project/" + pid + "/save", true);
+//     xmlObj.setRequestHeader("Content-Type", "application/json");
+//     var data = JSON.stringify({ "object": arr_object });
+//     xmlObj.send(data);
+//     xmlObj.onreadystatechange = handleRequest();
 
-    function handleRequest() {
-        if (xmlObj.readyState == 4 && xmlObj.status == 200) {
-            var myJSON = JSON.parse(xmlObj.responseText);
-            document.getElementById("response").innerHTML = myJSON.prediction;
-            alert("loaded");
-        } else {
-            alert(xmlObj.status);
-        }
-    }
-})
+//     function handleRequest() {
+//         if (xmlObj.readyState == 4 && xmlObj.status == 200) {
+//             var myJSON = JSON.parse(xmlObj.responseText);
+//             document.getElementById("response").innerHTML = myJSON.prediction;
+//             alert("loaded");
+//         } else {
+//             alert(xmlObj.status);
+//         }
+//     }
+// })
 
 animate()

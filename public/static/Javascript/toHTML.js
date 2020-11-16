@@ -59,7 +59,7 @@
 
 var pid = `{{pid}}`
 var xmlhttp = new XMLHttpRequest();
-xmlhttp.open("GET", "http://localhost:5000/user/" + pid + "/json", true);
+xmlhttp.open("GET", "http://localhost:5000/user/Homepage" + pid + "/json", true);
 xmlhttp.setRequestHeader("Content-Type", "application/json");
 xmlhttp.send();
 xmlhttp.onreadystatechange = function() {

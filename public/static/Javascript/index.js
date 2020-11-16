@@ -53,6 +53,7 @@ function animate() {
     arr_object.forEach((BoothIcon, index) => {
         if (BoothIcon.hasOwnProperty("type")) {
             
+            ctx.setLineDash([5, 15]);
             ctx.beginPath();
             ctx.lineWidth = 5;
             ctx.lineCap = "round";

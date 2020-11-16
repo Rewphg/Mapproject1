@@ -1,5 +1,5 @@
-const can = document.querySelector("#Canvas")
-const ctx = can.getContext("2d")
+//const can = document.querySelector("#Canvas")
+//const ctx = can.getContext("2d")
 
 class BoothClass {
     constructor(x, y, width, height, src, title, dis, type) {

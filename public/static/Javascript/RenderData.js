@@ -1,6 +1,9 @@
-var canvas = document.getElementsByTagName('canvas')[0];
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight - 140;
+var canvas = document.getElementById("Canvas")
+console.log(canvas)
+var ctx = canvas.getContext('2d');
+
+ctx.canvas.width = window.innerWidth;
+ctx.canvas.height = window.innerHeight - 140;
 
 var Background = new Image()
 Background.src = "/static/Icons/Background.png"
@@ -10,7 +13,6 @@ Pin.push(new BoothClass(20, 2000, 50, 50, "/static/Icons/toilet.png", "Toilet", 
 Pin.push(new BoothClass(30, 50, 50, 50, "/static/Icons/toilet.png", "Toilet", "toilet", "Booth"))
 window.onload = function() {
 
-    var ctx = canvas.getContext('2d');
     trackTransforms(ctx);
 
     function redraw() {

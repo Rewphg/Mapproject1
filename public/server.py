@@ -184,8 +184,12 @@ def renderUser(PID):
                 json.load(jsonfile)
         return render_template("test_template.html",  pid=PID)
 
-@app.route("/user/<PID>/load", methods=["GET"])
-def toHTML(PID):
+# @app.route("/user/<PID>/load", methods=["GET"])
+# def toHTML(PID):
+#     if request.method == "GET":
+
+@app.route("/user/Homepage/<PID>/json", methods=["GET"])
+def loadtoHomepage(PID):
     if request.method == "GET":
         filepath = os.path.join("ProjectContainer", PID, "Data", "mapdata.json")
         print(filepath)
