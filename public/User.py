@@ -1,14 +1,19 @@
 import datetime
 import os
-from os import name, path, remove
 from os.path import join
-import shutil
 from flask.app import Flask
 import pandas as pd
 import csv
-import random
 from csv import writer
 import json
+
+RouteArr = []
+
+class Route:
+    def __init__(self,x,y,type):
+        self.x = x
+        self.y = y
+        self.type = type
 
 def CheckProjectId(ProjId):
     with open("./static/Data/ProjectID.csv", "r") as F:
@@ -22,9 +27,9 @@ def CheckProjectId(ProjId):
 def CheckMetadata(ProjectId):
     with open(os.path.join("ProjectContainer",ProjectId,"metadata.json"), 'r') as File:
         Data = json.load(File)
-        if Data["Public"] == True:
+        if Data["Public"] == "true":
             return True
-        elif Data["Public"] == False:
+        elif Data["Public"] == "false":
             return False
 
 def GetProjectName(ProjectID):
@@ -37,10 +42,8 @@ def GetProjectData(ProjectID):
         Data = json.load(File)
         Toilet = []
         for obj in Data["object"]: 
-            print(obj["title"])    
-            if obj["type"] == 'line':
-                Toilet.append(obj)
-        print(Toilet)
+            print(obj['src'])
+        print(RouteArr)
         return Toilet
 
 # GetProjectData("0agbjP")
