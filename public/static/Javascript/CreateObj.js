@@ -1,7 +1,7 @@
 class BoothIcon {
     constructor(x, y, width, height, src, title, dis) {
-        this.x = x
-        this.y = y
+        this.x = x-25
+        this.y = y-45
         this.src = src
         this.width = width
         this.height = height
