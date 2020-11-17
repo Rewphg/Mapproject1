@@ -23,69 +23,69 @@
 </style>
 
 <body>
-    
-    <div>
-        <span>Change Background</span>
-        <input type="file" name="image" id="image"  />
-        <button onclick="uploadFile();">Upload</button>
+    <div style="float:left; margin-top:30px;">
+        <div>
+            <span>Change Background</span>
+            <input type="file" name="image" id="image"  />
+            <button onclick="uploadFile();">Upload</button>
+        </div>
+
+        <div style="display:none;">
+            <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
+            <button id="clickbutton" onclick="toCanvas()">Display</button>
+            <img id="display" hidden>
+
+            <h3>QR Code Generator</h3>
+            <form action="#" method="POST">
+                <div>
+                    <input id="qr-text" type="text" placeholder="Type message QR Code..." / name="qrcode"></div>
+                <br />
+                <div>
+                    <button class="qr-btn" onclick="generateQRCode()">create QR Code</button>
+                </div>
+            </form>
+        </div>
+
+        <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
+        <div>
+            <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
+            <button id="save_temp" onclick="saveTemp();">Save Draft</button>
+            <button id="clear_map" onclick="clearMap();">Clear Map</button>
+            <button id="read_temp" onclick="doRenderTemp();">Undo</button> |
+            <button id="edit_mode" onclick="Change(7);">Edit Booth</button> |
+            <button id="save_img" onclick="saveImageAndDownload();">Save To PNG</button>
+        </div>
+
+        <canvas id="canvas" width="1000" height="1000"></canvas> <br> <br>
+        <div class="form-popup" id="CreateForm">
+            <canvas id="qr-code"></canvas>
+
+            <form class="form-container" method="GET">
+                <h1>BoothInfo</h1>
+                <label for="text"><b>Booth Name</b></label>
+                <input id="DisName" type="text" placeholder="Name" name="boothname" onchange="updateQrCode();">
+                <label for="text"><b>Overview</b></label>
+                <input id="Description" type="text" placeholder="This booth is...." name="boothdesc"
+                    onchange="updateQrCode();">
+                <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title" name="boothname"></input>
+                <button type="button" class="btn cancel" onclick="Close('CreateForm')">Close</button>
+            </form>
+        </div>
+        <div class="form-popup" id="EditForm">
+            <canvas id="qr-code2"></canvas>
+            <form class="form-container">
+                <h1>Edit Booth Information</h1>
+                <label for="text"><b>Booth Name</b></label>
+                <input id="EditName" type="text" placeholder="New Name" onchange="updateQrCode2();">
+                <label for="text"><b>Overview</b></label>
+                <input id="EditDis" type="text" placeholder="New Discription" onchange="updateQrCode2();">
+                <button type="button" class="btn" onclick="ApplyEditBoothInfo()">Add Booth</button>
+                <button type="button" class="btn cancel" onclick="Close('EditForm')">Close</button>
+            </form>
+        </div>
     </div>
 
-    <div style="display:none;">
-        <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
-    <button id="clickbutton" onclick="toCanvas()">Display</button>
-    <img id="display" hidden>
-
-        <h3>QR Code Generator</h3>
-        <form action="#" method="POST">
-            <div>
-                <input id="qr-text" type="text" placeholder="Type message QR Code..." / name="qrcode"></div>
-            <br />
-            <div>
-                <button class="qr-btn" onclick="generateQRCode()">create QR Code</button>
-            </div>
-        </form>
-    </div>
-
-    <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
-    <div>
-        <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
-        <button id="save_temp" onclick="saveTemp();">Save Draft</button>
-        <button id="clear_map" onclick="clearMap();">Clear Map</button>
-        <button id="read_temp" onclick="doRenderTemp();">Undo</button> |
-        <button id="edit_mode" onclick="Change(7);">Edit Booth</button> |
-        <button id="save_img" onclick="saveImageAndDownload();">Save To PNG</button>
-    </div>
-
-    <canvas id="canvas" width="1000" height="1000"></canvas> <br> <br>
-    <div class="form-popup" id="CreateForm">
-        <canvas id="qr-code"></canvas>
-
-        <form class="form-container" method="GET">
-            <h1>BoothInfo</h1>
-            <label for="text"><b>Booth Name</b></label>
-            <input id="DisName" type="text" placeholder="Name" name="boothname" onchange="updateQrCode();">
-            <label for="text"><b>Overview</b></label>
-            <input id="Description" type="text" placeholder="This booth is...." name="boothdesc"
-                onchange="updateQrCode();">
-            <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title" name="boothname"></input>
-            <button type="button" class="btn cancel" onclick="Close('CreateForm')">Close</button>
-        </form>
-    </div>
-    <div class="form-popup" id="EditForm">
-        <canvas id="qr-code2"></canvas>
-        <form class="form-container">
-            <h1>Edit Booth Information</h1>
-            <label for="text"><b>Booth Name</b></label>
-            <input id="EditName" type="text" placeholder="New Name" onchange="updateQrCode2();">
-            <label for="text"><b>Overview</b></label>
-            <input id="EditDis" type="text" placeholder="New Discription" onchange="updateQrCode2();">
-            <button type="button" class="btn" onclick="ApplyEditBoothInfo()">Add Booth</button>
-            <button type="button" class="btn cancel" onclick="Close('EditForm')">Close</button>
-        </form>
-    </div>
-    </div>
-
-    <div id="MenuContainer">
+    <div id="MenuContainer"  style="float:left; margin-top:30px;">
         <div>
             <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\toilet.png"
                     width="50" length="50"></button>
@@ -123,7 +123,7 @@
         var current_booth;
         var arr_object = [];
         console.log(arr_object);
-        var user = '{{username}}'
+        var user = '{{username.strip()}}'
         var pid = '{{pid}}'
         var imgUri = "";
 
@@ -168,7 +168,7 @@
         }
 
         function refreshServer() {
-            $.getJSON("/org/{{username}}/project/{{pid}}/json", function (d) {
+            $.getJSON("/org/{{username.strip()}}/project/{{pid}}/json", function (d) {
                 //console.log(d.object);
                 // Put the object into storage
                 if (localStorage.getItem('mapObject') != null) {
@@ -317,13 +317,13 @@
                         contentType: false,
                         success: function (data) {
                             alert('success');
-                            imgUri = "../../org/background/{{pid}}/" + data.filename;
+                            imgUri = "../../org/background/{{pid}}/" + data.filename + "/" + new Date().getMilliseconds();
                             arr_object.push({
-                            "filename":"../../org/background/{{pid}}/" + data.filename,
+                            "filename":"../../org/background/{{pid}}/" + data.filename + "/" + new Date().getMilliseconds(),
                             "type": "background"
                         });
                             console.log(data);
-                            preview2("../../org/background/{{pid}}/" + data.filename);
+                            preview2("../../org/background/{{pid}}/" + data.filename + "/" + new Date().getMilliseconds());
                             
                         }
                     });
