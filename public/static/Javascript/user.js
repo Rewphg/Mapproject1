@@ -1,44 +1,18 @@
 //Reference: Stackoverflow, TowardDataScience, Reddit Forum
-
 const MPos = [{
     x: 0,
     y: 0,
 }]
 
-// function setupCanvas(canvas) {
-//     var dpr = window.devicePixelRatio || 1;
-//     var rect = canvas.getBoundingClientRect();
-//     canvas.width = rect.width * dpr;
-//     canvas.height = rect.height * dpr;
-//     var ctx = canvas.getContext('2d');
-//     ctx.scale(dpr, dpr);
-//     return ctx;
-//   }
-// var ctx = setupCanvas(document.querySelector('.my-canvas'));
-
-//const canvas = document.querySelector("#Canvas")
-// const ctx = canvas.getContext('2d')
-
 var mode = 0
 
 let route = false;
-
-// canvas.width = window.innerWidth;
-// canvas.height = window.innerHeight;
 
 const BackgroundUser = []
 const BoothIcons = []
 const ToiletIcons = []
 const Infos = []
 const lines = []
-
-// var object = {
-//     "toilet": [],
-//     "booth": [],
-//     "info": [],
-//     "route": [],
-//     "map": [],
-// }
 
 var arr_object = []
 
@@ -92,16 +66,10 @@ function draw(e) {
     ctx.stroke();
 }
 
-// canvas.addEventListener("mousedown", startRoute);
-// canvas.addEventListener("mouseup", endRoute);
-// canvas.addEventListener("mousemove", draw);
-
 var ConX = 0
 var ConY = 0
 var On = 0
 var EditIndex = 0
-
-//mode 0 = none ,mode 1 = Booth ,mode 2 = Toilet ,mode 3 = info, mode 4 = eraser, mode 5 = route
 
 document.getElementById("Canvas").addEventListener("click", (event) => {
     event.preventDefault()
@@ -133,15 +101,6 @@ document.getElementById("Canvas").addEventListener("click", (event) => {
         arr_object.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 arr_object.splice(index, 1)
-                    /*OpenEdit(BoothIcons[index])
-                    //EditIndex = index
-
-                    qr2.set({
-                        foreground: 'black', //  setup background color of qr code.
-                        size: 100, // size image qr code
-                        value: BoothIcons[index].title + "," + BoothIcons[index].dis + "," + BoothIcons[index].x + "," + BoothIcons[index].y   // set text for qr
-                    });
-                    */
             }
         });
 
@@ -211,26 +170,5 @@ function initObject(arr) {
     return new_arr
 
 }
-
-// document.getElementById("sent").addEventListener("click", function(event) {
-//     //var user = '{{username}}'
-//     //var pid = '{{pid}}'
-//     xmlObj = new XMLHttpRequest();
-//     xmlObj.open("POST", "http://localhost:5000/org/" + user + "/project/" + pid + "/save", true);
-//     xmlObj.setRequestHeader("Content-Type", "application/json");
-//     var data = JSON.stringify({ "object": arr_object });
-//     xmlObj.send(data);
-//     xmlObj.onreadystatechange = handleRequest();
-
-//     function handleRequest() {
-//         if (xmlObj.readyState == 4 && xmlObj.status == 200) {
-//             var myJSON = JSON.parse(xmlObj.responseText);
-//             document.getElementById("response").innerHTML = myJSON.prediction;
-//             alert("loaded");
-//         } else {
-//             alert(xmlObj.status);
-//         }
-//     }
-// })
 
 animate()
