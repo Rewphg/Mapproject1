@@ -1,8 +1,8 @@
-//const can = document.querySelector("#Canvas")
-//const ctx = can.getContext("2d")
+// var canvas = document.querySelector("Canvas")
+// var ctx = canvas.getContent("2d")
 
 class BoothClass {
-    constructor(x, y, width, height, src, title, dis, type) {
+    constructor(x, y, width, height, src, title, dis, type, fill) {
         this.x = x
         this.y = y
         this.src = src
@@ -11,6 +11,7 @@ class BoothClass {
         this.title = title
         this.dis = dis
         this.type = type
+        this.fill = fill
     }
 
     Draw() {
@@ -20,13 +21,12 @@ class BoothClass {
         B.src = this.src
         ctx.drawImage(B, this.x, this.y, this.width, this.height)
         ctx.font = "15px Arial"
+        ctx.fillStyle = this.fill
         ctx.textAlign = "center"
         ctx.fillText(this.title, this.x + 24, this.y - 10)
     }
 
     Update() {
         this.Draw()
-        this.x = this.x
-        this.y = this.y
     }
 }

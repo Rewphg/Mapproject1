@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import Project as CH
 import User as U
-import logging
+import sys
 import os
 from os import name, path
 import json
@@ -55,10 +55,9 @@ def userpage():
 @app.route("/user/Homepage/<ProjectID>")
 def Homepage(ProjectID):
     Roomname = U.GetProjectName(ProjectID)
-    BN = 5
-    BoothName = ["Booth 1", "Booth2", "Booth3", "Booth4", "Booth5"]
-    Info = ["Booth 1", "Booth2", "Booth3", "Booth4", "Booth5"]
-    return render_template("Userpage.html", RoomName=Roomname, BN=BN,BoothName = BoothName, info=Info)
+    BN , BoothName, Info = U.GetProjectData(ProjectID)
+    print(BN, BoothName, Info)
+    return render_template("Userpage.html", RoomName=Roomname, BN=BN,BoothName = BoothName, info=Info, pid=ProjectID)
 
 @app.route("/signup/", methods=["GET","POST"])
 def singuppage():

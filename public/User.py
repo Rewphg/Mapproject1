@@ -1,4 +1,5 @@
 import datetime
+from logging import info
 import os
 from os.path import join
 from flask.app import Flask
@@ -40,10 +41,22 @@ def GetProjectName(ProjectID):
 def GetProjectData(ProjectID):
     with open(os.path.join("ProjectContainer",ProjectID,"Data","mapdata.json"), 'r') as File:
         Data = json.load(File)
-        Toilet = []
+        BoothList = []
+        info = []
         for obj in Data["object"]: 
-            print(obj['src'])
-        print(RouteArr)
-        return Toilet
+            print(obj)
+            try:
+                if obj["src"] == "/static/Icons/toilet.png":
+                    print("Toilet", obj)
+                elif obj["src"] == "/static/Icons/pin.png":
+                    BoothList.append(obj["title"])
+                    info.append(obj["dis"])
+                    print("Pin", BoothList)
+                elif obj["src"] == "/static/Icons/info.png":
+                    print("Info", obj)
+            except:
+                continue
+        print(len(BoothList), BoothList, info)
+        return len(BoothList), BoothList, info
 
-# GetProjectData("0agbjP")
+GetProjectData("GM9vjG")
