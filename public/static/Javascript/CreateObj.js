@@ -1,5 +1,5 @@
 class BoothIcon {
-    constructor(x, y, width, height, src, title, dis) {
+    constructor(x, y, width, height, src, title, dis, pair) {
         this.x = x
         this.y = y
         this.src = src
@@ -7,6 +7,7 @@ class BoothIcon {
         this.height = height
         this.title = title
         this.dis = dis
+        this.pair = pair
     }
 
     Draw() {
@@ -95,6 +96,7 @@ function Change(M) {
 function OpenEdit(B) {
     document.getElementById("EditName").value = B.title
     document.getElementById("EditDis").value = B.dis
+    document.getElementById("EditPair").value = B.pair
     document.getElementById("EditForm").style.display = "block"
 }
 
@@ -102,9 +104,11 @@ function ApplyEditBoothInfo() {
     var B = arr_object[EditIndex]
     B.title = document.getElementById("EditName").value
     B.dis = document.getElementById("EditDis").value
+    B.pair = document.getElementById("EditPair").value
     document.getElementById("EditForm").style.display = "none"
     document.getElementById("EditName").value = ""
     document.getElementById("EditDis").value = ""
+    document.getElementById("EditPair").value = ""
 }
 
 function Close(e) {

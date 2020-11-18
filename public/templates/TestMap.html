@@ -79,6 +79,8 @@
             <input id="EditName" type="text" placeholder="New Name" onchange="updateQrCode2();">
             <label for="text"><b>Overview</b></label>
             <input id="EditDis" type="text" placeholder="New Discription" onchange="updateQrCode2();">
+            <label for="text"><b>Pairing</b></label>
+            <input id="EditPair" type="text" placeholder="New Pair" onchange="updateQrCode2()">
             <button type="button" class="btn" onclick="ApplyEditBoothInfo()">Add Booth</button>
             <button type="button" class="btn cancel" onclick="Close('EditForm')">Close</button>
         </form>
@@ -293,6 +295,7 @@
         function updateQrCode2() {
             var title = $("#EditName").val();
             var desc = $("#EditDis").val();
+            var pair = $("#EditPair").val();
             var new_x = current_booth.x;
             var new_y = current_booth.y;
             qr2.set({
@@ -342,4 +345,4 @@
 
         //setInterval(saveTemp,15000);
     </script>
-</body>a
+</body>

@@ -199,10 +199,11 @@ def loadtoHomepage(PID):
         print(filepath)
         print(path.exists(filepath))
         if path.exists(filepath) == True:
-            with open(filepath) as jsonfile:
+            with open(filepath, "r") as jsonfile:
+                mapdata = (json.load(jsonfile))
                 #json.loads(jsonfile)
-                print(json.load(jsonfile))
-                return json.load(open(filepath))
+                # print(mapdata)
+                return jsonify(mapdata)
 
 @app.route("/mapdata.json")
 def getSampleData():

@@ -1,6 +1,6 @@
-var canvas = document.getElementById("Canvas")
-console.log(canvas)
-var ctx = canvas.getContext('2d');
+//var canvas = document.getElementById("Canvas")
+//console.log(canvas)
+//var ctx = canvas.getContext('2d');
 
 ctx.canvas.width = window.innerWidth;
 ctx.canvas.height = window.innerHeight - 140;

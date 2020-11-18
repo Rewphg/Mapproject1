@@ -56,10 +56,10 @@
 
 //This part of code, I was implemented from an old code into this one by simply use the benefit of arr_object then
 //ask this from server to make it render from JSON.parse()
-
-var pid = `{{pid}}`
+console.log(window.location.href)
+// var pid = `{{pid}}`
 var xmlhttp = new XMLHttpRequest();
-xmlhttp.open("GET", "http://localhost:5000/user/Homepage" + pid + "/json", true);
+xmlhttp.open("GET", window.location.href + "/json", true);
 xmlhttp.setRequestHeader("Content-Type", "application/json");
 xmlhttp.send();
 xmlhttp.onreadystatechange = function() {
@@ -74,12 +74,6 @@ xmlhttp.onreadystatechange = function() {
         // }
         renderData(data.object);
         //console.log(data)
-        arr_object.forEach((Description, index) => {
-            if (Description.hasOwnProperty("dis") && Description != undefined) {
-                desc.innerHTML += Description
-                console.log(Description)
-            }
-        })
     }
 }
 

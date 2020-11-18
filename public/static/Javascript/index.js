@@ -204,23 +204,24 @@ document.getElementById("canvas").addEventListener("click", (event) => {
             ConY = event.clientY - border.top - 25
             var index = 1
             ShowMyForm(arr_object, index)
+            console.log(arr_object)
         }
 
         if (mode == 2) {
             // object.toilet.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
             arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
-            //console.log(arr_object);
+            console.log(arr_object);
         }
 
         if (mode == 3) {
             arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/info.png", "Info"))
-            //console.log(arr_object);
+            console.log(arr_object);
         }
 
         if (mode == 5) {
             arr_object.push({ x: MPos.x, y: MPos.y, "type": 'line' });
             //console.log(arr_object);
-            //console.log(arr_object[0].type)
+            console.log(arr_object)
         }
 
     }

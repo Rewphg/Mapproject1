@@ -16,8 +16,8 @@ const MPos = [{
 //   }
 // var ctx = setupCanvas(document.querySelector('.my-canvas'));
 
-//const canvas = document.querySelector("#Canvas")
-// const ctx = canvas.getContext('2d')
+const canvas = document.querySelector("#Canvas")
+const ctx = canvas.getContext('2d')
 
 var mode = 0
 

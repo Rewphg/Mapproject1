@@ -1,0 +1,12 @@
+{
+    "Toilet": {
+        "Toilet1": 50
+    },
+    "Toilet1": {
+        "Toilet": 50,
+        "Toilet2": 25
+    },
+    "Toilet2": {
+        "Toilet1": 25
+    }
+}
