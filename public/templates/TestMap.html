@@ -23,38 +23,38 @@
 </style>
 
 <body>
-    
-    <div>
-        <span>Change Background</span>
-        <input type="file" name="image" id="image"  />
-        <button onclick="uploadFile();">Upload</button>
-    </div>
+    <div style="float:left; margin-top:30px;">
+        <div>
+            <span>Change Background</span>
+            <input type="file" name="image" id="image"  />
+            <button onclick="uploadFile();">Upload</button>
+        </div>
 
-    <div style="display:none;">
-        <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
-    <button id="clickbutton" onclick="toCanvas()">Display</button>
-    <img id="display" hidden>
+        <div style="display:none;">
+            <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
+            <button id="clickbutton" onclick="toCanvas()">Display</button>
+            <img id="display" hidden>
 
-        <h3>QR Code Generator</h3>
-        <form action="#" method="POST">
-            <div>
-                <input id="qr-text" type="text" placeholder="Type message QR Code..." / name="qrcode"></div>
-            <br />
-            <div>
-                <button class="qr-btn" onclick="generateQRCode()">create QR Code</button>
-            </div>
-        </form>
-    </div>
+            <h3>QR Code Generator</h3>
+            <form action="#" method="POST">
+                <div>
+                    <input id="qr-text" type="text" placeholder="Type message QR Code..." / name="qrcode"></div>
+                <br />
+                <div>
+                    <button class="qr-btn" onclick="generateQRCode()">create QR Code</button>
+                </div>
+            </form>
+        </div>
 
-    <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
-    <div>
-        <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
-        <button id="save_temp" onclick="saveTemp();">Save Draft</button>
-        <button id="clear_map" onclick="clearMap();">Clear Map</button>
-        <button id="read_temp" onclick="doRenderTemp();">Undo</button> |
-        <button id="edit_mode" onclick="Change(7);">Edit Booth</button> |
-        <button id="save_img" onclick="saveImageAndDownload();">Save To PNG</button>
-    </div>
+        <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
+        <div>
+            <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
+            <button id="save_temp" onclick="saveTemp();">Save Draft</button>
+            <button id="clear_map" onclick="clearMap();">Clear Map</button>
+            <button id="read_temp" onclick="doRenderTemp();">Undo</button> |
+            <button id="edit_mode" onclick="Change(7);">Edit Booth</button> |
+            <button id="save_img" onclick="saveImageAndDownload();">Save To PNG</button>
+        </div>
 
     <canvas id="canvas" width="1000" height="1000"></canvas> <br> <br>
     <div class="form-popup" id="CreateForm">
@@ -87,7 +87,7 @@
     </div>
     </div>
 
-    <div id="MenuContainer">
+    <div id="MenuContainer"  style="float:left; margin-top:90px;">
         <div>
             <button id="CLICKME" class="open-button" onclick="Change(2)">Toilet<img src=".\static\Icons\toilet.png"
                     width="50" length="50"></button>
@@ -125,7 +125,7 @@
         var current_booth;
         var arr_object = [];
         console.log(arr_object);
-        var user = '{{username}}'
+        var user = '{{username.strip()}}'
         var pid = '{{pid}}'
         var imgUri = "";
 
@@ -170,7 +170,7 @@
         }
 
         function refreshServer() {
-            $.getJSON("/org/{{username}}/project/{{pid}}/json", function (d) {
+            $.getJSON("/org/{{username.strip()}}/project/{{pid}}/json", function (d) {
                 //console.log(d.object);
                 // Put the object into storage
                 if (localStorage.getItem('mapObject') != null) {
@@ -187,12 +187,12 @@
             arr_object = [];
             saveTemp();
             doRenderTemp()
-            if(imgUri != "") {
-                arr_object.push({
-                            "filename":imgUri,
-                            "type": "background"
-                        });
-            }
+            // if(imgUri != "") {
+            //     arr_object.push({
+            //                 "filename":imgUri,
+            //                 "type": "background"
+            //             });
+            // }
         }
 
         function saveTemp() {
@@ -320,17 +320,17 @@
                         contentType: false,
                         success: function (data) {
                             alert('success');
-                            imgUri = "../../org/background/{{pid}}/" + data.filename;
+                            imgUri = "../../org/background/{{pid}}/" + data.filename + "/" + new Date().getMilliseconds();
                             arr_object.push({
-                            "filename":"../../org/background/{{pid}}/" + data.filename,
+                            "filename":"../../org/background/{{pid}}/" + data.filename + "/" + new Date().getMilliseconds(),
                             "type": "background"
                         });
                             console.log(data);
-                            preview2("../../org/background/{{pid}}/" + data.filename);
+                            preview2("../../org/background/{{pid}}/" + data.filename + "/" + new Date().getMilliseconds());
                             
                         }
                     });
-                } else {อก
+                } else {
                     alert('Not a valid image!');
                 }
             } else {

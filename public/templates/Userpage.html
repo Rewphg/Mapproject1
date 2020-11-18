@@ -19,10 +19,9 @@
             <div id="nav-content" tabindex="0">
                 <ul>
                     <li><a href="#0" onclick="Open('FormContainer')">Booth</a></li>
-                    <li><a href="#0">Icons</a></li>
-                    <li><a href="#0">Information</a></li>
-                    <li><a href="#0">Support</a></li>
-                    <li><a href="http://localhost:5000/user">Exit</a></li>
+                    <li id="toiletMenu"><a href="#0">Toilet</a></li>
+                    <li id="infoMenu"><a href="#0">Information</a></li>
+                    <li><a href="http://localhost:5000/user">Exit Event</a></li>
                 </ul>
             </div>
         </div>
@@ -45,9 +44,75 @@
 
 <body>
     <canvas id="Canvas" width="200" height="400"></canvas>
+<<<<<<< HEAD
+=======
+    <script type="text/javascript" src="/static/Javascript/UserpageJs/Class.js"></script>
+    <script type="text/javascript">
+        var Pin = []
+
+        var pid = '{{pid}}'
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "http://localhost:5000/user/Homepage/" + pid + "/json", true);
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                var desc = document.getElementById("info");
+                renderData(data.object);
+                // Pin.forEach((Description, index) => {
+                //     if (Description.hasOwnProperty("title") && Description != undefined) {
+                //         desc.innerHTML += Description
+                //         console.log(Description)
+                //     }
+                // })
+            }
+        }
+
+        function renderData(data) {
+            var OldX;
+            var OldY;
+            data.forEach((el, index) => {
+
+                if (el.hasOwnProperty("type")) {
+                    console.log(el.type)
+                    Pin.push({
+                        x: el.x,
+                        y: el.y,
+                        "type": "line"
+                    });
+                    console.log(el.x, el.y)
+                }
+            })
+            data.forEach(function(el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/pin.png" || el.src == "../../../static/Icons/pin.png")) {
+                    Pin.push(new BoothClass(el.x, el.y, 50, 50, "../../../static/Icons/pin.png", el.title), '', "Pin", "black")
+                    console.log("Create Pin")
+                        // var Name = '<li><a href="#0" onclick="Open(' + i + ')">' + el.title + '</a><li>'
+                        // document.getElementById("PinList").appendChild(Name)
+                }
+            });
+
+            data.forEach(function(el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/info.png" || el.src == "../../../static/Icons/info.png")) {
+                    Pin.push(new BoothClass(el.x, el.y, 50, 50, "../../../static/Icons/info.png", el.title, '', "info", "black"))
+                    console.log("Create Info")
+                }
+            });
+
+            data.forEach(function(el, i) {
+                if (el.hasOwnProperty("src") && (el.src == "/static/Icons/toilet.png" || el.src == "../../../static/Icons/toilet.png")) {
+                    Pin.push(new BoothClass(el.x, el.y, 50, 50, "../../../static/Icons/toilet.png", el.title, "", "toilet", "black"))
+                    console.log("Create Toilet")
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript" src="/static/Javascript/RenderData.js"></script>
+>>>>>>> 6c317e2260260e410f3beba8f147661659609af1
     <form id="InfoForm" style="position: sticky;">
         <div id="FormContainer" style="display: none;">
-            <ul>
+            <ul id="PinList">
                 {% for i in range(BN) %}
                 <li><a href="#0" onclick="Open('{{i}}')">{{BoothName[i]}}</a></li>
                 {% endfor %}
@@ -55,22 +120,33 @@
             </ul>
         </div>
     </form>
+
+    <form id="Toilet" style="position: sticky;">
+        <div id="ToiletContainer" style="display: none;">
+            <ul id="ToiletList">
+                <li><a href="#0" onclick="CloseForm('FormContainer')">Close</a></li>
+            </ul>
+        </div>
+    </form>
+
     {% for i in range(BN) %}
     <div id='{{i}}' class="Discription" style="display: none;" style="position: absolute;">
         <h1 class="DiscriptionHeader">{{BoothName[i]}}</h1>
         <p class="DiscriptionBody">{{info[i]}}</p>
-        <button>
+        <a href="#0" onclick="CloseForm('{{i}}')">Close</a>
     </div>
     {% endfor %}
     <script>
         function CloseForm(id) {
             document.getElementById(id).style.display = "none"
         }
+
         function Open(Id) {
             console.log(Id)
             document.getElementById(Id).style.display = "block"
         }
     </script>
+<<<<<<< HEAD
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript" src="/static/Javascript/user.js"></script>
@@ -80,12 +156,17 @@
         <script type="text/javascript" src="/static/Javascript/toHTML.js"></script>
         <script type="text/javascript" src="/static/Javascript/UserpageJS/navigation.js"></script>
         
+=======
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+>>>>>>> 6c317e2260260e410f3beba8f147661659609af1
 </body>
 <center>
     <div class="ActionBar">
         <button class="btn" id="ZoomIn" style="margin-left: 5px;" style="margin-right: 5px;">+</button>
         <button class="btn" id="ZoomOut" style="margin-left: 5px;" style="margin-right: 5 px;">-</button>
     </div>
-    </center>
+</center>
 
 </html>

@@ -202,7 +202,7 @@ def loadtoHomepage(PID):
             with open(filepath, "r") as jsonfile:
                 mapdata = (json.load(jsonfile))
                 #json.loads(jsonfile)
-                # print(mapdata)
+                print(mapdata)
                 return jsonify(mapdata)
 
 @app.route("/mapdata.json")

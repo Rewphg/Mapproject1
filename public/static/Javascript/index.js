@@ -121,8 +121,8 @@ var EditIndex = 0
 document.getElementById("canvas").addEventListener("click", (event) => {
     event.preventDefault()
     var border = document.getElementById("canvas").getBoundingClientRect();
-    MPos.x = event.clientX - border.left - 25
-    MPos.y = event.clientY - border.top - 25
+    MPos.x = event.clientX - border.left
+    MPos.y = event.clientY - border.top
 
     if (mode == 7) {
 
@@ -200,8 +200,8 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     if (MPos.y < canvas.height && MPos.x < canvas.width) {
         On = 1
         if (mode == 1) {
-            ConX = event.clientX - border.left - 25
-            ConY = event.clientY - border.top - 25
+            ConX = event.clientX - border.left
+            ConY = event.clientY - border.top
             var index = 1
             ShowMyForm(arr_object, index)
             console.log(arr_object)

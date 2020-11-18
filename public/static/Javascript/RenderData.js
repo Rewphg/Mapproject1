@@ -1,6 +1,9 @@
-//var canvas = document.getElementById("Canvas")
-//console.log(canvas)
-//var ctx = canvas.getContext('2d');
+var canvas = document.getElementById("Canvas")
+console.log(canvas)
+var ctx = canvas.getContext('2d');
+var rect = canvas.getBoundingClientRect()
+
+var highlight = "none"
 
 ctx.canvas.width = window.innerWidth;
 ctx.canvas.height = window.innerHeight - 140;
@@ -8,9 +11,11 @@ ctx.canvas.height = window.innerHeight - 140;
 var Background = new Image()
 Background.src = "/static/Icons/Background.png"
 
-var Pin = []
-Pin.push(new BoothClass(20, 2000, 50, 50, "/static/Icons/toilet.png", "Toilet", "toilet", "Booth"))
-Pin.push(new BoothClass(30, 50, 50, 50, "/static/Icons/toilet.png", "Toilet", "toilet", "Booth"))
+Pin.forEach((Icons) => {
+    console.log(Icons)
+    if (Icons.hasOwnProperty("src"))
+        Icons.Update()
+})
 
 window.onload = function() {
 
@@ -29,7 +34,9 @@ window.onload = function() {
         ctx.drawImage(Background, 0, 0)
 
         Pin.forEach((Icons) => {
-            Icons.Update()
+            if (Icons.hasOwnProperty("src")) {
+                Icons.Update()
+            }
         })
     }
     redraw();
@@ -40,11 +47,17 @@ window.onload = function() {
     var dragStart, dragged;
 
     canvas.addEventListener('mousedown', function(evt) {
+        Pin.forEach((Icons) => {
+            Icons.fill = "black"
+        })
         document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
         lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
         lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
         dragStart = ctx.transformedPoint(lastX, lastY);
         dragged = false;
+
+        console.log(Pin[1].x)
+
     }, false);
 
     canvas.addEventListener('mousemove', function(evt) {
@@ -58,14 +71,32 @@ window.onload = function() {
         }
     }, false);
 
+    document.getElementById("toiletMenu").addEventListener('click', function() {
+        Pin.forEach((Icons) => {
+            console.log(Icons)
+            if (Icons['type'] == "toilet") {
+                console.log(Icons["type"])
+                Icons.fill = "red"
+            }
+        })
+        redraw()
+    })
+
+    document.getElementById("infoMenu").addEventListener('click', function() {
+        Pin.forEach((Icons) => {
+            console.log(Icons)
+            if (Icons['type'] == "info") {
+                console.log(Icons["type"])
+                Icons.fill = "red"
+            }
+        })
+        redraw()
+    })
+
     canvas.addEventListener('mouseup', function(evt) {
         dragStart = null;
         // if (!dragged) zoom(evt.shiftKey ? -1 : 1);
-        if (!dragged) Pin.forEach((item) => {
-            if (CheckCollition(evt.clientX, evt.clientX, item) == true) {
-                console.log("Hit")
-            }
-        })
+
     }, false);
 
     var scaleFactor = 1.1;
@@ -109,12 +140,6 @@ function trackTransforms(ctx) {
     ctx.scale = function(sx, sy) {
         xform = xform.scaleNonUniform(sx, sy);
         return scale.call(ctx, sx, sy);
-    };
-
-    var rotate = ctx.rotate;
-    ctx.rotate = function(radians) {
-        xform = xform.rotate(radians * 180 / Math.PI);
-        return rotate.call(ctx, radians);
     };
 
     var translate = ctx.translate;
