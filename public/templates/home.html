@@ -11,24 +11,24 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
         }
-
+        
         h1 {
             text-align: center;
         }
-
+                
         .switch {
             position: relative;
             display: inline-block;
             width: 60px;
             height: 34px;
         }
-
-        .switch input {
+        
+        .switch input { 
             opacity: 0;
             width: 0;
             height: 0;
         }
-
+        
         .slider {
             position: absolute;
             cursor: pointer;
@@ -40,7 +40,7 @@
             -webkit-transition: .4s;
             transition: .4s;
         }
-
+        
         .slider:before {
             position: absolute;
             content: "";
@@ -52,30 +52,29 @@
             -webkit-transition: .4s;
             transition: .4s;
         }
-
-        input:checked+.slider {
+        
+        input:checked + .slider {
             background-color: #2196F3;
         }
-
-        input:focus+.slider {
+        
+        input:focus + .slider {
             box-shadow: 0 0 1px #2196F3;
         }
-
-        input:checked+.slider:before {
+        
+        input:checked + .slider:before {
             -webkit-transform: translateX(26px);
             -ms-transform: translateX(26px);
             transform: translateX(26px);
         }
-
+        
         /* Rounded sliders */
         .slider.round {
             border-radius: 34px;
         }
-
+        
         .slider.round:before {
             border-radius: 50%;
         }
-
         .button1 {
             background-color: turquoise;
             border: none;
@@ -89,7 +88,7 @@
         }
 
         .button2 {
-            background-color: peru;
+            background-color:peru;
             border: none;
             border-radius: 5px;
             color: white;
@@ -99,7 +98,7 @@
             font-size: 14px;
             margin-left: 30px;
         }
-
+        
         .form-popup {
             display: none;
             position: fixed;
@@ -107,19 +106,17 @@
             border: 3px solid #f1f1f1;
             z-index: 9;
         }
-
         /* Add styles to the form container*/
-
+        
         .form-container {
             width: 300px;
             height: 400px;
             padding: 10px;
-            position: relative;
+            position:relative;
             background-color: white;
         }
-
         /* Full-width input fields */
-
+        
         .form-container input[type=text],
         .form-container input[type=password] {
             width: 90%;
@@ -133,28 +130,27 @@
 
 <body>
     <h1>Create your project</h1>
-    {% if Length >= 1%}
+    {% if Lenght >= 1%}
     <p>This is all project of {{user}}</p>
     {%else%}
-    <p>You did not have any project yet</p><br>
+    <p>You did not have any project yet</p><Br>
     {%endif%}
     <div>
-        {% for i in range(Length)%}
-        <!-- <form METHOD="DELETE"></form> -->
-        <button class="button1" onclick="openForm1( ' {{user}}', '{{Name[i]}}', '{{ID[i]}}' )" type="menu">{{Name[i]}} <br> {{ID[i]}}</button>
-        {% endfor %}
-        <div class="form-popup" id="Form">
-            <!-- <form action="#" class="form-container" METHOD="POST"> -->
+        {% for i in range(Lenght)%}
+        <form METHOD="DELETE"></form>
+        <button class="button1" onclick="openForm()" type="menu">{{Name[i]}} <br> {{ID[i]}}</button> {% endfor %}
+        <div class="form-popup" id="myForm">
+            <form action="#" class="form-container" METHOD="POST">
                 <h1>New Project</h1>
-                <br><button type="button" class="button2" onclick="openProject()">OPEN</button><br>
-                <br><button type="button" class="button2" onclick="open()" >RENAME</button><br>
+                <br><button type="button" class="button2">OPEN</button><br>
+                <br><button type="button" class="button2">RENAME</button><br>
                 <br><button type="button" class="button2">DELETE</button><br>
-                <br><button type="button" class="btn cancel" onclick="closeForm1()">Cancel</button>
+                <br><button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
                 <label class="switch">
                     <input type="checkbox">
                     <span class="slider round"></span>
-                </label>
-            <!-- </form> -->
+                  </label>
+            </form>
         </div>
     </div><br>
     <div>
@@ -164,58 +160,25 @@
                 <h1>New Project</h1>
                 <label for="text"><b>Project Name</b></label>
                 <input type="text" placeholder="" name="ProjectNameInput">
-                <button type="submit" class="btn" onclick="createProject()">Create</button>
+                <button type="submit" class="btn">Create</button>
                 <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
             </form>
         </div>
     </div>
-    <script>
-        var temp_pid = ""
-        var temp_username = ""
-        var temp_projname=""
-        function openProject() {
-            console.log(temp_username)
-            console.log(temp_projname)
-            console.log(temp_pid)
-            
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    // Typical action to be performed when the document is ready:
-                    // document.getElementById("demo").innerHTML = xhttp.responseText;
-                    document.write(xhttp.responseText)
-                    // console.log(xhttp.responseText)
-                }
-            };
-            xhttp.open("GET", `/org/${temp_username}/project/${temp_pid}`, true);
-            xhttp.send();
+        <script>
+            function openForm() {
+                console.log("asds")
+                document.getElementById("myForm").style.display = "block";
+            }
 
-        }
-        function openForm() {
-            console.log("asds")
-            document.getElementById("myForm").style.display = "block";
-        }
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            }
 
-        function openForm1(username,projname, pid) {
-            temp_pid = pid
-            temp_username= username
-            temp_projname= projname
-            // console.log(temp_username,temp_projname,temp_pid)
-            document.getElementById("Form").style.display = "block";
-        }
-
-        function closeForm() {
-            document.getElementById("myForm").style.display = "none";
-        }
-
-        function closeForm1() {
-            document.getElementById("Form").style.display = "none";
-        }
-
-        $('#Delete').click(function () {
-            $('.list').attr('action', '/Create/delete/{{ID[i]}}');
-            console.log("1")
-        });
-    </script>
+            $('#Delete').click(function() {
+                $('.list').attr('action', '/Create/delete/{{ID[i]}}');
+                console.log("1")
+            });
+        </script>
     </head>
 </body>

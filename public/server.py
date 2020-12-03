@@ -61,7 +61,7 @@ def singuppage():
                 print(new_username.name)
                 return redirect('/login.html')
             except:
-                return "there is not filled"
+                return "The form is not filled"
         else:
             return "Username is already taken"
     else:
@@ -80,12 +80,7 @@ def loginpage():
                 return redirect("/org/{}/project".format(D.name))
         return redirect('/org')
     else:
-        # User = Username.query.order_by(Username.date_created)
         return render_template("/login.html")
-
-# @app.route("/custom/")
-# def editorpage():
-#     return render_template("custom.html")
 
 @app.route('/create/delete/<ID>')
 def Delete_Project(ID):
@@ -163,6 +158,8 @@ def show():
 @app.route("/mapdata.json")
 def getSampleData():
     return render_template("mapdata.json")
+
+
 
 
 if __name__ == "__main__":

@@ -32,32 +32,12 @@ const ToiletIcons = []
 const Infos = []
 const lines = []
 
-// var object = [{
-//     "x":"",
-//     "y":"",
-//     "type":"",
-//     "info":{
-//         "height":"",
-//         "width":"",
-//         "src":"",
-//         "title":"",
-//         "description":""
-//     }
-// }
-// ]
-// var arr_object = []
-
-function preview(object) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-        document.getElementById("display").setAttribute("src", e.target.result);
-    };
-    reader.readAsDataURL(arr_object[0]);
-}
-
-function toCanvas() {
-    var image = document.getElementById("display").getAttribute("src");
-    canvas.style.backgroundImage = "url(" + image + ")"
+var object = {
+    "toilet": [],
+    "booth": [],
+    "info": [],
+    "route": [],
+    "map": [],
 }
 
 function animate() {
@@ -66,43 +46,35 @@ function animate() {
         Background[Background.length - 1].Draw()
     }
     requestAnimationFrame(animate)
-    var OldX;
-    var OldY;
-    arr_object.forEach((BoothIcon, index) => {
-        if (BoothIcon["type"] != 'line'){
-            BoothIcon.Update()
-        } else {
-            ctx.beginPath();
-            ctx.lineWidth = 5;
-            ctx.lineCap = "round";
-            ctx.moveTo(OldX, OldY);
-            ctx.lineTo(BoothIcon.x, BoothIcon.y);
-            ctx.strokeStyle = "#FF0000";
-            ctx.stroke();
-            OldX = BoothIcon.x;
-            OldY = BoothIcon.y;
-        }
+    object.booth.forEach((BoothIcon, index) => {
+        BoothIcon.Update()
             /*if (CheckCollitionImg(BoothIcon, Eraser) == true) {
                 BoothIcons.splice(BoothIcon, 1)
             }*/
     });
-    // arr_object.forEach((TI, index) => {
-    //     TI.Update()
-    // });
+    object.toilet.forEach((TI, index) => {
+        TI.Update()
+    });
 
-    // arr_object.forEach((TI, index) => {
-    //     TI.Update()
-    //     });
+    object.info.forEach((TI, index) => {
+            TI.Update()
+        });
 
-    // var OldX;
-    // var OldY;
-    // arr_object.forEach((P, index) => {
-    //     if (P.type == 'line') {
-    //         console.log(arr_object);
+    var OldX;
+    var OldY;
+    object.route.forEach((P,index) => {
+        //console.log(object);
 
-            
-    //     }
-    // });
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.lineCap = "round";
+        ctx.moveTo(OldX,OldY);
+        ctx.lineTo(P.x, P.y);
+        ctx.strokeStyle = "#FF0000";
+        ctx.stroke();
+        OldX = P.x;
+        OldY = P.y;
+    });
     //console.log(lines.length)
 } // .End animate
 
@@ -146,16 +118,16 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     
     if(mode==7){
         
-        arr_object.forEach((A, index) => {
+        object.booth.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
                 //BoothIcons.splice(index, 1)
-                OpenEdit(arr_object[index])
+                OpenEdit(object.booth[index])
                 EditIndex = index
 
                 qr2.set({
                     foreground: 'black', //  setup background color of qr code.
                     size: 100, // size image qr code
-                    value: arr_object[index].title + "," + arr_object[index].dis + "," + arr_object[index].x + "," + arr_object[index].y   // set text for qr
+                    value: object.booth[index].title + "," + object.booth[index].dis + "," + object.booth[index].x + "," + object.booth[index].y   // set text for qr
                 });
                 
             }
@@ -163,26 +135,41 @@ document.getElementById("canvas").addEventListener("click", (event) => {
     }
     
     if (mode == 4) {
-        arr_object.forEach((A, index) => {
+        object.booth.forEach((A, index) => {
             if (CheckCollition(MPos.x, MPos.y, A) == true) {
-                OpenEdit(arr_object[index])
+                object.booth.splice(index, 1)
+                /*OpenEdit(BoothIcons[index])
+                //EditIndex = index
+
+                qr2.set({
+                    foreground: 'black', //  setup background color of qr code.
+                    size: 100, // size image qr code
+                    value: BoothIcons[index].title + "," + BoothIcons[index].dis + "," + BoothIcons[index].x + "," + BoothIcons[index].y   // set text for qr
+                });
+                */
+            }
+        });
+
+        object.booth.forEach((A, index) => {
+            if (CheckCollition(MPos.x, MPos.y, A) == true) {
+                OpenEdit(object.booth[index])
                 EditIndex = index
 
                 qr2.set({
                     foreground: 'black', //  setup background color of qr code.
                     size: 100, // size image qr code
-                    value: arr_object[index].title // set text for qr
+                    value: object.booth[index].title // set text for qr
                 });
             }
         });
-        arr_object.forEach((B, index) => {
+        object.toilet.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                arr_object.splice(index, 1)
+                object.toilet.splice(index, 1)
             }
         });
-        arr_object.forEach((B, index) => {
+        object.info.forEach((B, index) => {
             if (CheckCollition(MPos.x, MPos.y, B) == true) {
-                arr_object.splice(index, 1)
+                object.info.splice(index, 1)
             }
         });
     }
@@ -193,49 +180,33 @@ document.getElementById("canvas").addEventListener("click", (event) => {
             ConX = event.clientX - border.left - 25
             ConY = event.clientY - border.top - 25
             var index = 1
-            ShowMyForm(arr_object, index)
+            ShowMyForm(object, index)
         }
 
         if (mode == 2) {
-            // object.toilet.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
-            arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/toilet.png", "Toilet"))
-            console.log(arr_object);
+            object.toilet.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/toilet.png", "Toilet"))
+            console.log(object);
         }
 
         if (mode == 3) {
-            arr_object.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "/static/Icons/info.png", "Info"))
-            console.log(arr_object);
+            object.info.push(new BoothIcon(MPos.x, MPos.y, 50, 50, "./static/Icons/info.png", "Info"))
+            console.log(object);
         }
 
         if (mode == 5) {
-            arr_object.push({x:MPos.x,y:MPos.y, "type": 'line'});
-            console.log(arr_object);
-            console.log(arr_object[0].type)
+            object.route.push({x:MPos.x,y:MPos.y});
+            console.log(object);
         }
 
     }
 })
 
-function initObject(arr){
-    new_arr = []
-    arr.forEach(elem => {
-        if (elem['type'] != 'line'){
-            new_arr.push(new BoothIcon(elem.x, elem.y, elem.width, elem.height, elem.src, elem.title))
-        }
-        else {
-            new_arr.push(elem)
-        }
-        
-    })
-    return new_arr
-    
-}
-
 document.getElementById("submit").addEventListener("click", function (event) {
+    event.preventDefault()
     xmlObj = new XMLHttpRequest();
-    xmlObj.open("POST", `http://localhost:5000/org/${user}/project/${pid}`, true);
+    xmlObj.open("POST", "http://localhost:5000/TestMap", true);
     xmlObj.setRequestHeader("Content-Type", "application/json");
-    var data = JSON.stringify({"object": arr_object});
+    var data = JSON.stringify(object);
     xmlObj.send(data);
     xmlObj.onreadystatechange = handleRequest();
 
@@ -248,7 +219,6 @@ document.getElementById("submit").addEventListener("click", function (event) {
             alert(xmlObj.status);
         }
     }
-    event.preventDefault()
 })
 
-// animate()
+animate()
