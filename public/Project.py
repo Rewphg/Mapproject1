@@ -1,22 +1,26 @@
 import datetime
 import os
 from os import name, path, remove
+from os.path import join
 import shutil
+from flask.app import Flask
 import pandas as pd
 import csv
+
+from pandas.core import indexing
 from hashids import Hashids
 import random
 from csv import writer
 import json
 
-# UN = "Rew"
+UN = "Rew"
 
 def AudenticateUser(UN):
     Ans = CheckDB(UN)
     return Ans
 
 def CheckDB(UN):
-    Data = pd.read_csv("ProjectID.csv")
+    Data = pd.read_csv("./static/Data/ProjectID.csv", error_bad_lines=False)
     Data.info()
     AID = []
     Aname = []
@@ -26,9 +30,20 @@ def CheckDB(UN):
             Aname.append(A.Name)
     return AID, Aname
 
+def CheckMetadata(AID):
+    PB = []
+    for ID in AID:
+        with open(os.path.join("ProjectContainer",ID,"metadata.json"), 'r') as File:
+            Data = json.load(File)
+            if Data["Public"] == True:
+                PB.append("true")
+            elif Data["Public"] == False:
+                PB.append("false")
+    return PB
+
 def GenProject(U, Pname):
     Fn = GenID()
-    append_list_as_row("ProjectID.csv", Fn, U, Pname)
+    append_list_as_row("./static/Data/ProjectID.csv", Fn, U, Pname)
     CreateFolder(Fn, U, Pname)
 
 def append_list_as_row(file_name, list_of_elem, U,Pname):
@@ -66,14 +81,14 @@ def GenID():
 
 def DeleteProject(ID):
     lines = list()
-    with open('ProjectID.csv', 'r') as readFile:
+    with open('./static/Data/ProjectID.csv', 'r') as readFile:
         reader = csv.reader(readFile)
         for row in reader:
             lines.append(row)
             for field in row:
                 if field == ID:
                     lines.remove(row)
-    with open('ProjectID.csv', 'w') as writeFile:
+    with open('./static/Data/ProjectID.csv', 'w') as writeFile:
         writer = csv.writer(writeFile)
         writer.writerows(lines)
     DeleteDIR(ID)
@@ -105,8 +120,34 @@ def CreateJson(Data, path):
 def myconverter(o):
     if isinstance(o, datetime.datetime):
         return o.__str__()
+        
+def ChangePublic(PID,OnOff) :
+    Data = ""
+    with open(os.path.join("ProjectContainer",PID,"metadata.json"), 'r') as D:
+        Data = json.load(D)
+        Data["Public"] = OnOff
+    with open(os.path.join("ProjectContainer",PID,"metadata.json"), 'w') as RD:
+        WD = json.dumps(Data, default = myconverter)
+        print(WD)
+        RD.write(WD)
 
-# CheckDB(UN)
+
+def ChangeName(New,ID):
+    lines = list()
+    with open('./static/Data/ProjectID.csv', 'r') as readFile:
+        reader = csv.reader(readFile)
+        for row in reader:
+            lines.append(row)
+            for field in row:
+                if field == ID:
+                    lines[lines.index(row)][2] = New
+    with open('./static/Data/ProjectID.csv', 'w') as writeFile:
+        writer = csv.writer(writeFile)
+        writer.writerows(lines)
+        
+CheckDB(UN)
+
+# ChangeName("Test2","AW6Dj0")
 # GenProject(UN,"helloworld")
 # DeleteProject("ABDj2G")
 # DeleteDIR("ABDj2G")

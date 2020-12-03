@@ -2,134 +2,135 @@
 <html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="static\stylesheets\format.css">
-  <link rel="stylesheet" href="\static\stylesheets\form.css">
-  <link rel="stylesheet" href="\static\stylesheets\welcome-Templatee.css">
-  <script src="/static/Javascript/main.js"></script>
-  <script src="/static/Javascript/Const.js"></script>
-  <title>Create your Template</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Welcome to Firebase Hosting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href=".\static\stylesheets\format.css">
+    <link rel="stylesheet" href=".\static\stylesheets\form.css">
+    <link rel="stylesheet" href=".\static\stylesheets\welcome-Templatee.css">
+    <script src="/static/Javascript/main.js"></script>
+    <script src="/static/Javascript/Const.js"></script>
+    <title>Create your Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
 
-  <!-- update the version number as needed -->
-  <script defer src="/__/firebase/7.22.0/firebase-app.js"></script>
-  <!-- include only the Firebase features as you need -->
-  <script defer src="/__/firebase/7.22.0/firebase-auth.js"></script>
-  <script defer src="/__/firebase/7.22.0/firebase-database.js"></script>
-  <script defer src="/__/firebase/7.22.0/firebase-messaging.js"></script>
-  <script defer src="/__/firebase/7.22.0/firebase-storage.js"></script>
-  <script defer src="/__/firebase/7.22.0/firebase-analytics.js"></script>
-  <script defer src="/__/firebase/7.22.0/firebase-remote-config.js"></script>
-  <script defer src="/__/firebase/7.22.0/firebase-performance.js"></script>
-  <!-- initialize the SDK after all desired features are loaded -->
-  <script defer src="/__/firebase/init.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/static/Javascript/main.js"></script>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.22.0/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.22.0/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.22.0/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.22.0/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.22.0/firebase-storage.js"></script>
+    <script defer src="/__/firebase/7.22.0/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/7.22.0/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/7.22.0/firebase-performance.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/Javascript/main.js"></script>
 
-<body>
-  <img src='mara.png' alt="" id="BackgoundImg">
-  <canvas id="canvas"></canvas>
-  <div id="MarkerConainer">
-    <div></div>
-  </div>
-  </div>
-  <!--Menu bar-->
-  <div class="vertical-menu">
-    <a href="#" class="active">Menu</a>
-    <div>
-  <!--Booth icon -->
-      <button class="open-button" onclick="openForm()">Booth<img
+    <body>
+        <img src='mara.png' alt="" id="BackgoundImg">
+        <canvas id="canvas"></canvas>
+        <div id="MarkerConainer">
+            <div></div>
+        </div>
+        </div>
+        <!--Menu bar-->
+        <div class="vertical-menu">
+            <a href="#" class="active">Menu</a>
+            <div>
+                <!--Booth icon -->
+                <button class="open-button" onclick="openForm()">Booth<img
           src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxjaXJjbGUgc3R5bGU9ImZpbGw6I0I5RUFGRjsiIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI1NiIvPg0KPHBhdGggc3R5bGU9ImZpbGw6IzM1Q0NGRjsiIGQ9Ik0xMzIuMTY4LDQ4MC4wOTJDMTY4Ljg2Nyw1MDAuNDE1LDIxMS4wNzgsNTEyLDI1Niw1MTJjMTQxLjM4NSwwLDI1Ni0xMTQuNjE1LDI1Ni0yNTYNCgljMC01MC4zNC0xNC41NC05Ny4yNzktMzkuNjM1LTEzNi44NjdMNDM1LjIzMiw4Mkw2Ni4wNzYsMTY4LjVsMzIuNzMsMzIuNzNsNC43NDUsMTYuNDUxTDY2LjA3Niw0MTRMMTMyLjE2OCw0ODAuMDkyeiIvPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6IzY2MkU1NzsiIHBvaW50cz0iMjgzLjY2NiwyMjAuMzYzIDI1NS42NjQsMjY4Ljg2NSAyMjcuNjYxLDIyMC4zNjMgIi8+DQo8cG9seWdvbiBzdHlsZT0iZmlsbDojNTkwRjM4OyIgcG9pbnRzPSIyNTUuNjY0LDIyMC4zNjMgMjU1LjY2NCwyNjguODY1IDI4My42NjYsMjIwLjM2MyAiLz4NCjxwb2x5Z29uIHN0eWxlPSJmaWxsOiM5ODMyNjI7IiBwb2ludHM9IjMzNi4zNTQsMjAwLjM2MiAzMjkuMDQ0LDI1NS44ODggMjg0LjYxMywyMjEuNzk0ICIvPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6IzU5MEYzODsiIHBvaW50cz0iMzc3LjM0NSwxNTkuNDE2IDM5MS44NCwyMTMuNTEzIDMzNy43NDMsMTk5LjAxOCAiLz4NCjxwb2x5Z29uIHN0eWxlPSJmaWxsOiNGRjNGODQ7IiBwb2ludHM9IjE3NS45MiwxOTcuNTg1IDE4My4yMywyNTMuMTEgMjI3LjY2MSwyMTkuMDE3ICIvPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6IzY2MkU1NzsiIHBvaW50cz0iMTM2LjQ1NywxNTkuNDE2IDEyMS45NjIsMjEzLjUxMyAxNzYuMDU5LDE5OS4wMTggIi8+DQo8cmVjdCB4PSIzNDMiIHk9IjI0OC4zMyIgc3R5bGU9ImZpbGw6I0ZGQjM0NDsiIHdpZHRoPSI0OC43MiIgaGVpZ2h0PSI2Ni4xNyIvPg0KPHJlY3QgeD0iMzEwLjMzIiB5PSIyODEuNDIiIHN0eWxlPSJmaWxsOiNGRkZGRkY7IiB3aWR0aD0iNDAuNjY3IiBoZWlnaHQ9IjMzLjA4Ii8+DQo8cmVjdCB4PSIxMzcuNjciIHk9IjI4MS40MiIgc3R5bGU9ImZpbGw6I0ZGQjM0NDsiIHdpZHRoPSI0MC42NjciIGhlaWdodD0iMzMuMDgiLz4NCjxnPg0KCTxyZWN0IHg9IjgwLjUiIHk9IjE1OCIgc3R5bGU9ImZpbGw6IzMzMzMzMzsiIHdpZHRoPSIyNC41IiBoZWlnaHQ9IjE3MC41Ii8+DQoJPHJlY3QgeD0iNDA3IiB5PSIxNTgiIHN0eWxlPSJmaWxsOiMzMzMzMzM7IiB3aWR0aD0iMjQuNSIgaGVpZ2h0PSIxNzAuNSIvPg0KPC9nPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6I0YxMzMzRjsiIHBvaW50cz0iNDQ1LjkyNCwxNjguNSA2Ni4wNzYsMTY4LjUgNzYuNzY4LDgyIDQzNS4yMzIsODIgIi8+DQo8cG9seWdvbiBzdHlsZT0iZmlsbDojQUUyODNGOyIgcG9pbnRzPSI0MzUuMjMyLDgyIDI1Ni4zMzMsODIgMjU2LjMzMywxNjguNSA0NDUuOTI0LDE2OC41ICIvPg0KPHJlY3QgeD0iMjI5LjExIiB5PSI4MiIgc3R5bGU9ImZpbGw6I0ZGRkZGRjsiIHdpZHRoPSI1NC4yIiBoZWlnaHQ9Ijg2LjUiLz4NCjxnPg0KCTxyZWN0IHg9IjI1Ni4zMyIgeT0iODIiIHN0eWxlPSJmaWxsOiNFMEUwRTA7IiB3aWR0aD0iMjYuOTc3IiBoZWlnaHQ9Ijg2LjUiLz4NCgk8cmVjdCB4PSIzMzcuNTEiIHk9IjgyIiBzdHlsZT0iZmlsbDojRTBFMEUwOyIgd2lkdGg9IjU0LjIiIGhlaWdodD0iODYuNSIvPg0KPC9nPg0KPHJlY3QgeD0iMTIwLjciIHk9IjgyIiBzdHlsZT0iZmlsbDojRkZGRkZGOyIgd2lkdGg9IjU0LjIiIGhlaWdodD0iODYuNSIvPg0KPHJlY3QgeD0iNjYuMDgiIHk9IjMxNC41IiBzdHlsZT0iZmlsbDojRjEzMzNGOyIgd2lkdGg9IjM3OS44NSIgaGVpZ2h0PSI5OS41Ii8+DQo8cmVjdCB4PSIyNTYuMzMiIHk9IjMxNC41IiBzdHlsZT0iZmlsbDojQUUyODNGOyIgd2lkdGg9IjE4OS41OSIgaGVpZ2h0PSI5OS41Ii8+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg=="
           width="50" length="50"></button>
-      <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
-          <h1>Booth</h1>
-          <label for="text"><b>Description</b></label>
-          <input type="text" placeholder="Enter your booth description here">
-          <button type="submit" class="btn">Confirm</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-      </div>
-    </div>
-  <!-- First aid icon -->
-    <div>
-      <button class="open-button" onclick="openForm()">First-Aid<img
+                <div class="form-popup" id="myForm">
+                    <form action="/action_page.php" class="form-container">
+                        <h1>Booth</h1>
+                        <label for="text"><b>Description</b></label>
+                        <input type="text" placeholder="Enter your booth description here">
+                        <button type="submit" class="btn">Confirm</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                </div>
+            </div>
+            <!-- First aid icon -->
+            <div>
+                <button class="open-button" onclick="openForm()">First-Aid<img
           src="data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgaWQ9IlhNTElEXzUxXyI+PGcgaWQ9IlhNTElEXzE4XyI+PHBhdGggaWQ9IlhNTElEXzE3NzRfIiBkPSJtMzQ2LjYyNSAxMzUuNDM4aC0xODEuMjVjLTguMjg0IDAtMTUtNi43MTYtMTUtMTV2LTU0LjEyNWMwLTI4LjI2IDIyLjk5MS01MS4yNTEgNTEuMjUxLTUxLjI1MWgxMDguNzQ4YzI4LjI2IDAgNTEuMjUxIDIyLjk5MSA1MS4yNTEgNTEuMjUxdjU0LjEyNGMwIDguMjg1LTYuNzE2IDE1LjAwMS0xNSAxNS4wMDF6bS0xNjYuMjUtMjBoMTUxLjI1di00OS4xMjVjMC0xMS43MTgtOS41MzMtMjEuMjUxLTIxLjI1MS0yMS4yNTFoLTEwOC43NDhjLTExLjcxOCAwLTIxLjI1MSA5LjUzMy0yMS4yNTEgMjEuMjUxeiIgZmlsbD0iIzU3NWE2NSIvPjwvZz48cGF0aCBpZD0iWE1MSURfMTkyOF8iIGQ9Im0zMTAuMzc0IDE1LjA2MmgtNTQuMzc0djMwaDU0LjM3NGMxMS43MTggMCAyMS4yNTEgOS41MzMgMjEuMjUxIDIxLjI1MXY0OS4xMjRoLTc1LjYyNXYyMGg5MC42MjVjOC4yODQgMCAxNS02LjcxNiAxNS0xNXYtNTQuMTI0YzAtMjguMjU5LTIyLjk5MS01MS4yNTEtNTEuMjUxLTUxLjI1MXoiIGZpbGw9IiM0NjRiNTIiLz48ZyBpZD0iWE1MSURfMjBfIj48cGF0aCBpZD0iWE1MSURfMTc3N18iIGQ9Im00MzUuNzUxIDQ5Ni45MzgtMTc5Ljc1MS0yNi45MzgtMTc5Ljc1MSAyNi45MzhjLTQyLjA0NCAwLTc2LjI0OS0zNC4yMDYtNzYuMjQ5LTc2LjI1di0yMzkuMDAxYzAtNDIuMDQ0IDM0LjIwNS03Ni4yNDkgNzYuMjQ5LTc2LjI0OWwxNzkuNzUxIDEyLjU2MiAxNzkuNzUxLTEyLjU2MmM0Mi4wNDQgMCA3Ni4yNDkgMzQuMjA1IDc2LjI0OSA3Ni4yNDl2MjM5LjAwMmMwIDQyLjA0My0zNC4yMDUgNzYuMjQ5LTc2LjI0OSA3Ni4yNDl6IiBmaWxsPSIjNDY0YjUyIi8+PC9nPjxwYXRoIGlkPSJYTUxJRF8xODgzXyIgZD0ibTQzNS43NTEgMTA1LjQzOC0xNzkuNzUxIDEwdjM3MS41bDE3OS43NTEgMTBjNDIuMDQ0IDAgNzYuMjQ5LTM0LjIwNSA3Ni4yNDktNzYuMjQ5di0yMzkuMDAyYzAtNDIuMDQ0LTM0LjIwNS03Ni4yNDktNzYuMjQ5LTc2LjI0OXoiIGZpbGw9IiMyOTJiMmYiLz48ZyBpZD0iWE1MSURfMjFfIj48cGF0aCBpZD0iWE1MSURfMTc2OF8iIGQ9Im00MzUuNzUxIDQ5Ni45MzhoLTM1OS41MDJ2LTM5MS41aDM1OS41MDJ6IiBmaWxsPSIjZjNmNWZjIi8+PC9nPjxwYXRoIGlkPSJYTUxJRF8xODgyXyIgZD0ibTI1NiAxMDUuNDM4aDE3OS43NTF2MzkxLjVoLTE3OS43NTF6IiBmaWxsPSIjZTllY2Y0Ii8+PGcgaWQ9IlhNTElEXzUyXyI+PHBhdGggaWQ9IlhNTElEXzE3NzFfIiBkPSJtMjg2LjEyNSA0MDYuNTYyaC02MC4yNWMtOC4yODQgMC0xNS02LjcxNi0xNS0xNXYtNDUuMjVoLTQ1LjI1Yy04LjI4NCAwLTE1LTYuNzE2LTE1LTE1di02MC4yNWMwLTguMjg0IDYuNzE2LTE1IDE1LTE1aDQ1LjI1di00NS4yNWMwLTguMjg0IDYuNzE2LTE1IDE1LTE1aDYwLjI1YzguMjg0IDAgMTUgNi43MTYgMTUgMTV2NDUuMjVoNDUuMjVjOC4yODQgMCAxNSA2LjcxNiAxNSAxNXY2MC4yNWMwIDguMjg0LTYuNzE2IDE1LTE1IDE1aC00NS4yNXY0NS4yNWMwIDguMjg1LTYuNzE2IDE1LTE1IDE1eiIgZmlsbD0iI2Q3MzQyNCIvPjwvZz48cGF0aCBpZD0iWE1MSURfMTkyNF8iIGQ9Im0zNDYuMzc1IDI1Ni4wNjJoLTQ1LjI1di00NS4yNWMwLTguMjg0LTYuNzE2LTE1LTE1LTE1aC0zMC4xMjV2MjEwLjc1aDMwLjEyNWM4LjI4NCAwIDE1LTYuNzE2IDE1LTE1di00NS4yNWg0NS4yNWM4LjI4NCAwIDE1LTYuNzE2IDE1LTE1di02MC4yNWMwLTguMjg0LTYuNzE2LTE1LTE1LTE1eiIgZmlsbD0iI2IzMTEzYiIvPjwvZz48L3N2Zz4="
           width="50" length="50"></button>
-      <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
-          <h1>Login</h1>
-          <label for="text"><b>First-Aid</b></label>
-          <input type="text" placeholder="">
-          <button type="submit" class="btn">Confirm</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-      </div>
-    </div>
-<!--Toilet icon -->
-    <div>
-      <button class="open-button" onclick="openForm()">Toilet<img
+                <div class="form-popup" id="myForm">
+                    <form action="/action_page.php" class="form-container">
+                        <h1>Login</h1>
+                        <label for="text"><b>First-Aid</b></label>
+                        <input type="text" placeholder="">
+                        <button type="submit" class="btn">Confirm</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                </div>
+            </div>
+            <!--Toilet icon -->
+            <div>
+                <button class="open-button" onclick="openForm()">Toilet<img
           src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHBhdGggc3R5bGU9ImZpbGw6IzQzOThEMTsiIGQ9Ik0zMjguNTMzLDIyMS44Njd2MTE5LjQ2N2gzNC4xMzNWNDYwLjhINDQ4VjM0MS4zMzNoMzQuMTMzVjIyMS44NjdjMC0yOC4yNzktMjIuOTIxLTUxLjItNTEuMi01MS4yDQoJaC01MS4yQzM1MS40NTQsMTcwLjY2NywzMjguNTMzLDE5My41ODcsMzI4LjUzMywyMjEuODY3eiIvPg0KPHBhdGggc3R5bGU9ImZpbGw6IzQxOTNDOTsiIGQ9Ik00NjguMDExLDE4Ni42MjRjLTExLjMwNyw2OS4yMjItNDkuMDg0LDEzMS4zMzctMTA1LjM0NCwxNzMuMjE4VjQ2MC44SDQ0OFYzNDEuMzMzaDM0LjEzM1YyMjEuODY3DQoJQzQ4Mi4xNDIsMjA4Ljc0Miw0NzcuMDgyLDE5Ni4xMTMsNDY4LjAxMSwxODYuNjI0eiIvPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6IzQzOThEMTsiIHBvaW50cz0iODEuMDY3LDE3MC42NjcgMjkuODY3LDM0MS4zMzMgNzIuNTMzLDM0MS4zMzMgNzIuNTMzLDQ2MC44IDE1Ny44NjcsNDYwLjggMTU3Ljg2NywzNDEuMzMzIA0KCTIwMC41MzMsMzQxLjMzMyAxNDkuMzMzLDE3MC42NjcgIi8+DQo8cGF0aCBzdHlsZT0iZmlsbDojNDE5M0M5OyIgZD0iTTcyLjUzMywzNTguODYxVjQ2MC44aDg1LjMzM1YzNDEuMzMzaDQyLjY2N2wtMzAuNTQ5LTEwMS44Mg0KCUMxNDguODk4LDI4Ny4zNzcsMTE1LjIxNywzMjguNjI3LDcyLjUzMywzNTguODYxeiIvPg0KPGNpcmNsZSBzdHlsZT0iZmlsbDojNDM5OEQxOyIgY3g9IjExNS4yIiBjeT0iOTMuODciIHI9IjQyLjY2NyIvPg0KPHJlY3QgeD0iMTA2LjY3IiB5PSIzMzIuOCIgc3R5bGU9ImZpbGw6IzM5OENDNDsiIHdpZHRoPSIxNy4wNyIgaGVpZ2h0PSIxMjgiLz4NCjxjaXJjbGUgc3R5bGU9ImZpbGw6IzQzOThEMTsiIGN4PSI0MDUuMzMiIGN5PSI5My44NyIgcj0iNDIuNjY3Ii8+DQo8cmVjdCB4PSIyNTEuNzMiIHN0eWxlPSJmaWxsOiM5N0QzRTY7IiB3aWR0aD0iMTcuMDciIGhlaWdodD0iNTEyIi8+DQo8Zz4NCgk8cmVjdCB4PSIzNTQuMTMiIHk9IjIzMC40IiBzdHlsZT0iZmlsbDojMzk4Q0M0OyIgd2lkdGg9IjE3LjA3IiBoZWlnaHQ9IjExMC45MyIvPg0KCTxyZWN0IHg9IjQzOS40NyIgeT0iMjMwLjQiIHN0eWxlPSJmaWxsOiMzOThDQzQ7IiB3aWR0aD0iMTcuMDciIGhlaWdodD0iMTEwLjkzIi8+DQoJPHJlY3QgeD0iMzk2LjgiIHk9IjMzMi44IiBzdHlsZT0iZmlsbDojMzk4Q0M0OyIgd2lkdGg9IjE3LjA3IiBoZWlnaHQ9IjEyOCIvPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo="
           width="50" length="50"></button>
-      <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
-          <h1>Login</h1>
-          <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="">
-          <button type="submit" class="btn">Confirm</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-      </div>
-    </div>
-<!-- text box icon -->
-    <div>
-      <button class="open-button" onclick="openForm()">Text Box<img
+                <div class="form-popup" id="myForm">
+                    <form action="/action_page.php" class="form-container">
+                        <h1>Login</h1>
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="">
+                        <button type="submit" class="btn">Confirm</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                </div>
+            </div>
+            <!-- text box icon -->
+            <div>
+                <button class="open-button" onclick="openForm()">Text Box<img
           src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMXB0IiB2aWV3Qm94PSItMSAxIDUxMSA1MTEuOTk5IiB3aWR0aD0iNTExcHQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTE1LjUgMTYyaDM5LjMyODEyNWM4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE1cy02LjcxNDg0NC0xNS0xNS0xNWgtMzkuMzI4MTI1Yy04LjI4NTE1NiAwLTE1IDYuNzE0ODQ0LTE1IDE1czYuNzE0ODQ0IDE1IDE1IDE1em0wIDAiLz48cGF0aCBkPSJtMTUuNSAyNjEuOTk2MDk0YzguMjg1MTU2IDAgMTUtNi43MTQ4NDQgMTUtMTV2LTM5LjMyODEyNWMwLTguMjg1MTU3LTYuNzE0ODQ0LTE1LTE1LTE1cy0xNSA2LjcxNDg0My0xNSAxNXYzOS4zMjgxMjVjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNXptMCAwIi8+PHBhdGggZD0ibTE1LjUgMzYxLjMzNTkzOGM4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE1di0zOS4zMjgxMjZjMC04LjI4NTE1Ni02LjcxNDg0NC0xNS0xNS0xNXMtMTUgNi43MTQ4NDQtMTUgMTV2MzkuMzI4MTI2YzAgOC4yODUxNTYgNi43MTQ4NDQgMTUgMTUgMTV6bTAgMCIvPjxwYXRoIGQ9Im0zMC41IDQ0Ni4zMzU5Mzh2LTM5LjMyODEyNmMwLTguMjg1MTU2LTYuNzE0ODQ0LTE1LTE1LTE1cy0xNSA2LjcxNDg0NC0xNSAxNXYzOS4zMjgxMjZjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNXMxNS02LjcxNDg0NCAxNS0xNXptMCAwIi8+PHBhdGggZD0ibTY1LjE2MDE1NiA0ODJoLTM5LjMyODEyNWMtOC4yODUxNTYgMC0xNSA2LjcxNDg0NC0xNSAxNSAwIDguMjgxMjUgNi43MTQ4NDQgMTUgMTUgMTVoMzkuMzI4MTI1YzguMjg1MTU2IDAgMTUtNi43MTg3NSAxNS0xNSAwLTguMjg1MTU2LTYuNzE0ODQ0LTE1LTE1LTE1em0wIDAiLz48cGF0aCBkPSJtMTY1LjE1NjI1IDQ4MmgtMzkuMzMyMDMxYy04LjI4MTI1IDAtMTUgNi43MTQ4NDQtMTUgMTUgMCA4LjI4MTI1IDYuNzE4NzUgMTUgMTUgMTVoMzkuMzMyMDMxYzguMjgxMjUgMCAxNS02LjcxODc1IDE1LTE1IDAtOC4yODUxNTYtNi43MTQ4NDQtMTUtMTUtMTV6bTAgMCIvPjxwYXRoIGQ9Im0yNjUuMjc3MzQ0IDQ4MmgtMzkuMzI4MTI1Yy04LjI4NTE1NyAwLTE1IDYuNzE0ODQ0LTE1IDE1IDAgOC4yODEyNSA2LjcxNDg0MyAxNC45OTYwOTQgMTUgMTQuOTk2MDk0aDM5LjMyODEyNWM4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE0Ljk5NjA5NCAwLTguMjg1MTU2LTYuNzE0ODQ0LTE1LTE1LTE1em0wIDAiLz48cGF0aCBkPSJtMzY1LjE1MjM0NCA0ODJoLTM5LjMzMjAzMmMtOC4yODEyNSAwLTE1IDYuNzE0ODQ0LTE1IDE1IDAgOC4yODEyNSA2LjcxODc1IDE0Ljk5NjA5NCAxNSAxNC45OTYwOTRoMzkuMzMyMDMyYzguMjgxMjUgMCAxNS02LjcxNDg0NCAxNS0xNC45OTYwOTQgMC04LjI4NTE1Ni02LjcxODc1LTE1LTE1LTE1em0wIDAiLz48cGF0aCBkPSJtNDk1LjQ4ODI4MSA5MGM4LjI4NTE1NyAwIDE1LTYuNzE0ODQ0IDE1LTE1di02MGMwLTguMjg1MTU2LTYuNzE0ODQzLTE1LTE1LTE1aC02MGMtOC4yODUxNTYgMC0xNSA2LjcxNDg0NC0xNSAxNXYxNWgtMjYwdi0xNWMwLTguMjg1MTU2LTYuNzE0ODQzLTE1LTE1LTE1aC02MGMtOC4yODEyNSAwLTE1IDYuNzE0ODQ0LTE1IDE1djYwYzAgOC4yODUxNTYgNi43MTg3NSAxNSAxNSAxNWgxNXYyNjBoLTE1Yy04LjI4MTI1IDAtMTUgNi43MTQ4NDQtMTUgMTV2NjBjMCA4LjI4MTI1IDYuNzE4NzUgMTUgMTUgMTVoNjBjOC4yODUxNTcgMCAxNS02LjcxODc1IDE1LTE1di0xNWgxOTAuMDExNzE5djI3LjE3MTg3NWMwIDguMjg1MTU2IDYuNzE0ODQ0IDE1IDE1IDE1IDguMjgxMjUgMCAxNC45OTYwOTQtNi43MTQ4NDQgMTQuOTk2MDk0LTE1di0yNy4xNzE4NzVoMzkuOTkyMTg3djE1YzAgOC4yODEyNSA2LjcxNDg0NCAxNSAxNSAxNWg2MGM4LjI4NTE1NyAwIDE1LTYuNzE4NzUgMTUtMTV2LTYwYzAtOC4yODUxNTYtNi43MTQ4NDMtMTUtMTUtMTVoLTE1di0yNjB6bS00NS02MGgzMHYzMGgtMzB6bS0zNTAgMGgzMHYzMGgtMzB6bTMwIDM4MGgtMzB2LTMwaDMwem0zNTAgMGgtMzB2LTMwaDMwem0tMzAtNjBoLTE1Yy04LjI4NTE1NiAwLTE1IDYuNzE0ODQ0LTE1IDE1djE1aC0yNjB2LTE1YzAtOC4yODUxNTYtNi43MTQ4NDMtMTUtMTUtMTVoLTE1di0yNjBoMTVjOC4yODUxNTcgMCAxNS02LjcxNDg0NCAxNS0xNXYtMTVoMjYwdjE1YzAgOC4yODUxNTYgNi43MTQ4NDQgMTUgMTUgMTVoMTV6bTAgMCIvPjxwYXRoIGQ9Im0zNzYuNDg4MjgxIDEwNmgtMTc0Yy04LjI4MTI1IDAtMTUgNi43MTQ4NDQtMTUgMTV2MzZjMCA4LjI4NTE1NiA2LjcxODc1IDE1IDE1IDE1IDguMjg1MTU3IDAgMTUtNi43MTQ4NDQgMTUtMTV2LTIxaDU3djE2OGgtMTBjLTguMjgxMjUgMC0xNSA2LjcxNDg0NC0xNSAxNSAwIDguMjgxMjUgNi43MTg3NSAxNSAxNSAxNWg1MGM4LjI4NTE1NyAwIDE1LTYuNzE4NzUgMTUtMTUgMC04LjI4NTE1Ni02LjcxNDg0My0xNS0xNS0xNWgtMTB2LTE2OGg1N3YyMWMwIDguMjg1MTU2IDYuNzE0ODQ0IDE1IDE1IDE1IDguMjg1MTU3IDAgMTUtNi43MTQ4NDQgMTUtMTV2LTM2YzAtOC4yODUxNTYtNi43MTQ4NDMtMTUtMTUtMTV6bTAgMCIvPjwvc3ZnPg=="
           width="50" length="50"></button>
-      <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
-          <h1>Login</h1>
-          <label for="text"><b>Text Box</b></label>
-          <input type="text" placeholder="">
-          <button type="submit" class="btn">Confirm</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-      </div>
-    </div>
-<!-- Information icon -->
-    <div>
-      <button class="open-button" onclick="openForm()">Information<img
+                <div class="form-popup" id="myForm">
+                    <form action="/action_page.php" class="form-container">
+                        <h1>Login</h1>
+                        <label for="text"><b>Text Box</b></label>
+                        <input type="text" placeholder="">
+                        <button type="submit" class="btn">Confirm</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Information icon -->
+            <div>
+                <button class="open-button" onclick="openForm()">Information<img
           src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTExLjk3OSA1MTEuOTc5IiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMS45NzkgNTExLjk3OSIgd2lkdGg9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Zz48cGF0aCBkPSJtNDM3LjAwMiA3NC45NzhjLTQ4LjM1MS00OC4zNTEtMTEyLjYzNS03NC45NzgtMTgxLjAxMi03NC45NzhzLTEzMi42NjIgMjYuNjI3LTE4MS4wMTIgNzQuOTc4Yy00OC4zNTEgNDguMzUtNzQuOTc4IDExMi42MzQtNzQuOTc4IDE4MS4wMTJzMjYuNjI3IDEzMi42NjIgNzQuOTc4IDE4MS4wMTIgMTEyLjYzNSA3NC45NzggMTgxLjAxMiA3NC45NzggMTMyLjY2Mi0yNi42MjcgMTgxLjAxMi03NC45NzggNzQuOTc4LTExMi42MzUgNzQuOTc4LTE4MS4wMTItMjYuNjI4LTEzMi42NjItNzQuOTc4LTE4MS4wMTJ6IiBmaWxsPSIjZmZjZDcwIi8+PHBhdGggZD0ibTMwNy4wMDcgMzc5LjQ3M3YtMTcxLjAzNGgtODQuODY5LTE1LTM5LjMyM3YzMGgzOS4zMjN2MTQxLjAzNGgtMzkuMzIzdjMwaDM5LjMyMyA5OS44NjkgMzkuMzIzdi0zMHoiIGZpbGw9IiMwMDc4YTgiLz48cGF0aCBkPSJtMjA3LjEzOCA4NC4yNDhoOTkuODY5djk5Ljg2OWgtOTkuODY5eiIgZmlsbD0iIzAwNzhhOCIvPjxwYXRoIGQ9Im00MzcuMDAyIDc0Ljk3OGMtNDguMzUxLTQ4LjM1MS0xMTIuNjM1LTc0Ljk3OC0xODEuMDEyLTc0Ljk3OHY1MTEuOTc5YzY4LjM3NyAwIDEzMi42NjItMjYuNjI3IDE4MS4wMTItNzQuOTc4czc0Ljk3OC0xMTIuNjM1IDc0Ljk3OC0xODEuMDEyLTI2LjYyOC0xMzIuNjYxLTc0Ljk3OC0xODEuMDExeiIgZmlsbD0iI2ZmYWM2MyIvPjxnIGZpbGw9IiMwMDVmOTAiPjxwYXRoIGQ9Im0yNTUuOTkgODQuMjQ4aDUxLjAxN3Y5OS44NjloLTUxLjAxN3oiLz48cGF0aCBkPSJtMzA3LjAwNyAzNzkuNDczdi0xNzEuMDM0aC01MS4wMTd2MjAxLjAzNGg1MS4wMTcgMzkuMzIzdi0zMHoiLz48L2c+PC9nPjwvc3ZnPg=="
           width="50" length="50"></button>
-      <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
-          <h1>Login</h1>
-          <label for="text"><b>Information</b></label>
-          <input type="text" placeholder="">
-          <button type="submit" class="btn">Confirm</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-      </div>
-    </div>
-    <!-- Back button -->
-    <a href="#">
-      <button>Back</button>
-    </a>
+                <div class="form-popup" id="myForm">
+                    <form action="/action_page.php" class="form-container">
+                        <h1>Login</h1>
+                        <label for="text"><b>Information</b></label>
+                        <input type="text" placeholder="">
+                        <button type="submit" class="btn">Confirm</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Back button -->
+            <a href="#">
+                <button>Back</button>
+            </a>
 
-    <script>
-      function openForm() {
-        document.getElementById("myForm").style.display = "block";
-      }
-      function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-      }
-    </script>
-  </div>
-  <script src="main.js"></script>
-</body>
-<!--<script>
+            <script>
+                function openForm() {
+                    document.getElementById("myForm").style.display = "block";
+                }
+
+                function closeForm() {
+                    document.getElementById("myForm").style.display = "none";
+                }
+            </script>
+        </div>
+        <script src="main.js"></script>
+    </body>
+    <!--<script>
        if (typeof FunctionName == 'function') { 
         FunctionName(); 
 }else{
@@ -137,4 +138,5 @@
 }
 </script>
 -->
+
 </html>
