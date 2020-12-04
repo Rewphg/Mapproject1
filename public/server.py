@@ -78,7 +78,7 @@ def singuppage():
         User = Username.query.order_by(Username.date_created)
         return render_template("/signup.html")
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/org", methods=["GET", "POST"])
 def loginpage():
     if request.method == "POST":
         username = request.form['username']
@@ -138,21 +138,6 @@ def ProjID(name,PID):
         return render_template("/TestMap.html", username=name, pid=PID)
     # else:
     #     return redirect("/org")
-
-@app.route("/org", methods=["GET", "POST"])
-def loginpage():
-    if request.method == "POST":
-        username = request.form['username']
-        password = request.form['pass']
-        Data = Username.query.order_by(Username.date_created)
-        for D in Data:
-            if D.name == username and D.Password == password:
-                session["user"] = D.name
-                return redirect("/org/{}/project".format(session["user"]))
-        return redirect("/org")
-    else:
-        User = Username.query.order_by(Username.date_created)
-        return render_template("/org.html", User=User)
 
 @app.route("/org/<name>/project/<PID>/save", methods=["GET", "POST"])
 def  MapEditerPage(name, PID): 
