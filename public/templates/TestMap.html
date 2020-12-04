@@ -23,15 +23,17 @@
 </style>
 
 <body>
-    <div style="display:none;">
+    
 
-<form action="#" method="POST"></form>
+
     <input type="file" id="namebox1" onchange="preview(this)" name="template"> <br> <br>
     <button id="clickbutton" onclick="toCanvas()">Display</button>
     <img id="display" hidden>
-    </form>
-    <h3>QR Code Generator</h3>
+    
 
+    
+<div style="display:none;">
+    <h3>QR Code Generator</h3>
     <form action="#" method="POST">
         <div>
             <input id="qr-text" type="text" placeholder="Type message QR Code..." / name="qrcode"></div>
@@ -43,15 +45,12 @@
     </div>
     
 
-    <form action="#" method="post" role="form">
-        <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
-    </form>
+   <button class="btn btn-primary" name="submit" id="sent">Submit/Save</button>
+  
 
     <div>
-
         <button id="refresh_sv" onclick="refreshServer();">Refresh Form Server</button>
         <button id="save_temp" onclick="saveTemp();">Save Draft</button>
-
         <button id="clear_map" onclick="clearMap();">Clear Map</button>
         <button id="read_temp" onclick="doRenderTemp();">Undo</button> |
         <button id="edit_mode" onclick="Change(7);">Edit Booth</button> |
@@ -65,9 +64,9 @@
         <form class="form-container" method="GET">
             <h1>BoothInfo</h1>
             <label for="text"><b>Booth Name</b></label>
-            <input id="DisName" type="text" placeholder="Name" name="boothname">
+            <input id="DisName" type="text" placeholder="Name" name="boothname" onchange="updateQrCode();">
             <label for="text"><b>Overview</b></label>
-            <input id="Description" type="text" placeholder="This booth is...." name="boothdesc">
+            <input id="Description" type="text" placeholder="This booth is...." name="boothdesc" onchange="updateQrCode();">
             <input type="button" class="btn" onclick="DisplayInfo()" placeholder="Title" name="boothname"></input>
             <button type="button" class="btn cancel" onclick="Close('CreateForm')">Close</button>
         </form>
@@ -77,9 +76,9 @@
         <form class="form-container">
             <h1>Edit Booth Information</h1>
             <label for="text"><b>Booth Name</b></label>
-            <input id="EditName" type="text" placeholder="New Name">
+            <input id="EditName" type="text" placeholder="New Name" onchange="updateQrCode2();">
             <label for="text"><b>Overview</b></label>
-            <input id="EditDis" type="text" placeholder="New Discription">
+            <input id="EditDis" type="text" placeholder="New Discription" onchange="updateQrCode2();">
             <button type="button" class="btn" onclick="ApplyEditBoothInfo()">Add Booth</button>
             <button type="button" class="btn cancel" onclick="Close('EditForm')">Close</button>
         </form>
@@ -96,14 +95,17 @@
             <button class="open-button" onclick="Change(1)">Booth<img src="./static/Icons/pin.png" width="50"
           length="50"></button>
         </div>
+
         <div>
             <button class="open-button" onclick="Change(3)">Info<img src="./static/Icons/info.png" width="50"
           length="50"></button>
         </div>
+
         <div>
             <button class="open-button" onclick="Change(4)">Edit/Delete<img src="./static/Icons/Eraser.png" width="50"
           length="50"></button>
         </div>
+
         <div>
             <button class="open-button" onclick="Change(5)">Route<img src="./static/Icons/route.png" width="50"
           length="50"></button>
@@ -118,7 +120,7 @@
         <script type=text/javascript src="{{url_for('static', filename='Javascript/displayimage.js')}}"></script>
 
         <script type="text/javascript">
-
+            var current_booth;
             var arr_object = [];
             console.log(arr_object);
             var user = '{{username}}'
@@ -165,18 +167,17 @@
             }
 
             function refreshServer() {
-                // $.getJSON("/org/{{username}}/project/{{pid}}/json", function(data) {
-                //     savedContent = data;
-
-                //     // Put the object into storage
-                //     if (localStorage.getItem('mapObject') != null) {
-                //         localStorage.setItem('mapsObject', JSON.stringify(savedContent));
-                //         renderData(data);
-                //     }
-
-                // }).fail(function() {
-                //     console.log("An error has occurred.");
-                // });
+                $.getJSON("/org/{{username}}/project/{{pid}}/json", function(d) {
+                    //console.log(d.object);
+                    // Put the object into storage
+                    if (localStorage.getItem('mapObject') != null) {
+                        localStorage.setItem('mapsObject', JSON.stringify(d.object));
+                    }
+                    renderData(d.object);
+                    
+                }).fail(function() {
+                    console.log("An error has occurred.");
+                });
             }
 
             function clearMap() {
@@ -249,6 +250,30 @@
                 downloadLink.setAttribute('href', url);
                 downloadLink.click();
 
+            }
+
+            function updateQrCode(){
+                var title = $("#DisName").val();
+                var desc = $("#Description").val();
+                var new_x = MPos.x;
+                var new_y = MPos.y;
+                qr.set({
+                    foreground: 'black', //  setup background color of qr code.
+                    size: 100, // size image qr code
+                    value: title + "," + desc + "," + new_x + "," + new_y // set text for qr
+                });
+            }
+
+            function updateQrCode2(){
+                var title = $("#EditName").val();
+                var desc = $("#EditDis").val();
+                var new_x = current_booth.x;
+                var new_y = current_booth.y;
+                qr2.set({
+                    foreground: 'black', //  setup background color of qr code.
+                    size: 100, // size image qr code
+                    value: title + "," + desc + "," + new_x + "," + new_y // set text for qr
+                });
             }
 
             //setInterval(saveTemp,15000);

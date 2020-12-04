@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="\static\stylesheets\Userpage.css">
+    <script type="text/javascript" src="/static/Javascript/RenderData.js"></script>
+    <ul>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Icons</a>
+            <div class="dropdown-content">
+                <a href="#">Booth</a>
+                <a href="#">Info</a>
+                <a href="#">Toilet</a>
+            </div>
+        </li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to {{RoomName}}</title>
+</head>
+
+<body>
+    <div id="SearchBox">
+        <input type="text" id="current" placeholder="Your location">
+        <p1> to </p1>
+        <input type="text" id="destination" placeholder="Your Destination">
+    </div>
+    <canvas id="Canvas" width="200" height="400"></canvas>
+    <div>
+        <span id="minus">-Zoom Out</span>&nbsp;&nbsp;<span id="plus">+Zoom In</span>
+    </div>
+</body>
+
+</html>
