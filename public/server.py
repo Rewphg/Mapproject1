@@ -105,6 +105,7 @@ def ProjectPage(name):
             usr = session["user"]
             PID, Pname = CH.CheckDB(usr)
             PB = CH.CheckMetadata(PID)
+            print(PB)
             Number = len(PID)
             app.logger.info(PB)
             return render_template("/home.html", user=usr, ID=PID, Name=Pname, Length = Number, PB=PB)
@@ -126,6 +127,12 @@ def RenameProject(PID,New):
     CH.ChangeName(New,PID)
     app.logger.info("Rename")
     return redirect("/org/{}/project".format(session["user"]))
+
+@app.route("/org/project/<PID>/public/<ispublic>", methods=["PUT"])
+def Switchpublic(PID,ispublic):
+    CH.ChangePublic(PID,ispublic)
+    return ""
+
 
 @app.route("/org/<name>/project/<PID>", methods=["GET","POST"])
 def ProjID(name,PID):
@@ -166,9 +173,15 @@ def getJson(name,PID):
 def getImage(Image, Name):
     return send_file(os.path.join("static","Icons", Image), mimetype='image/gif')
 
-@app.route("/test_template.html")
-def show():
-    return render_template("test_template.html")
+#Test Zone
+@app.route("/user/<PID>/", methods=["GET"])
+def toHTML(PID):
+    if request.method == "GET":
+        filepath = os.path.join("ProjectContainer", PID, "Data", "mapdata.json")
+        if path.exists(filepath) == True:
+            with open(filepath, "r") as jsonfile:
+                json.load(jsonfile)
+                return render_template("test_template.html",  pid=PID)
 
 @app.route("/mapdata.json")
 def getSampleData():

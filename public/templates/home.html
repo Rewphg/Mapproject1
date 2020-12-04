@@ -131,29 +131,49 @@
 
 <body>
     <h1>Create your project</h1>
-    {% if Lenght >= 1%}
+    {% if Length >= 1%}
     <p>This is all project of {{user}}</p>
     {%else%}
     <p>You did not have any project yet</p><br> {%endif%}
     <div>
         {% for i in range(Length)%}
         <!-- <form METHOD="DELETE"></form> -->
-        <button class="button1" onclick="openForm1( ' {{user}}', '{{Name[i]}}', '{{ID[i]}}' )" type="menu">{{Name[i]}}
+        <button class="button1" onclick="openForm1( ' {{user}}', '{{Name[i]}}', '{{ID[i]}}', '{{PB[i]}}' )" type="menu">{{Name[i]}}
             <br> {{ID[i]}}</button> {% endfor %}
         <div class="form-popup" id="Form">
             <!-- <form action="#" class="form-container" METHOD="POST"> -->
             <h1>New Project</h1>
             <br><button type="button" class="button2" onclick="openProject()">OPEN</button><br>
-            <br><button type="button" class="button2" onclick="openRenameForm( ' {{Name[i]}} ', '{{ID[i]}}' )">RENAME</button><br>
+            <br><button type="button" class="button2" onclick="openRenameForm()">RENAME</button><br>
             <br><button type="button" class="button2" onclick="deleteProject()">DELETE</button><br>
             <br><button type="button" class="btn cancel" onclick="closeForm1()">Cancel</button>
             <label class="switch">
-                {% if PB[i] == "true" %}
-                    <input type="checkbox" checked>
-                {% else%}
-                    <input type="checkbox">
-                {%endif%}
-                <span class="slider round"></span>
+                <input type="checkbox" id="checkbox" onclick="togglepublic()">
+                <span class="slider round" id="public"></span>
+                <script>
+                    var temp_pid = ""
+                    var temp_username = ""
+                    var temp_projname = ""
+                    var temp_NewProjectName = ""
+                    var temp_pb = ""
+                    
+                    function togglepublic() {
+                        checked = true
+                        if (checkbox.checked == true) {
+                            checked = true 
+                        }else{
+                            checked = false
+
+                        }
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                            }
+                        };
+                        xhttp.open("PUT", `/org/project/${temp_pid}/public/${checked}`, true);
+                        xhttp.send();
+                    }
+                </script>
             </label>
             <!-- </form> -->
         </div>
@@ -183,10 +203,7 @@
         </div>
     </div>
     <script>
-        var temp_pid = ""
-        var temp_username = ""
-        var temp_projname = ""
-        var temp_NewProjectName = ""
+       
 
         function openProject() {
             console.log(temp_username)
@@ -244,11 +261,19 @@
             document.getElementById("RenameForm").style.display = "none";
         }
 
-        function openForm1(username, projname, pid) {
+        function openForm1(username, projname, pid, pb) {
             temp_pid = pid
             temp_username = username
             temp_projname = projname
+            temp_pb = pb
                 // console.log(temp_username,temp_projname,temp_pid)
+            checkbox = document.getElementById("checkbox") 
+            if (temp_pb == 'true'){
+                checkbox.checked = true
+            }
+            else {
+                checkbox.checked = false
+            } 
             document.getElementById("Form").style.display = "block";
         }
 

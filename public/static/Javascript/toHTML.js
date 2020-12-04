@@ -48,14 +48,13 @@
 // }).join("")}
 // `
 
-function toHTML() {
-    var xmlhttp = new XMLHttpRequest();
+var xmlhttp = new XMLHttpRequest();
+
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var data = JSON.parse(this.responseText);
-            document.getElementById("app").innerHTML = data.name;
+            document.getElementById("canvas").innerHTML = data.name;
+            xmlhttp.open("GET", "http://localhost:5000/testing/" + pid + "/load", true);
+            xmlhttp.send();
         }
     }
-};
-xmlhttp.open("GET", "ProjectContainer/Data/pid/mapdata.json", true);
-xmlhttp.send();
