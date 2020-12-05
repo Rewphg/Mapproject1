@@ -8,6 +8,7 @@ from datetime import datetime
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Username.db'
 app.config['SERVER_NAME'] = 'localhost:5000'
+app.config['SECRET_KEY'] = 'Hello'
 db = SQLAlchemy(app)
 
 class Username(db.Model):
@@ -72,11 +73,7 @@ def loginpage():
         Data = Username.query.order_by(Username.date_created)
         for D in Data:
             if D.name == username and D.Password == password:
-                return redirect("/TestMap.html")
-            else:
-                flash("Invalid Username or Password")
-                return redirect("/org.html")
-        error = "Invalid Password or Username"
+                return redirect("/create.html")
         return redirect("/org.html")
     else:
         User = Username.query.order_by(Username.date_created)
@@ -85,6 +82,10 @@ def loginpage():
 @app.route("/TestMap.html")
 def  MapEditerPage(): 
     return render_template("TestMap.html")
+
+@app.route("/create.html")
+def createpage():
+    return render_template("create.html")
 
 # @app.route("/TestMap.html")
 # def realeditor():
